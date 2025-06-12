@@ -5,18 +5,25 @@ import { insertProjectSchema, insertExportSchema, insertSecurityLogSchema } from
 import { z } from "zod";
 import rateLimit from "express-rate-limit";
 
-// Security middleware
+// Security middleware - more permissive for development
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limit each IP to 100 requests per windowMs
+  max: process.env.NODE_ENV === 'development' ? 1000 : 100, // Higher limit for development
   message: { error: "Too many requests, please try again later" },
   standardHeaders: true,
   legacyHeaders: false,
+  skip: (req) => {
+    // Skip rate limiting for health checks and certain endpoints in development
+    if (process.env.NODE_ENV === 'development' && req.path === '/health') {
+      return true;
+    }
+    return false;
+  }
 });
 
 const projectLimiter = rateLimit({
   windowMs: 60 * 1000, // 1 minute
-  max: 10, // limit project creation to 10 per minute
+  max: process.env.NODE_ENV === 'development' ? 50 : 10, // Higher limit for development
   message: { error: "Project creation rate limit exceeded" },
 });
 
