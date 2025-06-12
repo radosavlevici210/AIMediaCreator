@@ -1,113 +1,168 @@
-import { useQuery } from "@tanstack/react-query";
-import MusicGenerator from "@/components/music-generator";
+
+import { useState } from "react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { 
+  Play, 
+  Pause, 
+  Music, 
+  Video, 
+  Mic, 
+  Camera, 
+  Settings, 
+  BarChart3,
+  Shield,
+  Zap,
+  Sparkles
+} from "lucide-react";
+
 import VideoCreator from "@/components/video-creator";
-import AIEnhancement from "@/components/ai-enhancement";
-import MediaPreview from "@/components/media-preview";
+import MusicGenerator from "@/components/music-generator";
 import ProductionDashboard from "@/components/production-dashboard";
 import SecurityMonitor from "@/components/security-monitor";
 import PerformanceMonitor from "@/components/performance-monitor";
 import RealTimeUpdates from "@/components/real-time-updates";
 import { ThemeToggle } from "@/components/theme-toggle";
-import { Button } from "@/components/ui/button";
-import { Settings, User, LogOut } from "lucide-react";
-import type { Project } from "@shared/schema";
 
-// © 2025 Ervin Radosavlevici - Professional AI Studio Platform
 export default function Studio() {
-  const { data: projects = [] } = useQuery<Project[]>({
-    queryKey: ["/api/projects"],
-  });
-
-  const { data: stats } = useQuery<{
-    totalProjects: number;
-    completedProjects: number;
-    processingProjects: number;
-    avgProcessingTime: number;
-  }>({
-    queryKey: ["/api/stats"],
-  });
+  const [activeTab, setActiveTab] = useState("dashboard");
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      {/* Header Banner */}
-      <div className="bg-gradient-to-r from-[hsl(150,100%,50%)] via-[hsl(210,100%,60%)] to-[hsl(320,100%,50%)] p-4 text-center text-black font-bold text-lg relative">
-        <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-2">
-          <ThemeToggle />
-          <Button variant="ghost" size="icon" className="text-black hover:bg-black/10">
-            <Settings className="h-4 w-4" />
-          </Button>
-          <Button variant="ghost" size="icon" className="text-black hover:bg-black/10">
-            <User className="h-4 w-4" />
-          </Button>
-        </div>
-        AI MEDIA PRODUCTION STUDIO | © {new Date().getFullYear()} ERVIN RADOSAVLEVICI - ALL RIGHTS RESERVED | {new Date().toLocaleString()}
-      </div>
-
-      {/* Main Header */}
-      <div className="container mx-auto px-6 py-12">
-        <div className="text-center mb-12 glass-morphism rounded-3xl p-12 border border-white/10">
-          <h1 className="text-6xl font-bold neon-gradient mb-6">
-            <i className="fas fa-play-circle mr-4"></i>AI STUDIO PRO
-          </h1>
-          <p className="text-xl text-gray-300 mb-8">Advanced AI-Powered Music & Video Production Platform</p>
-          
-          {/* Status Indicators */}
-          <div className="flex justify-center gap-6 flex-wrap">
-            <div className="flex items-center bg-[hsl(150,100%,50%)]/10 border border-[hsl(150,100%,50%)]/30 rounded-full px-4 py-2">
-              <div className="w-3 h-3 bg-[hsl(150,100%,50%)] rounded-full mr-3 animate-pulse"></div>
-              <span className="text-sm font-medium">Audio Engine: Active</span>
+    <div className="min-h-screen bg-background">
+      <header className="border-b bg-card">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2">
+                <Sparkles className="h-8 w-8 text-primary" />
+                <h1 className="text-2xl font-bold">AI Media Studio</h1>
+              </div>
+              <Badge variant="secondary" className="animate-pulse">
+                <Zap className="h-3 w-3 mr-1" />
+                Pro
+              </Badge>
             </div>
-            <div className="flex items-center bg-[hsl(210,100%,60%)]/10 border border-[hsl(210,100%,60%)]/30 rounded-full px-4 py-2">
-              <div className="w-3 h-3 bg-[hsl(210,100%,60%)] rounded-full mr-3 animate-pulse"></div>
-              <span className="text-sm font-medium">Video Generator: Ready</span>
-            </div>
-            <div className="flex items-center bg-[hsl(320,100%,50%)]/10 border border-[hsl(320,100%,50%)]/30 rounded-full px-4 py-2">
-              <div className="w-3 h-3 bg-[hsl(320,100%,50%)] rounded-full mr-3 animate-pulse"></div>
-              <span className="text-sm font-medium">AI Processing: Online</span>
+            <div className="flex items-center gap-4">
+              <Button variant="outline" size="sm">
+                <Settings className="h-4 w-4 mr-2" />
+                Settings
+              </Button>
+              <ThemeToggle />
             </div>
           </div>
         </div>
-      </div>
+      </header>
 
-      {/* Production Workspace */}
-      <div className="container mx-auto px-6 pb-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 mb-12">
-          <MusicGenerator />
-          <VideoCreator />
-          <AIEnhancement />
-        </div>
+      <main className="container mx-auto px-4 py-6">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
+          <TabsList className="grid w-full grid-cols-6">
+            <TabsTrigger value="dashboard" className="flex items-center gap-2">
+              <BarChart3 className="h-4 w-4" />
+              Dashboard
+            </TabsTrigger>
+            <TabsTrigger value="video" className="flex items-center gap-2">
+              <Video className="h-4 w-4" />
+              Video
+            </TabsTrigger>
+            <TabsTrigger value="music" className="flex items-center gap-2">
+              <Music className="h-4 w-4" />
+              Music
+            </TabsTrigger>
+            <TabsTrigger value="voice" className="flex items-center gap-2">
+              <Mic className="h-4 w-4" />
+              Voice
+            </TabsTrigger>
+            <TabsTrigger value="security" className="flex items-center gap-2">
+              <Shield className="h-4 w-4" />
+              Security
+            </TabsTrigger>
+            <TabsTrigger value="performance" className="flex items-center gap-2">
+              <Zap className="h-4 w-4" />
+              Performance
+            </TabsTrigger>
+          </TabsList>
 
-        <PerformanceMonitor />
-        <RealTimeUpdates />
-        <SecurityMonitor />
-        <MediaPreview projects={projects} />
-        <ProductionDashboard stats={stats} />
-      </div>
+          <TabsContent value="dashboard" className="space-y-6">
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">Active Projects</CardTitle>
+                  <Video className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">12</div>
+                  <p className="text-xs text-muted-foreground">+2 from last week</p>
+                </CardContent>
+              </Card>
+              
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">Processing Queue</CardTitle>
+                  <Settings className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">3</div>
+                  <p className="text-xs text-muted-foreground">2 video, 1 audio</p>
+                </CardContent>
+              </Card>
+              
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                  <CardTitle className="text-sm font-medium">AI Models Active</CardTitle>
+                  <Sparkles className="h-4 w-4 text-muted-foreground" />
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">5</div>
+                  <p className="text-xs text-muted-foreground">All systems online</p>
+                </CardContent>
+              </Card>
+            </div>
+            
+            <ProductionDashboard />
+          </TabsContent>
 
-      {/* Footer */}
-      <footer className="mt-16 border-t border-white/10 pt-8 pb-12">
-        <div className="container mx-auto px-6 text-center">
-          <div className="mb-6">
-            <img 
-              src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&h=200" 
-              alt="Collaborative creative team working on media production" 
-              className="w-full h-32 object-cover rounded-xl shadow-lg opacity-60" 
-            />
-          </div>
-          <p className="text-gray-400 text-sm">© 2024 AI Media Production Studio - Professional Creative Platform. All rights reserved.</p>
-          <div className="flex justify-center space-x-6 mt-4">
-            <a href="#" className="text-gray-400 hover:text-[hsl(150,100%,50%)] transition-all">
-              <i className="fab fa-github text-xl"></i>
-            </a>
-            <a href="#" className="text-gray-400 hover:text-[hsl(210,100%,60%)] transition-all">
-              <i className="fab fa-twitter text-xl"></i>
-            </a>
-            <a href="#" className="text-gray-400 hover:text-[hsl(320,100%,50%)] transition-all">
-              <i className="fab fa-discord text-xl"></i>
-            </a>
-          </div>
-        </div>
-      </footer>
+          <TabsContent value="video" className="space-y-6">
+            <VideoCreator />
+          </TabsContent>
+
+          <TabsContent value="music" className="space-y-6">
+            <MusicGenerator />
+          </TabsContent>
+
+          <TabsContent value="voice" className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Mic className="h-5 w-5" />
+                  Voice Synthesis Studio
+                </CardTitle>
+                <CardDescription>
+                  Create realistic voice content with AI-powered synthesis
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="text-center py-12">
+                  <Mic className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+                  <p className="text-muted-foreground">Voice synthesis coming soon...</p>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="security" className="space-y-6">
+            <SecurityMonitor />
+          </TabsContent>
+
+          <TabsContent value="performance" className="space-y-6">
+            <PerformanceMonitor />
+          </TabsContent>
+        </Tabs>
+      </main>
+
+      <RealTimeUpdates />
     </div>
   );
 }
