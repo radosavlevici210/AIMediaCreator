@@ -14,27 +14,38 @@ const app = express();
 // Trust proxy configuration for rate limiting
 app.set('trust proxy', 1);
 
-// Security middleware
+// Enhanced security middleware for production
 app.use(helmet({
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
-      styleSrc: ["'self'", "'unsafe-inline'"],
-      scriptSrc: ["'self'", "'unsafe-eval'"], // Required for Vite in development
-      imgSrc: ["'self'", "data:", "https:"],
-      connectSrc: ["'self'", "ws:", "wss:"], // Allow WebSocket connections for Vite HMR
-      fontSrc: ["'self'"],
+      styleSrc: ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com"],
+      scriptSrc: ["'self'", "'unsafe-eval'", "'unsafe-inline'"],
+      imgSrc: ["'self'", "data:", "https:", "blob:"],
+      connectSrc: ["'self'", "ws:", "wss:", "https:"],
+      fontSrc: ["'self'", "https://cdnjs.cloudflare.com"],
       objectSrc: ["'none'"],
-      mediaSrc: ["'self'"],
+      mediaSrc: ["'self'", "blob:", "data:"],
       frameSrc: ["'none'"],
+      baseUri: ["'self'"],
+      formAction: ["'self'"],
     },
   },
-  crossOriginEmbedderPolicy: false, // Disable for development
+  crossOriginEmbedderPolicy: false,
+  hsts: {
+    maxAge: 31536000,
+    includeSubDomains: true,
+    preload: true
+  }
 }));
 
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' ? false : true,
-  credentials: true
+  origin: process.env.NODE_ENV === 'production' ? 
+    ['https://replit.app', 'https://*.replit.app', 'https://*.replit.dev'] : 
+    true,
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 }));
 
 app.use(express.json({ limit: '10mb' }));

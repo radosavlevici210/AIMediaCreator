@@ -1,292 +1,151 @@
-# AI Movie & Music Studio Pro+
+# AI Creative Studio Pro+
 
-## 🎬 Professional AI-Powered Creative Production Platform
+Professional AI-powered media generation platform for creating music, videos, and multimedia content with real-time collaboration features.
 
-AI Movie & Music Studio Pro+ is a cutting-edge, production-ready platform for creating professional-quality movies, music, and multimedia content using advanced AI technology. Built with modern web technologies and designed for both individual creators and collaborative teams.
+## Features
 
-### ✨ Key Features
+### Core Capabilities
+- **AI Music Generation**: Create professional music tracks with multiple genres, instruments, and voice types
+- **AI Video Creation**: Generate high-quality videos with customizable styles, formats, and effects
+- **Real-time Collaboration**: Work together with team members in live sessions
+- **Advanced Analytics**: Track performance metrics, views, downloads, and engagement
+- **Multi-format Export**: Support for various audio and video formats
+- **Distribution Tools**: Direct integration with major platforms
 
-#### 🎵 Enhanced Music Generation
-- **Professional Audio Production**: Studio-quality music generation with multiple AI models
-- **Complete Album Creation**: Full album production with track sequencing and mastering
-- **Lyric Integration**: AI-powered songwriting with melody matching
-- **Multiple Genres**: Support for 12+ music genres from Electronic to Classical
-- **Real-time Collaboration**: Live editing and feedback systems
-- **Professional Mixing**: Advanced mixing console with spatial audio support
+### Advanced Features
+- **AI Learning System**: Self-improving AI with multi-model selection
+- **Performance Monitoring**: Real-time system performance tracking
+- **Security Monitoring**: Comprehensive security logging and threat detection
+- **User Management**: Role-based access control with admin capabilities
+- **Theme Support**: Light and dark mode with customizable themes
 
-#### 🎬 Advanced Video Creation
-- **Cinematic Quality**: 8K Ultra HD and IMAX quality video generation
-- **Full Movie Production**: Complete feature-length film creation (up to 3 hours)
-- **AI Models**: 5 specialized AI models for different production styles
-- **Script Analysis**: Advanced AI script analysis and optimization
-- **Professional Tools**: Timeline editing, scene transitions, and effects
+## Technology Stack
 
-#### 🤖 AI Learning System
-- **Adaptive Intelligence**: AI learns from user preferences and improves over time
-- **Real-time Optimization**: Dynamic quality enhancement during generation
-- **Performance Analytics**: Detailed metrics on AI model performance
-- **Content Quality Scoring**: Automated quality assessment and suggestions
+- **Frontend**: React 18, TypeScript, Tailwind CSS, shadcn/ui
+- **Backend**: Express.js, Node.js
+- **State Management**: TanStack Query (React Query)
+- **Routing**: Wouter
+- **Styling**: Tailwind CSS with custom theme system
+- **Icons**: Lucide React, React Icons
+- **Build Tool**: Vite
+- **Development**: tsx, TypeScript
 
-#### 👥 Collaboration Workspace
-- **Real-time Collaboration**: Multiple users can work on projects simultaneously
-- **Project Sessions**: Organized workspace for team projects
-- **Live Updates**: Real-time notifications and status updates
-- **Role Management**: Different permission levels for team members
+## Getting Started
 
-#### 📊 Analytics Dashboard
-- **Performance Metrics**: Comprehensive analytics on content performance
-- **Market Analysis**: AI-powered market trend analysis
-- **Quality Insights**: Detailed quality reports and improvement suggestions
-- **Export Analytics**: Track distribution and engagement metrics
-
-#### 🚀 Distribution Hub
-- **Multi-platform Export**: Support for 10+ export formats
-- **Platform Integration**: Direct publishing to major streaming platforms
-- **Quality Optimization**: Automatic optimization for different platforms
-- **Batch Processing**: Efficient handling of multiple export formats
-
-### 🛠 Technical Stack
-
-#### Frontend
-- **React 18** with TypeScript for robust UI development
-- **Tailwind CSS** for responsive, modern styling
-- **Radix UI** components for accessible, professional interface
-- **Framer Motion** for smooth animations and transitions
-- **TanStack Query** for efficient data management
-- **Wouter** for lightweight routing
-
-#### Backend
-- **Node.js** with Express for scalable server architecture
-- **TypeScript** for type-safe backend development
-- **In-memory storage** with extensible database interface
-- **RESTful API** design with proper error handling
-- **WebSocket support** for real-time features
-
-#### Development Tools
-- **Vite** for fast development and optimized builds
-- **ESLint & Prettier** for code quality and consistency
-- **Drizzle ORM** for database management
-- **Zod** for runtime type validation
-
-### 🚀 Quick Start
-
-#### Prerequisites
-- Node.js 20.x or higher
+### Prerequisites
+- Node.js 20 or higher
 - npm or yarn package manager
 
-#### Installation
+### Installation
+
+1. Clone the repository:
 ```bash
-# Clone the repository
-git clone https://github.com/ervin210/ai-movie-music-studio.git
-cd ai-movie-music-studio
+git clone <repository-url>
+cd ai-creative-studio
+```
 
-# Install dependencies
+2. Install dependencies:
+```bash
 npm install
+```
 
-# Start development server
+3. Start the development server:
+```bash
 npm run dev
 ```
 
-The application will start on `http://localhost:5000`
+The application will be available at `http://localhost:5000`
 
-#### Environment Setup
-Create a `.env` file in the root directory:
-```env
-NODE_ENV=development
-PORT=5000
-# Add API keys for external services as needed
-OPENAI_API_KEY=your_openai_key_here
-STABILITY_AI_KEY=your_stability_key_here
+## Project Structure
+
+```
+├── client/                 # Frontend React application
+│   ├── src/
+│   │   ├── components/     # Reusable UI components
+│   │   ├── hooks/          # Custom React hooks
+│   │   ├── lib/            # Utility libraries
+│   │   ├── pages/          # Application pages
+│   │   └── main.tsx        # Application entry point
+├── server/                 # Backend Express server
+│   ├── index.ts           # Server entry point
+│   ├── routes.ts          # API routes
+│   ├── storage.ts         # Data storage interface
+│   └── vite.ts            # Vite integration
+├── shared/                # Shared types and schemas
+│   └── schema.ts          # Database schema and types
+└── package.json           # Project dependencies
 ```
 
-### 📱 Usage Guide
+## Configuration
 
-#### Creating Your First Music Track
-1. Navigate to the **Enhanced Music Generator**
-2. Enter your song lyrics and concept
-3. Configure audio settings (genre, tempo, instruments)
-4. Select mood and emotion tags
-5. Click **Generate Enhanced Music**
-6. Download or save to your library
+### Environment Variables
+- `NODE_ENV`: Development or production mode
+- `PORT`: Server port (default: 5000)
 
-#### Producing a Video/Movie
-1. Go to **Enhanced Video Creator**
-2. Write your script or movie concept
-3. Choose production settings (quality, duration, style)
-4. Select AI model and aspect ratio
-5. Click **Create Enhanced Movie**
-6. Preview and export your creation
+### Theme Customization
+The application supports custom themes through CSS variables defined in `client/src/index.css`.
 
-#### Collaboration Workflow
-1. Create a new project session
-2. Invite team members via email
-3. Assign roles and permissions
-4. Work together in real-time
-5. Track progress and share feedback
+## API Endpoints
 
-### 🎯 Production Features
+### Projects
+- `GET /api/projects` - Get all projects
+- `POST /api/projects` - Create new project
+- `GET /api/projects/:id` - Get specific project
+- `PATCH /api/projects/:id` - Update project
 
-#### Security & Performance
-- **Rate limiting** to prevent abuse
-- **Input validation** with Zod schemas
-- **Error boundaries** for graceful error handling
-- **Performance monitoring** with real-time metrics
-- **Security logging** with suspicious activity detection
+### Analytics
+- `GET /api/analytics/stats` - Get project statistics
+- `GET /api/analytics/performance` - Get performance metrics
 
-#### Scalability
-- **Modular architecture** for easy feature expansion
-- **Extensible storage interface** supporting multiple databases
-- **WebSocket clustering** for horizontal scaling
-- **CDN-ready asset management**
+### Security
+- `GET /api/security/logs` - Get security logs
+- `POST /api/security/logs` - Log security event
 
-#### Quality Assurance
-- **TypeScript** for compile-time error prevention
-- **Automated testing** setup ready
-- **Code splitting** for optimal loading
-- **Progressive Web App** capabilities
+## Development
 
-### 🔧 API Documentation
-
-#### Music Generation
-```typescript
-POST /api/projects
-Content-Type: application/json
-
-{
-  "type": "music",
-  "title": "My Song",
-  "settings": {
-    "genre": "electronic",
-    "tempo": 120,
-    "duration": 240
-  },
-  "lyrics": "Your song lyrics here..."
-}
+### Running Tests
+```bash
+npm test
 ```
 
-#### Video Creation
-```typescript
-POST /api/projects
-Content-Type: application/json
-
-{
-  "type": "video",
-  "title": "My Movie",
-  "settings": {
-    "quality": "4k",
-    "duration": 7200,
-    "style": "cinematic"
-  },
-  "script": "Your movie script here..."
-}
-```
-
-### 📊 Analytics & Monitoring
-
-#### Performance Metrics
-- Real-time CPU and memory usage monitoring
-- Network latency tracking
-- AI model performance analytics
-- User engagement metrics
-
-#### Quality Metrics
-- Content generation success rates
-- User satisfaction scores
-- Processing time optimization
-- Error rate monitoring
-
-### 🎨 Customization
-
-#### Theming
-The application supports full dark/light mode theming with CSS custom properties:
-```css
-:root {
-  --primary: hsl(210, 100%, 50%);
-  --secondary: hsl(210, 20%, 90%);
-  /* Custom theme variables */
-}
-```
-
-#### Component Extension
-All UI components are built with extensibility in mind:
-```typescript
-// Example: Custom workspace component
-import { WorkspaceTabsProps } from '@/components/workspace-tabs';
-
-export function CustomWorkspace(props: WorkspaceTabsProps) {
-  // Your custom implementation
-}
-
-// Contact: ervin210@icloud.com or radosavlevici210@icloud.com
-```
-
-### 🚀 Deployment
-
-#### Production Build
+### Building for Production
 ```bash
 npm run build
 ```
 
-#### Docker Deployment
-```dockerfile
-FROM node:20-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci --only=production
-COPY . .
-RUN npm run build
-EXPOSE 5000
-CMD ["npm", "start"]
-```
+### Code Style
+The project uses TypeScript with strict type checking. Follow the existing code patterns and use proper TypeScript types.
 
-#### Environment Variables
-```env
-NODE_ENV=production
-PORT=5000
-DATABASE_URL=your_production_db_url
-REDIS_URL=your_redis_url
-```
+## Security Features
 
-### 🤝 Contributing
+- Input validation using Zod schemas
+- Rate limiting on API endpoints
+- CORS protection
+- Helmet.js security headers
+- Session management with secure cookies
+- Security event logging
+- Suspicious activity detection
 
-#### Development Workflow
+## Contributing
+
 1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/amazing-feature`
-3. Commit your changes: `git commit -m 'Add amazing feature'`
-4. Push to the branch: `git push origin feature/amazing-feature`
-5. Open a Pull Request
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
 
-#### Code Standards
-- Follow TypeScript best practices
-- Use ESLint and Prettier configurations
-- Write comprehensive tests for new features
-- Update documentation for API changes
+## License
 
-### 📄 License
+All rights reserved. See LICENSE file for details.
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## Support
 
-### 🆘 Support
+For support and questions, contact the development team.
 
-#### Documentation
-- [API Reference](./docs/api.md)
-- [Component Guide](./docs/components.md)
-- [Deployment Guide](./docs/deployment.md)
+## Ownership
 
-#### Community
-- [GitHub Issues](https://github.com/ervin210/ai-movie-music-studio/issues)
-- [Discord Community](https://discord.gg/ai-studio-pro)
-- [Documentation Portal](https://docs.ai-movie-studio.com)
+**Root Users**: 
+- ervin210@icloud.com
+- radosavlevici210@icloud.com
 
-### 🎊 Acknowledgments
-
-- Built with modern React and TypeScript
-- Powered by advanced AI models
-- Designed for professional creative workflows
-- Optimized for performance and scalability
-
----
-
-**Ready for Production** ✅ | **Fully Featured** ✅ | **Professional Grade** ✅
-
-*Transform your creative vision into reality with AI Movie & Music Studio Pro+*
+**Copyright**: © 2025 Ervin Remus Radosavlevici. All Rights Reserved.
