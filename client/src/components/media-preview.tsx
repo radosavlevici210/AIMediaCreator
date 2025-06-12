@@ -10,6 +10,7 @@ interface MediaPreviewProps {
   projects: Project[];
 }
 
+// © 2025 Ervin Radosavlevici - Professional Media Preview System
 export default function MediaPreview({ projects }: MediaPreviewProps) {
   const [isAudioPlaying, setIsAudioPlaying] = useState(false);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
@@ -59,20 +60,20 @@ export default function MediaPreview({ projects }: MediaPreviewProps) {
         </h2>
         <p className="text-xs text-gray-400">© {new Date().getFullYear()} Ervin Radosavlevici | {new Date().toLocaleString()}</p>
       </div>
-      
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Audio Player */}
         <div className="space-y-4">
           <h3 className="text-xl font-semibold text-[hsl(150,100%,50%)] flex items-center">
             <i className="fas fa-music mr-2"></i>Generated Audio
           </h3>
-          
+
           <img 
             src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300" 
             alt="Professional audio equipment and mixing console" 
             className="w-full h-48 object-cover rounded-xl shadow-lg" 
           />
-          
+
           <div className="bg-[hsl(0,0%,7%)]/60 rounded-xl p-6">
             <div className="flex items-center justify-between mb-4">
               <span className="text-lg font-semibold">
@@ -80,7 +81,7 @@ export default function MediaPreview({ projects }: MediaPreviewProps) {
               </span>
               <span className="text-[hsl(150,100%,50%)]">03:42</span>
             </div>
-            
+
             {latestMusic && (
               <>
                 {/* Audio Controls */}
@@ -105,7 +106,7 @@ export default function MediaPreview({ projects }: MediaPreviewProps) {
                     <i className="fas fa-volume-up"></i>
                   </Button>
                 </div>
-                
+
                 {/* Export Options */}
                 <div className="flex gap-2 flex-wrap">
                   <Button
@@ -140,19 +141,19 @@ export default function MediaPreview({ projects }: MediaPreviewProps) {
             )}
           </div>
         </div>
-        
+
         {/* Video Player */}
         <div className="space-y-4">
           <h3 className="text-xl font-semibold text-[hsl(210,100%,60%)] flex items-center">
             <i className="fas fa-video mr-2"></i>Generated Video
           </h3>
-          
+
           <img 
             src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=300" 
             alt="Creative media production workspace with digital screens" 
             className="w-full h-48 object-cover rounded-xl shadow-lg" 
           />
-          
+
           <div className="bg-[hsl(0,0%,7%)]/60 rounded-xl p-6">
             <div className="flex items-center justify-between mb-4">
               <span className="text-lg font-semibold">
@@ -160,7 +161,7 @@ export default function MediaPreview({ projects }: MediaPreviewProps) {
               </span>
               <span className="text-[hsl(210,100%,60%)]">00:30</span>
             </div>
-            
+
             {latestVideo && (
               <>
                 {/* Video Controls */}
@@ -185,7 +186,7 @@ export default function MediaPreview({ projects }: MediaPreviewProps) {
                     <i className="fas fa-expand"></i>
                   </Button>
                 </div>
-                
+
                 {/* Export Options */}
                 <div className="flex gap-2 flex-wrap">
                   <Button

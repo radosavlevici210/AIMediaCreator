@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Progress } from "@/components/ui/progress";
 
+// © 2025 Ervin Radosavlevici - Advanced AI Enhancement Technology
 export default function AIEnhancement() {
   const [enhancementLevel, setEnhancementLevel] = useState([75]);
   const [isProcessing, setIsProcessing] = useState(false);

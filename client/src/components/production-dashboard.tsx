@@ -7,6 +7,7 @@ interface ProductionDashboardProps {
   };
 }
 
+// © 2025 Ervin Radosavlevici - Professional Production Dashboard
 export default function ProductionDashboard({ stats }: ProductionDashboardProps) {
   const defaultStats = {
     totalProjects: 0,
@@ -32,7 +33,7 @@ export default function ProductionDashboard({ stats }: ProductionDashboardProps)
             <i className="fas fa-folder text-3xl text-[hsl(150,100%,50%)] opacity-60"></i>
           </div>
         </div>
-      
+
         <div className="glass-morphism bg-[hsl(210,100%,60%)]/10 rounded-xl p-6 border border-[hsl(210,100%,60%)]/30">
           <div className="flex items-center justify-between">
             <div>
@@ -42,7 +43,7 @@ export default function ProductionDashboard({ stats }: ProductionDashboardProps)
             <i className="fas fa-clock text-3xl text-[hsl(210,100%,60%)] opacity-60"></i>
           </div>
         </div>
-        
+
         <div className="glass-morphism bg-[hsl(320,100%,50%)]/10 rounded-xl p-6 border border-[hsl(320,100%,50%)]/30">
           <div className="flex items-center justify-between">
             <div>
@@ -52,7 +53,7 @@ export default function ProductionDashboard({ stats }: ProductionDashboardProps)
             <i className="fas fa-check-circle text-3xl text-[hsl(320,100%,50%)] opacity-60"></i>
           </div>
         </div>
-        
+
         <div className="glass-morphism bg-white/10 rounded-xl p-6 border border-white/20">
           <div className="flex items-center justify-between">
             <div>

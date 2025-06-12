@@ -6,6 +6,7 @@ import MediaPreview from "@/components/media-preview";
 import ProductionDashboard from "@/components/production-dashboard";
 import SecurityMonitor from "@/components/security-monitor";
 
+// © 2025 Ervin Radosavlevici - Professional AI Studio Platform
 export default function Studio() {
   const { data: projects = [] } = useQuery({
     queryKey: ["/api/projects"],

@@ -7,6 +7,7 @@ import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import WaveformVisualizer from "./waveform-visualizer";
 
+// © 2025 Ervin Radosavlevici - Professional AI Music Generation
 export default function MusicGenerator() {
   const [lyrics, setLyrics] = useState("");
   const [genre, setGenre] = useState("electronic-pop");

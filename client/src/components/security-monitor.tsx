@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 
+// © 2025 Ervin Radosavlevici - Advanced Security Monitoring System
 export default function SecurityMonitor() {
   const [activeThreats, setActiveThreats] = useState(0);
   const { toast } = useToast();
