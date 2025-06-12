@@ -1,15 +1,30 @@
-import { projects, exports, type Project, type InsertProject, type Export, type InsertExport } from "@shared/schema";
+import { 
+  projects, exports, messages, collaborators,
+  type Project, type InsertProject, 
+  type Export, type InsertExport,
+  type Message, type InsertMessage,
+  type Collaborator, type InsertCollaborator
+} from "@shared/schema";
 
 export interface IStorage {
   // Project methods
   createProject(project: InsertProject): Promise<Project>;
   getProject(id: number): Promise<Project | undefined>;
   getAllProjects(): Promise<Project[]>;
-  updateProjectStatus(id: number, status: string, resultUrl?: string): Promise<Project | undefined>;
+  updateProjectStatus(id: number, status: string, resultUrl?: string | null): Promise<Project | undefined>;
   
   // Export methods
   createExport(exportData: InsertExport): Promise<Export>;
   getExportsByProject(projectId: number): Promise<Export[]>;
+  
+  // Message methods
+  createMessage(message: InsertMessage): Promise<Message>;
+  getMessagesByProject(projectId: number): Promise<Message[]>;
+  
+  // Collaborator methods
+  addCollaborator(collaborator: InsertCollaborator): Promise<Collaborator>;
+  getCollaboratorsByProject(projectId: number): Promise<Collaborator[]>;
+  updateCollaboratorStatus(projectId: number, username: string, isOnline: boolean): Promise<Collaborator | undefined>;
   
   // Stats methods
   getProjectStats(): Promise<{

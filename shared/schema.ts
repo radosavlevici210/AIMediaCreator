@@ -24,6 +24,24 @@ export const exports = pgTable("exports", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
+export const messages = pgTable("messages", {
+  id: serial("id").primaryKey(),
+  projectId: integer("project_id").references(() => projects.id),
+  sender: text("sender").notNull(),
+  content: text("content").notNull(),
+  messageType: text("message_type").notNull().default("text"), // 'text' | 'system' | 'file' | 'reaction'
+  createdAt: timestamp("created_at").defaultNow(),
+});
+
+export const collaborators = pgTable("collaborators", {
+  id: serial("id").primaryKey(),
+  projectId: integer("project_id").references(() => projects.id),
+  username: text("username").notNull(),
+  role: text("role").notNull().default("viewer"), // 'owner' | 'editor' | 'viewer'
+  isOnline: boolean("is_online").notNull().default(false),
+  lastSeen: timestamp("last_seen").defaultNow(),
+});
+
 export const insertProjectSchema = createInsertSchema(projects).omit({
   id: true,
   createdAt: true,
@@ -34,7 +52,21 @@ export const insertExportSchema = createInsertSchema(exports).omit({
   createdAt: true,
 });
 
+export const insertMessageSchema = createInsertSchema(messages).omit({
+  id: true,
+  createdAt: true,
+});
+
+export const insertCollaboratorSchema = createInsertSchema(collaborators).omit({
+  id: true,
+  lastSeen: true,
+});
+
 export type InsertProject = z.infer<typeof insertProjectSchema>;
 export type Project = typeof projects.$inferSelect;
 export type InsertExport = z.infer<typeof insertExportSchema>;
 export type Export = typeof exports.$inferSelect;
+export type InsertMessage = z.infer<typeof insertMessageSchema>;
+export type Message = typeof messages.$inferSelect;
+export type InsertCollaborator = z.infer<typeof insertCollaboratorSchema>;
+export type Collaborator = typeof collaborators.$inferSelect;
