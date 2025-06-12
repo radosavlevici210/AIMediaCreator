@@ -57,6 +57,7 @@ export default function Studio() {
           <AIEnhancement />
         </div>
 
+        <SecurityMonitor />
         <MediaPreview projects={projects} />
         <ProductionDashboard stats={stats} />
       </div>

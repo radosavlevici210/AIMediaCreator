@@ -53,9 +53,12 @@ export default function MediaPreview({ projects }: MediaPreviewProps) {
 
   return (
     <div className="mt-12 glass-morphism rounded-3xl p-8 border border-white/10">
-      <h2 className="text-3xl font-bold text-center mb-8 neon-gradient">
-        <i className="fas fa-play-circle mr-3"></i>Media Preview & Export
-      </h2>
+      <div className="flex items-center justify-between mb-8">
+        <h2 className="text-3xl font-bold neon-gradient">
+          <i className="fas fa-play-circle mr-3"></i>Media Preview & Export
+        </h2>
+        <p className="text-xs text-gray-400">© {new Date().getFullYear()} Ervin Radosavlevici | {new Date().toLocaleString()}</p>
+      </div>
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Audio Player */}
