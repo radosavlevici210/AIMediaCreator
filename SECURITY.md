@@ -1,4 +1,3 @@
-
 # Security Policy
 
 ## Supported Versions
@@ -9,52 +8,55 @@
 
 ## Security Features
 
-### 🛡️ Built-in Protection
-- **Rate Limiting**: Automatic API abuse prevention
-- **Input Validation**: Comprehensive data sanitization using Zod schemas
-- **CORS Protection**: Cross-origin request filtering
-- **Security Headers**: Helmet.js implementation
-- **Real-time Monitoring**: Continuous threat detection
+This application implements multiple layers of security:
 
-### 🔍 Security Monitoring
-- All API requests are logged and monitored
-- Suspicious activity triggers automatic alerts
-- IP-based blocking for repeated violations
-- Real-time security dashboard
+### Network Security
+- CORS protection with configurable origins
+- Rate limiting (100 requests per 15 minutes for API)
+- Helmet security headers
+- CSP (Content Security Policy) headers
+- XSS protection headers
 
-### 🔒 Data Protection
-- All user inputs are validated and sanitized
+### Input Validation
+- Zod schema validation for all API inputs
+- Request size limits (10MB max)
 - SQL injection prevention through parameterized queries
-- XSS attack mitigation through content security policy
-- Session management with secure cookies
+- File upload restrictions and validation
 
-## Reporting Vulnerabilities
+### Authentication & Authorization
+- Session-based authentication
+- Secure session configuration
+- Request logging and monitoring
+- Suspicious activity detection
 
-If you discover a security vulnerability, please report it to:
+### Production Security
+- Environment variable protection
+- Error message sanitization
+- Security event logging
+- Performance monitoring
 
-**Email:** radosavlevici210@icloud.com
-**Subject:** "Security Vulnerability Report - AI Studio"
+## Reporting a Vulnerability
 
-Please include:
-- Description of the vulnerability
-- Steps to reproduce
-- Potential impact assessment
-- Any suggested fixes
+If you discover a security vulnerability, please:
+
+1. **DO NOT** open a public issue
+2. Email security concerns to: security@aimediaStudio.com
+3. Include detailed steps to reproduce
+4. Allow 48-72 hours for initial response
+
+## Security Checklist for Deployment
+
+- [ ] Environment variables properly configured
+- [ ] CORS origins set for production domains
+- [ ] Rate limiting configured appropriately
+- [ ] SSL/TLS certificate installed
+- [ ] Security headers verified
+- [ ] API keys secured and rotated
+- [ ] Database connections encrypted
+- [ ] Logging and monitoring active
+- [ ] Backup and recovery procedures tested
 
 ## Security Updates
 
-Security patches are released immediately upon discovery and verification of vulnerabilities.
-
-## Copyright Protection
-
-This software includes advanced copyright protection mechanisms:
-- Code obfuscation in production
-- License validation
-- Usage tracking and monitoring
-- Unauthorized access prevention
-
----
-
-**© 2025 Ervin Radosavlevici - All Rights Reserved**
-
-For questions regarding security policies, contact: radosavlevici210@icloud.com
+Security updates are released as patch versions and should be applied immediately.
+Subscribe to our security notifications for timely updates.
