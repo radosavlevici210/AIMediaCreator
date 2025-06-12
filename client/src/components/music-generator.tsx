@@ -1,23 +1,11 @@
 import { useState } from "react";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import { Label } from "./ui/label";
-import { Textarea } from "./ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import { Slider } from "./ui/slider";
-import { Badge } from "./ui/badge";
-import { Progress } from "./ui/progress";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
-import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
-import { Music, Play, Download, Share2, Settings, Wand2, Volume2 } from "lucide-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { WaveformVisualizer } from "./waveform-visualizer";
-import { musicGenres, durations, parseDuration } from "../lib/audio-utils";
-import type { InsertProject } from "@shared/schema";
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
-
+import WaveformVisualizer from "./waveform-visualizer";
 
 // © 2025 Ervin Radosavlevici - Professional AI Music Generation
 export default function MusicGenerator() {
@@ -77,13 +65,13 @@ export default function MusicGenerator() {
           </div>
         </div>
       </div>
-
+      
       <img 
         src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=400" 
         alt="Professional music production studio" 
         className="w-full h-48 object-cover rounded-xl mb-6 shadow-lg" 
       />
-
+      
       <div className="space-y-4">
         <div>
           <label className="block text-[hsl(150,100%,50%)] font-semibold mb-2">Lyrics Input:</label>
@@ -101,7 +89,7 @@ AI dreams and human hearts
 Together we'll reach the stars..."
           />
         </div>
-
+        
         <div className="grid grid-cols-2 gap-4">
           <div>
             <label className="block text-[hsl(150,100%,50%)] font-semibold mb-2">Genre:</label>
@@ -133,9 +121,9 @@ Together we'll reach the stars..."
             </Select>
           </div>
         </div>
-
+        
         <WaveformVisualizer isActive={generateMusicMutation.isPending} />
-
+        
         <Button
           onClick={handleGenerate}
           disabled={generateMusicMutation.isPending}
