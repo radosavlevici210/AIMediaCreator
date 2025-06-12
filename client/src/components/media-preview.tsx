@@ -1,10 +1,23 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { 
+  Play, Pause, Download, Share2, FileAudio, FileVideo, 
+  Clock, Calendar, User, Tag, ExternalLink, RefreshCw 
+} from "lucide-react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { formatDuration } from "@/lib/audio-utils";
+import { audioFormats, audioQualities } from "@/lib/audio-utils";
+import { videoFormats, videoQualities } from "@/lib/video-utils";
+import type { Project, Export } from "@shared/schema";
 import { Slider } from "@/components/ui/slider";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
-import type { Project } from "@shared/schema";
 
 interface MediaPreviewProps {
   projects: Project[];
