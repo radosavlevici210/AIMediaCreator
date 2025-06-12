@@ -1,139 +1,81 @@
+# AI Media Creation Studio
 
-# AI Movie & Music Studio - Professional Production System
+A professional AI-powered media creation platform for generating music, videos, and multimedia content.
 
-© 2025 Ervin Radosavlevici - All Rights Reserved
+## Features
 
-**Contact:** radosavlevici210@icloud.com
+- **AI Music Generation**: Create original music tracks with customizable styles and genres
+- **AI Video Creation**: Generate videos with various styles and formats
+- **Real-time Performance Monitoring**: Track system performance and optimization
+- **Security Monitoring**: Comprehensive security logging and threat detection
+- **Production Dashboard**: Monitor project statistics and processing metrics
+- **Export Management**: Handle multiple export formats and quality settings
 
-## 🎬 Professional AI Studio Features
+## Technology Stack
 
-### Core Capabilities
-- **AI Music Generation** - Create professional music tracks with advanced AI
-- **Video Production** - Generate cinematic videos with AI assistance  
-- **Real-time Processing** - Live preview and instant feedback
-- **Professional Dashboard** - Complete production management
-- **Security Monitoring** - Advanced threat detection and protection
+- **Frontend**: React 18, TypeScript, Tailwind CSS
+- **Backend**: Node.js, Express, TypeScript
+- **UI Components**: Radix UI with shadcn/ui
+- **State Management**: TanStack Query
+- **Routing**: Wouter
+- **Styling**: Tailwind CSS with custom animations
 
-### 🛡️ Security Features
-- **Rate Limiting** - Protection against API abuse
-- **Input Validation** - Comprehensive data sanitization
-- **Security Logging** - Real-time threat monitoring
-- **CORS Protection** - Cross-origin request security
-- **Helmet.js** - Security headers implementation
-- **IP Blocking** - Automatic suspicious user blocking
+## Installation
 
-## 🚀 Quick Start
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-### Prerequisites
-- Node.js 20+
-- Modern web browser
+## Environment Variables
 
-### Installation
-```bash
-npm install
-```
+Create a `.env` file with the following variables:
 
-### Development
-```bash
-npm run dev
-```
-Access the application at `http://localhost:5000`
-
-### Production
-```bash
-npm run build
-npm start
-```
-
-## 🔧 Configuration
-
-### Environment Variables
-Create a `.env` file:
 ```
 NODE_ENV=production
-DATABASE_URL=your_database_url
-API_RATE_LIMIT=100
-SECURITY_KEY=your_security_key
+PORT=5000
+# Add your API keys for AI services
 ```
 
-### Database Setup
-```bash
-npm run db:push
-```
+## Production Deployment
 
-## 📁 Project Structure
+The application is optimized for production deployment with:
 
-```
-├── client/          # React frontend
-├── server/          # Express backend
-├── shared/          # Shared types and schemas
-├── COPYRIGHT.md     # Copyright information
-└── README.md        # This file
-```
+- Security headers and CORS configuration
+- Rate limiting and request validation
+- Error handling and logging
+- Performance monitoring
+- Automated security scanning
 
-## 🛡️ Security Implementation
+## API Endpoints
 
-### Rate Limiting
-- API endpoints: 100 requests per 15 minutes
-- Project creation: 10 requests per minute
-- Development mode: Increased limits for testing
-
-### Input Validation
-- Zod schema validation for all inputs
-- SQL injection prevention
-- XSS attack mitigation
-
-### Monitoring
-- Real-time security event logging
-- Suspicious activity detection
-- Automatic threat response
-
-## 📊 API Endpoints
-
-### Projects
-- `POST /api/projects` - Create new project
 - `GET /api/projects` - List all projects
-- `GET /api/projects/:id` - Get specific project
+- `POST /api/projects` - Create new project
+- `GET /api/projects/:id` - Get project details
+- `PATCH /api/projects/:id` - Update project
+- `GET /api/exports/:projectId` - Get project exports
+- `POST /api/exports` - Create new export
+- `GET /api/security-logs` - Get security logs
+- `GET /api/stats` - Get platform statistics
 
-### Security
-- `POST /api/security` - Log security event
-- `GET /api/security` - Get security logs
+## Security Features
 
-### Statistics
-- `GET /api/stats` - Get project statistics
+- Request rate limiting
+- Input validation and sanitization
+- Security event logging
+- Suspicious activity detection
+- CORS protection
+- Helmet security headers
 
-## 🔒 Copyright & License
+## License
 
-This software is proprietary and protected under copyright law.
+Business License - See LICENSE file for details.
 
-**All rights reserved by Ervin Radosavlevici**
+## Support
 
-- Unauthorized copying, distribution, or modification is prohibited
-- Commercial use requires explicit license agreement
-- For licensing inquiries, contact: radosavlevici210@icloud.com
-
-### Components Covered
-- AI Music Generation System
-- Professional Video Creation Tools
-- Advanced Audio Processing
-- Production Dashboard
-- Security Monitoring System
-- All UI/UX designs and implementations
-
-## 🆘 Support
-
-For technical support or licensing inquiries:
-- **Email:** radosavlevici210@icloud.com
-- **Subject:** Include "AI Studio Support" in subject line
-
-## 🔄 Updates
-
-This is a production-ready system with regular security updates and feature enhancements.
-
-**Version:** 1.0.0 Production
-**Last Updated:** 2025
-**Master License Holder:** Ervin Remus Radosavlevic
-
----
-
-⚠️ **Security Notice:** This application includes advanced security monitoring. All usage is logged and monitored for security purposes.
+For support and questions, please contact our development team.
