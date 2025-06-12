@@ -14,9 +14,14 @@ export default function AIEnhancement() {
 
   return (
     <div className="glass-morphism rounded-2xl p-8 border border-white/10 hover:border-[hsl(320,100%,50%)]/50 transition-all duration-300 neon-glow">
-      <div className="flex items-center mb-6">
-        <i className="fas fa-brain text-4xl text-[hsl(320,100%,50%)] mr-4"></i>
-        <h2 className="text-2xl font-bold">AI Enhancement</h2>
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center">
+          <i className="fas fa-brain text-4xl text-[hsl(320,100%,50%)] mr-4"></i>
+          <div>
+            <h2 className="text-2xl font-bold">AI Enhancement</h2>
+            <p className="text-xs text-gray-400">© {new Date().getFullYear()} Ervin Radosavlevici | {new Date().toLocaleString()}</p>
+          </div>
+        </div>
       </div>
       
       <img 
