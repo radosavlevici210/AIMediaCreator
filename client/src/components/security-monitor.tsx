@@ -1,7 +1,18 @@
 import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
+import { Badge } from "./ui/badge";
+import { Button } from "./ui/button";
+import { ScrollArea } from "./ui/scroll-area";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
+import { Alert, AlertDescription } from "./ui/alert";
+import { Progress } from "./ui/progress";
+import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
+import { 
+  Shield, ShieldAlert, ShieldCheck, Eye, AlertTriangle, 
+  Lock, Unlock, Activity, Users, Globe, Clock, Ban 
+} from "lucide-react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import type { SecurityLog } from "@shared/schema";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 
@@ -34,13 +45,13 @@ export default function SecurityMonitor() {
 
   useEffect(() => {
     const suspiciousUsers = ['Cristina Laura', 'Maxim Tudor', 'Organ Cornel', 'Mr Brown', 'Citric', 'Atlasian'];
-    
+
     const interval = setInterval(() => {
       const randomUser = suspiciousUsers[Math.floor(Math.random() * suspiciousUsers.length)];
       setActiveThreats(prev => prev + 1);
-      
+
       logSecurityMutation.mutate(randomUser);
-      
+
       toast({
         title: "🚨 SECURITY ALERT",
         description: `Theft attempt detected from ${randomUser} - BLOCKED`,
@@ -106,7 +117,7 @@ export default function SecurityMonitor() {
               </div>
             </div>
           ))}
-          
+
           {criticalLogs.length === 0 && (
             <div className="text-center text-gray-500 py-8">
               <i className="fas fa-shield-check text-4xl mb-3"></i>
