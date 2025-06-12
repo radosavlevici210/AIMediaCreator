@@ -1,31 +1,85 @@
-import type { Express } from "express";
+import type { Express, Request, Response, NextFunction } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { insertProjectSchema, insertExportSchema, insertSecurityLogSchema } from "@shared/schema";
 import { z } from "zod";
+import rateLimit from "express-rate-limit";
+
+// Security middleware
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  message: { error: "Too many requests, please try again later" },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+const projectLimiter = rateLimit({
+  windowMs: 60 * 1000, // 1 minute
+  max: 10, // limit project creation to 10 per minute
+  message: { error: "Project creation rate limit exceeded" },
+});
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Apply security middleware
+  app.use("/api", apiLimiter);
+
+  // Input validation middleware
+  const validateInput = (schema: z.ZodSchema) => {
+    return (req: Request, res: Response, next: NextFunction) => {
+      try {
+        schema.parse(req.body);
+        next();
+      } catch (error) {
+        if (error instanceof z.ZodError) {
+          return res.status(400).json({ 
+            error: "Validation failed", 
+            details: error.errors 
+          });
+        }
+        return res.status(400).json({ error: "Invalid input" });
+      }
+    };
+  };
+
   // Create a new project
-  app.post("/api/projects", async (req, res) => {
+  app.post("/api/projects", projectLimiter, validateInput(insertProjectSchema), async (req, res) => {
     try {
-      const projectData = insertProjectSchema.parse(req.body);
+      const projectData = req.body;
       const project = await storage.createProject(projectData);
       
-      // Simulate processing delay
+      // Log project creation for security monitoring
+      await storage.logSecurityEvent({
+        projectId: project.id,
+        suspicious_user: req.ip || 'unknown',
+        action: 'project_created',
+        ip_address: req.ip,
+        user_agent: req.get('User-Agent') || null,
+        severity: 'low',
+        blocked: false
+      });
+      
+      // Simulate processing delay with better error handling
       setTimeout(async () => {
-        await storage.updateProjectStatus(
-          project.id, 
-          'completed', 
-          `/api/media/${project.id}.${project.type === 'music' ? 'mp3' : 'mp4'}`
-        );
-      }, 3000);
+        try {
+          await storage.updateProjectStatus(
+            project.id, 
+            'completed', 
+            `/api/media/${project.id}.${project.type === 'music' ? 'mp3' : 'mp4'}`
+          );
+        } catch (error) {
+          console.error(`Failed to complete project ${project.id}:`, error);
+          await storage.updateProjectStatus(project.id, 'failed');
+        }
+      }, Math.random() * 5000 + 2000); // Random delay between 2-7 seconds
       
       // Immediately update to processing
       await storage.updateProjectStatus(project.id, 'processing');
       
-      res.json(project);
+      res.status(201).json(project);
     } catch (error) {
-      res.status(400).json({ error: "Invalid project data" });
+      console.error('Project creation error:', error);
+      res.status(500).json({ error: "Failed to create project" });
     }
   });
 

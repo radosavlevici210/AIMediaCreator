@@ -5,6 +5,8 @@ import AIEnhancement from "@/components/ai-enhancement";
 import MediaPreview from "@/components/media-preview";
 import ProductionDashboard from "@/components/production-dashboard";
 import SecurityMonitor from "@/components/security-monitor";
+import PerformanceMonitor from "@/components/performance-monitor";
+import RealTimeUpdates from "@/components/real-time-updates";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { Settings, User, LogOut } from "lucide-react";
@@ -75,6 +77,8 @@ export default function Studio() {
           <AIEnhancement />
         </div>
 
+        <PerformanceMonitor />
+        <RealTimeUpdates />
         <SecurityMonitor />
         <MediaPreview projects={projects} />
         <ProductionDashboard stats={stats} />
