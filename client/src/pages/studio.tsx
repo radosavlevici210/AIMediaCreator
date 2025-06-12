@@ -5,22 +5,39 @@ import AIEnhancement from "@/components/ai-enhancement";
 import MediaPreview from "@/components/media-preview";
 import ProductionDashboard from "@/components/production-dashboard";
 import SecurityMonitor from "@/components/security-monitor";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { Button } from "@/components/ui/button";
+import { Settings, User, LogOut } from "lucide-react";
+import type { Project } from "@shared/schema";
 
 // © 2025 Ervin Radosavlevici - Professional AI Studio Platform
 export default function Studio() {
-  const { data: projects = [] } = useQuery({
+  const { data: projects = [] } = useQuery<Project[]>({
     queryKey: ["/api/projects"],
   });
 
-  const { data: stats } = useQuery({
+  const { data: stats } = useQuery<{
+    totalProjects: number;
+    completedProjects: number;
+    processingProjects: number;
+    avgProcessingTime: number;
+  }>({
     queryKey: ["/api/stats"],
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[hsl(0,0%,4%)] via-[hsl(225,20%,12%)] to-[hsl(218,30%,15%)] text-white">
+    <div className="min-h-screen bg-background text-foreground">
       {/* Header Banner */}
-      <div className="bg-gradient-to-r from-[hsl(150,100%,50%)] via-[hsl(210,100%,60%)] to-[hsl(320,100%,50%)] p-4 text-center text-black font-bold text-lg">
-        <i className="fas fa-magic mr-2"></i>
+      <div className="bg-gradient-to-r from-[hsl(150,100%,50%)] via-[hsl(210,100%,60%)] to-[hsl(320,100%,50%)] p-4 text-center text-black font-bold text-lg relative">
+        <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-2">
+          <ThemeToggle />
+          <Button variant="ghost" size="icon" className="text-black hover:bg-black/10">
+            <Settings className="h-4 w-4" />
+          </Button>
+          <Button variant="ghost" size="icon" className="text-black hover:bg-black/10">
+            <User className="h-4 w-4" />
+          </Button>
+        </div>
         AI MEDIA PRODUCTION STUDIO | © {new Date().getFullYear()} ERVIN RADOSAVLEVICI - ALL RIGHTS RESERVED | {new Date().toLocaleString()}
       </div>
 
