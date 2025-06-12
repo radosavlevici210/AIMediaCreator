@@ -19,6 +19,8 @@ import {
   Sparkles
 } from "lucide-react";
 
+import EnhancedStudioHeader from "@/components/enhanced-studio-header";
+import ProductionFeatures from "@/components/production-features";
 import VideoCreator from "@/components/video-creator";
 import MusicGenerator from "@/components/music-generator";
 import ProductionDashboard from "@/components/production-dashboard";
@@ -32,29 +34,7 @@ export default function Studio() {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="border-b bg-card">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="flex items-center gap-2">
-                <Sparkles className="h-8 w-8 text-primary" />
-                <h1 className="text-2xl font-bold">AI Media Studio</h1>
-              </div>
-              <Badge variant="secondary" className="animate-pulse">
-                <Zap className="h-3 w-3 mr-1" />
-                Pro
-              </Badge>
-            </div>
-            <div className="flex items-center gap-4">
-              <Button variant="outline" size="sm">
-                <Settings className="h-4 w-4 mr-2" />
-                Settings
-              </Button>
-              <ThemeToggle />
-            </div>
-          </div>
-        </div>
-      </header>
+      <EnhancedStudioHeader />
 
       <main className="container mx-auto px-4 py-6">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
@@ -86,41 +66,7 @@ export default function Studio() {
           </TabsList>
 
           <TabsContent value="dashboard" className="space-y-6">
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Active Projects</CardTitle>
-                  <Video className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">12</div>
-                  <p className="text-xs text-muted-foreground">+2 from last week</p>
-                </CardContent>
-              </Card>
-              
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Processing Queue</CardTitle>
-                  <Settings className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">3</div>
-                  <p className="text-xs text-muted-foreground">2 video, 1 audio</p>
-                </CardContent>
-              </Card>
-              
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">AI Models Active</CardTitle>
-                  <Sparkles className="h-4 w-4 text-muted-foreground" />
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">5</div>
-                  <p className="text-xs text-muted-foreground">All systems online</p>
-                </CardContent>
-              </Card>
-            </div>
-            
+            <ProductionFeatures />
             <ProductionDashboard />
           </TabsContent>
 

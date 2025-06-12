@@ -6,48 +6,77 @@
 }
 
 :root {
-  --background: hsl(240, 10%, 3.9%);
+  --background: hsl(240, 12%, 6%);
   --foreground: hsl(0, 0%, 98%);
-  --card: hsl(240, 10%, 3.9%);
+  --card: hsl(240, 10%, 8%);
   --card-foreground: hsl(0, 0%, 98%);
-  --popover: hsl(240, 10%, 3.9%);
+  --popover: hsl(240, 10%, 8%);
   --popover-foreground: hsl(0, 0%, 98%);
-  --primary: hsl(207, 90%, 54%);
-  --primary-foreground: hsl(211, 100%, 99%);
-  --secondary: hsl(240, 3.7%, 15.9%);
+  --primary: hsl(142, 76%, 36%);
+  --primary-foreground: hsl(0, 0%, 98%);
+  --secondary: hsl(240, 4%, 16%);
   --secondary-foreground: hsl(0, 0%, 98%);
-  --muted: hsl(240, 3.7%, 15.9%);
-  --muted-foreground: hsl(240, 5%, 64.9%);
-  --accent: hsl(240, 3.7%, 15.9%);
+  --muted: hsl(240, 4%, 16%);
+  --muted-foreground: hsl(240, 5%, 65%);
+  --accent: hsl(142, 76%, 36%);
   --accent-foreground: hsl(0, 0%, 98%);
-  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive: hsl(0, 62%, 50%);
   --destructive-foreground: hsl(0, 0%, 98%);
-  --border: hsl(240, 3.7%, 15.9%);
-  --input: hsl(240, 3.7%, 15.9%);
-  --ring: hsl(240, 4.9%, 83.9%);
-  --radius: 0.5rem;
+  --border: hsl(240, 4%, 18%);
+  --input: hsl(240, 4%, 16%);
+  --ring: hsl(142, 76%, 36%);
+  --radius: 0.75rem;
+  --ai-gradient: linear-gradient(45deg, hsl(142, 76%, 36%), hsl(200, 95%, 50%), hsl(280, 100%, 70%));
+  --shadow-glow: 0 0 25px hsla(142, 76%, 36%, 0.3);
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  background: linear-gradient(135deg, hsl(0, 0%, 4%) 0%, hsl(225, 20%, 12%) 50%, hsl(218, 30%, 15%) 100%);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: linear-gradient(135deg, hsl(240, 12%, 4%) 0%, hsl(225, 15%, 8%) 30%, hsl(200, 20%, 12%) 70%, hsl(142, 15%, 10%) 100%);
   color: var(--foreground);
   min-height: 100vh;
-  line-height: 1.5;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
-/* Basic utility classes */
+/* Enhanced utility classes for production */
 .flex { display: flex; }
 .flex-col { flex-direction: column; }
 .items-center { align-items: center; }
 .justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
 .text-center { text-align: center; }
 .min-h-screen { min-height: 100vh; }
 .p-4 { padding: 1rem; }
+.p-6 { padding: 1.5rem; }
 .mb-4 { margin-bottom: 1rem; }
 .text-2xl { font-size: 1.5rem; }
+.text-3xl { font-size: 1.875rem; }
+.font-bold { font-weight: 700; }
+.rounded-lg { border-radius: var(--radius); }
+.border { border: 1px solid var(--border); }
+.bg-card { background-color: var(--card); }
+.shadow-lg { box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.3); }
+
+/* Production-ready animations */
+@keyframes ai-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.ai-pulse { animation: ai-pulse 2s ease-in-out infinite; }
+.gradient-shift { animation: gradient-shift 3s ease infinite; }
+
+/* Professional glow effects */
+.glow-primary { box-shadow: var(--shadow-glow); }
+.glow-hover:hover { box-shadow: var(--shadow-glow); transition: box-shadow 0.3s ease; }
 .font-bold { font-weight: bold; }
 .text-sm { font-size: 0.875rem; }
 .rounded { border-radius: 0.25rem; }
