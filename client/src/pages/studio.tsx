@@ -4,6 +4,7 @@ import VideoCreator from "@/components/video-creator";
 import AIEnhancement from "@/components/ai-enhancement";
 import MediaPreview from "@/components/media-preview";
 import ProductionDashboard from "@/components/production-dashboard";
+import SecurityMonitor from "@/components/security-monitor";
 
 export default function Studio() {
   const { data: projects = [] } = useQuery({
