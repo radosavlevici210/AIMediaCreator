@@ -16,10 +16,13 @@ import {
   BarChart3,
   Shield,
   Zap,
-  Sparkles
+  Sparkles,
+  FileText
 } from "lucide-react";
 
 import EnhancedStudioHeader from "@/components/enhanced-studio-header";
+import EnhancedCreationSuite from "@/components/enhanced-creation-suite";
+import LyricsIntegrationSystem from "@/components/lyrics-integration-system";
 import ProductionFeatures from "@/components/production-features";
 import VideoCreator from "@/components/video-creator";
 import MusicGenerator from "@/components/music-generator";
@@ -43,17 +46,17 @@ export default function Studio() {
               <BarChart3 className="h-4 w-4" />
               Dashboard
             </TabsTrigger>
-            <TabsTrigger value="video" className="flex items-center gap-2">
-              <Video className="h-4 w-4" />
-              Video
+            <TabsTrigger value="create" className="flex items-center gap-2">
+              <Sparkles className="h-4 w-4" />
+              Create
             </TabsTrigger>
-            <TabsTrigger value="music" className="flex items-center gap-2">
-              <Music className="h-4 w-4" />
-              Music
+            <TabsTrigger value="lyrics" className="flex items-center gap-2">
+              <FileText className="h-4 w-4" />
+              Lyrics
             </TabsTrigger>
-            <TabsTrigger value="voice" className="flex items-center gap-2">
-              <Mic className="h-4 w-4" />
-              Voice
+            <TabsTrigger value="legacy" className="flex items-center gap-2">
+              <Settings className="h-4 w-4" />
+              Legacy Tools
             </TabsTrigger>
             <TabsTrigger value="security" className="flex items-center gap-2">
               <Shield className="h-4 w-4" />
@@ -70,12 +73,42 @@ export default function Studio() {
             <ProductionDashboard />
           </TabsContent>
 
-          <TabsContent value="video" className="space-y-6">
-            <VideoCreator />
+          <TabsContent value="create" className="space-y-6">
+            <EnhancedCreationSuite />
           </TabsContent>
 
-          <TabsContent value="music" className="space-y-6">
-            <MusicGenerator />
+          <TabsContent value="lyrics" className="space-y-6">
+            <LyricsIntegrationSystem />
+          </TabsContent>
+
+          <TabsContent value="legacy" className="space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Video className="h-5 w-5" />
+                    Legacy Video Creator
+                  </CardTitle>
+                  <CardDescription>Classic video creation interface</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <VideoCreator />
+                </CardContent>
+              </Card>
+              
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Music className="h-5 w-5" />
+                    Legacy Music Generator
+                  </CardTitle>
+                  <CardDescription>Classic music generation tools</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <MusicGenerator />
+                </CardContent>
+              </Card>
+            </div>
           </TabsContent>
 
           <TabsContent value="voice" className="space-y-6">
