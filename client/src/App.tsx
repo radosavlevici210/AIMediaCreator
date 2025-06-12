@@ -4,6 +4,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/theme-provider";
 import ErrorBoundary from "@/components/error-boundary";
 import Studio from "@/pages/studio";
+import AdminPanel from "@/components/admin-panel";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient({
@@ -23,6 +24,7 @@ function App() {
           <Router>
             <Route path="/" component={Studio} />
             <Route path="/studio" component={Studio} />
+            <Route path="/admin" component={AdminPanel} />
             <Route component={NotFound} />
           </Router>
           <Toaster />
