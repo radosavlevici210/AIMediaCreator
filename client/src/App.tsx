@@ -1,4 +1,4 @@
-import { Route } from "wouter";
+import { Router, Route } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -20,9 +20,11 @@ function App() {
     <ErrorBoundary>
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         <QueryClientProvider client={queryClient}>
-          <Route path="/" component={Studio} />
-          <Route path="/studio" component={Studio} />
-          <Route component={NotFound} />
+          <Router>
+            <Route path="/" component={Studio} />
+            <Route path="/studio" component={Studio} />
+            <Route component={NotFound} />
+          </Router>
           <Toaster />
         </QueryClientProvider>
       </ThemeProvider>
