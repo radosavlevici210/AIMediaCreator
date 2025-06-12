@@ -12,7 +12,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 import { Music, Play, Download, Share2, Settings, Wand2, Volume2 } from "lucide-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { WaveformVisualizer } from "./waveform-visualizer";
+import WaveformVisualizer from "./waveform-visualizer";
 import { musicGenres, durations, parseDuration } from "../lib/audio-utils";
 import type { InsertProject } from "@shared/schema";
 import { apiRequest } from "@/lib/queryClient";
