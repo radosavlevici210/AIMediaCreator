@@ -77,7 +77,7 @@ AI Movie & Music Studio Pro+ is a cutting-edge, production-ready platform for cr
 #### Installation
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/ai-movie-music-studio.git
+git clone https://github.com/ervin210/ai-movie-music-studio.git
 cd ai-movie-music-studio
 
 # Install dependencies
@@ -216,6 +216,8 @@ import { WorkspaceTabsProps } from '@/components/workspace-tabs';
 export function CustomWorkspace(props: WorkspaceTabsProps) {
   // Your custom implementation
 }
+
+// Contact: ervin210@icloud.com or radosavlevici210@icloud.com
 ```
 
 ### 🚀 Deployment
@@ -272,9 +274,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Deployment Guide](./docs/deployment.md)
 
 #### Community
-- [GitHub Issues](https://github.com/your-username/ai-movie-music-studio/issues)
-- [Discord Community](https://discord.gg/your-server)
-- [Documentation Portal](https://docs.your-domain.com)
+- [GitHub Issues](https://github.com/ervin210/ai-movie-music-studio/issues)
+- [Discord Community](https://discord.gg/ai-studio-pro)
+- [Documentation Portal](https://docs.ai-movie-studio.com)
 
 ### 🎊 Acknowledgments
 
