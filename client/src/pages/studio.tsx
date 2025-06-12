@@ -19,7 +19,7 @@ export default function Studio() {
       {/* Header Banner */}
       <div className="bg-gradient-to-r from-[hsl(150,100%,50%)] via-[hsl(210,100%,60%)] to-[hsl(320,100%,50%)] p-4 text-center text-black font-bold text-lg">
         <i className="fas fa-magic mr-2"></i>
-        AI MEDIA PRODUCTION STUDIO - PROFESSIONAL CREATIVE PLATFORM | OWNER: CREATIVE PROFESSIONAL
+        AI MEDIA PRODUCTION STUDIO | © {new Date().getFullYear()} ERVIN RADOSAVLEVICI - ALL RIGHTS RESERVED | {new Date().toLocaleString()}
       </div>
 
       {/* Main Header */}

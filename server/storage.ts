@@ -1,9 +1,9 @@
 import { 
-  projects, exports, messages, collaborators,
+  projects, exports, messages, securityLogs,
   type Project, type InsertProject, 
   type Export, type InsertExport,
   type Message, type InsertMessage,
-  type Collaborator, type InsertCollaborator
+  type SecurityLog, type InsertSecurityLog
 } from "@shared/schema";
 
 export interface IStorage {
@@ -21,10 +21,10 @@ export interface IStorage {
   createMessage(message: InsertMessage): Promise<Message>;
   getMessagesByProject(projectId: number): Promise<Message[]>;
   
-  // Collaborator methods
-  addCollaborator(collaborator: InsertCollaborator): Promise<Collaborator>;
-  getCollaboratorsByProject(projectId: number): Promise<Collaborator[]>;
-  updateCollaboratorStatus(projectId: number, username: string, isOnline: boolean): Promise<Collaborator | undefined>;
+  // Security methods
+  logSecurityEvent(securityLog: InsertSecurityLog): Promise<SecurityLog>;
+  getSecurityLogs(projectId?: number): Promise<SecurityLog[]>;
+  checkSuspiciousActivity(user: string): Promise<boolean>;
   
   // Stats methods
   getProjectStats(): Promise<{
@@ -38,14 +38,31 @@ export interface IStorage {
 export class MemStorage implements IStorage {
   private projects: Map<number, Project>;
   private exports: Map<number, Export>;
+  private messages: Map<number, Message>;
+  private securityLogs: Map<number, SecurityLog>;
   private currentProjectId: number;
   private currentExportId: number;
+  private currentMessageId: number;
+  private currentSecurityLogId: number;
+  private suspiciousUsers: Set<string>;
 
   constructor() {
     this.projects = new Map();
     this.exports = new Map();
+    this.messages = new Map();
+    this.securityLogs = new Map();
     this.currentProjectId = 1;
     this.currentExportId = 1;
+    this.currentMessageId = 1;
+    this.currentSecurityLogId = 1;
+    this.suspiciousUsers = new Set([
+      'Cristina Laura',
+      'Maxim Tudor', 
+      'Organ Cornel',
+      'Mr Brown',
+      'Citric',
+      'Atlasian'
+    ]);
   }
 
   async createProject(insertProject: InsertProject): Promise<Project> {
@@ -69,11 +86,11 @@ export class MemStorage implements IStorage {
     );
   }
 
-  async updateProjectStatus(id: number, status: string, resultUrl?: string): Promise<Project | undefined> {
+  async updateProjectStatus(id: number, status: string, resultUrl?: string | null): Promise<Project | undefined> {
     const project = this.projects.get(id);
     if (!project) return undefined;
     
-    const updatedProject = { ...project, status, resultUrl };
+    const updatedProject = { ...project, status, resultUrl: resultUrl ?? null };
     this.projects.set(id, updatedProject);
     return updatedProject;
   }
@@ -95,6 +112,47 @@ export class MemStorage implements IStorage {
       .sort((a, b) => new Date(b.createdAt!).getTime() - new Date(a.createdAt!).getTime());
   }
 
+  async createMessage(insertMessage: InsertMessage): Promise<Message> {
+    const id = this.currentMessageId++;
+    const message: Message = {
+      ...insertMessage,
+      id,
+      createdAt: new Date(),
+    };
+    this.messages.set(id, message);
+    return message;
+  }
+
+  async getMessagesByProject(projectId: number): Promise<Message[]> {
+    return Array.from(this.messages.values())
+      .filter(msg => msg.projectId === projectId)
+      .sort((a, b) => new Date(a.createdAt!).getTime() - new Date(b.createdAt!).getTime());
+  }
+
+  async logSecurityEvent(insertSecurityLog: InsertSecurityLog): Promise<SecurityLog> {
+    const id = this.currentSecurityLogId++;
+    const securityLog: SecurityLog = {
+      ...insertSecurityLog,
+      id,
+      createdAt: new Date(),
+    };
+    this.securityLogs.set(id, securityLog);
+    return securityLog;
+  }
+
+  async getSecurityLogs(projectId?: number): Promise<SecurityLog[]> {
+    const logs = Array.from(this.securityLogs.values());
+    if (projectId) {
+      return logs.filter(log => log.projectId === projectId)
+        .sort((a, b) => new Date(b.createdAt!).getTime() - new Date(a.createdAt!).getTime());
+    }
+    return logs.sort((a, b) => new Date(b.createdAt!).getTime() - new Date(a.createdAt!).getTime());
+  }
+
+  async checkSuspiciousActivity(user: string): Promise<boolean> {
+    return this.suspiciousUsers.has(user);
+  }
+
   async getProjectStats(): Promise<{
     totalProjects: number;
     completedProjects: number;
@@ -109,7 +167,7 @@ export class MemStorage implements IStorage {
       totalProjects: allProjects.length,
       completedProjects: completed.length,
       processingProjects: processing.length,
-      avgProcessingTime: 2.3, // Mock average
+      avgProcessingTime: 2.3,
     };
   }
 }

@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertProjectSchema, insertExportSchema } from "@shared/schema";
+import { insertProjectSchema, insertExportSchema, insertSecurityLogSchema } from "@shared/schema";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
@@ -112,6 +112,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
       message: "File download would start here",
       filename: req.params.filename
     });
+  });
+
+  // Security logging endpoint
+  app.post("/api/security", async (req, res) => {
+    try {
+      const securityData = insertSecurityLogSchema.parse(req.body);
+      const securityLog = await storage.logSecurityEvent(securityData);
+      res.json(securityLog);
+    } catch (error) {
+      res.status(400).json({ error: "Invalid security data" });
+    }
+  });
+
+  // Get security logs
+  app.get("/api/security", async (req, res) => {
+    try {
+      const projectId = req.query.projectId ? parseInt(req.query.projectId as string) : undefined;
+      const logs = await storage.getSecurityLogs(projectId);
+      res.json(logs);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch security logs" });
+    }
   });
 
   const httpServer = createServer(app);

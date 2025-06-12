@@ -33,13 +33,16 @@ export const messages = pgTable("messages", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
-export const collaborators = pgTable("collaborators", {
+export const securityLogs = pgTable("security_logs", {
   id: serial("id").primaryKey(),
   projectId: integer("project_id").references(() => projects.id),
-  username: text("username").notNull(),
-  role: text("role").notNull().default("viewer"), // 'owner' | 'editor' | 'viewer'
-  isOnline: boolean("is_online").notNull().default(false),
-  lastSeen: timestamp("last_seen").defaultNow(),
+  suspicious_user: text("suspicious_user").notNull(),
+  action: text("action").notNull(), // 'unauthorized_access' | 'theft_attempt' | 'copyright_violation'
+  ip_address: text("ip_address"),
+  user_agent: text("user_agent"),
+  severity: text("severity").notNull().default("medium"), // 'low' | 'medium' | 'high' | 'critical'
+  blocked: boolean("blocked").notNull().default(false),
+  createdAt: timestamp("created_at").defaultNow(),
 });
 
 export const insertProjectSchema = createInsertSchema(projects).omit({
@@ -57,9 +60,9 @@ export const insertMessageSchema = createInsertSchema(messages).omit({
   createdAt: true,
 });
 
-export const insertCollaboratorSchema = createInsertSchema(collaborators).omit({
+export const insertSecurityLogSchema = createInsertSchema(securityLogs).omit({
   id: true,
-  lastSeen: true,
+  createdAt: true,
 });
 
 export type InsertProject = z.infer<typeof insertProjectSchema>;
@@ -68,5 +71,5 @@ export type InsertExport = z.infer<typeof insertExportSchema>;
 export type Export = typeof exports.$inferSelect;
 export type InsertMessage = z.infer<typeof insertMessageSchema>;
 export type Message = typeof messages.$inferSelect;
-export type InsertCollaborator = z.infer<typeof insertCollaboratorSchema>;
-export type Collaborator = typeof collaborators.$inferSelect;
+export type InsertSecurityLog = z.infer<typeof insertSecurityLogSchema>;
+export type SecurityLog = typeof securityLogs.$inferSelect;
