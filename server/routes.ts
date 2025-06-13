@@ -63,7 +63,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const projectData = req.body;
       const project = await storage.createProject(projectData);
-      
+
       // Log project creation for security monitoring
       await storage.logSecurityEvent({
         projectId: project.id,
@@ -74,7 +74,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         severity: 'low',
         blocked: false
       });
-      
+
       // Simulate processing delay with better error handling
       setTimeout(async () => {
         try {
@@ -88,10 +88,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
           await storage.updateProjectStatus(project.id, 'failed');
         }
       }, Math.random() * 5000 + 2000); // Random delay between 2-7 seconds
-      
+
       // Immediately update to processing
       await storage.updateProjectStatus(project.id, 'processing');
-      
+
       res.status(201).json(project);
     } catch (error) {
       console.error('Project creation error:', error);
@@ -127,17 +127,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/exports", async (req, res) => {
     try {
       const exportData = insertExportSchema.parse(req.body);
-      
+
       // Generate mock file URL and size
       const fileUrl = `/api/downloads/${exportData.projectId}.${exportData.format}`;
       const fileSize = Math.floor(Math.random() * 10000000) + 1000000; // 1-10MB
-      
+
       const exportRecord = await storage.createExport({
         ...exportData,
         fileUrl,
         fileSize,
       });
-      
+
       res.json(exportRecord);
     } catch (error) {
       res.status(400).json({ error: "Invalid export data" });

@@ -57,3 +57,52 @@ export default function EnhancedStudioHeader() {
     </header>
   );
 }
+import React from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Wifi, WifiOff, Clock } from "lucide-react";
+
+interface EnhancedStudioHeaderProps {
+  isConnected: boolean;
+  lastChecked: Date | null;
+}
+
+export default function EnhancedStudioHeader({ isConnected, lastChecked }: EnhancedStudioHeaderProps) {
+  return (
+    <Card className="border-b rounded-none bg-card/50 backdrop-blur-sm">
+      <CardContent className="py-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <h1 className="text-2xl font-bold text-gradient">AI Studio Pro</h1>
+            <Badge variant="outline" className="bg-green-500/10 text-green-400 border-green-500/20">
+              Production Ready
+            </Badge>
+          </div>
+          
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 text-sm">
+              {isConnected ? (
+                <>
+                  <Wifi className="h-4 w-4 text-green-500" />
+                  <span className="text-green-500">Connected</span>
+                </>
+              ) : (
+                <>
+                  <WifiOff className="h-4 w-4 text-red-500" />
+                  <span className="text-red-500">Disconnected</span>
+                </>
+              )}
+            </div>
+            
+            {lastChecked && (
+              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                <Clock className="h-3 w-3" />
+                <span>Last checked: {lastChecked.toLocaleTimeString()}</span>
+              </div>
+            )}
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+}

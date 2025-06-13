@@ -43,14 +43,11 @@ import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function Studio() {
   const [activeTab, setActiveTab] = useState("dashboard");
-  const [isLoading, setIsLoading] = useState(false);
-  const [connectionStatus, setConnectionStatus] = useState("checking");
-
   const { isConnected, lastChecked, checkConnection } = useRouterConnection();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 animate-fade-in">
-      <EnhancedStudioHeader isConnected={isConnected} retryCount={retryCount}/>
+      <EnhancedStudioHeader isConnected={isConnected} lastChecked={lastChecked} />
 
       {/* Production Ready Banner */}
       <div className="bg-gradient-to-r from-green-500/10 via-blue-500/10 to-purple-500/10 border-b border-border/50">

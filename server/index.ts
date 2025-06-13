@@ -109,6 +109,7 @@ app.use((req, res, next) => {
       res.status(200).json({ 
         status: "connected",
         server: "online",
+        connected: true,
         timestamp: new Date().toISOString(),
         uptime: process.uptime(),
         memory: {
@@ -126,6 +127,7 @@ app.use((req, res, next) => {
       console.error('Health check error:', error);
       res.status(500).json({
         status: "error",
+        connected: false,
         timestamp: new Date().toISOString(),
         error: "Health check failed"
       });
