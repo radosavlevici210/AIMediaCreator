@@ -9,7 +9,8 @@ import { Crown, Users, Settings, Shield, Database, Activity } from "lucide-react
 export default function RootUserPanel() {
   const [activeUsers, setActiveUsers] = useState([
     { email: "ervin210@icloud.com", role: "root", status: "active", lastLogin: "2025-06-13 00:25:00" },
-    { email: "radosavlevici.ervin@gmail.com", role: "root", status: "active", lastLogin: "2025-06-13 00:24:30" }
+    { email: "radosavlevici.ervin@gmail.com", role: "root", status: "active", lastLogin: "2025-06-13 00:24:30" },
+    { email: "radosavlevici210@icloud.com", role: "root", status: "active", lastLogin: "2025-06-13 00:24:15" }
   ]);
 
   const [systemStats] = useState({

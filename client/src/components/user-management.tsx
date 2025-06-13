@@ -36,12 +36,19 @@ export default function UserManagement() {
       role: 'admin',
       status: 'active',
       joinDate: '2024-01-01'
+    },
+    {
+      id: '3',
+      email: 'radosavlevici.ervin@gmail.com',
+      role: 'admin',
+      status: 'active',
+      joinDate: '2024-01-01'
     }
   ]);
 
   const [newUserEmail, setNewUserEmail] = useState("");
 
-  const rootUsers = ['ervin210@icloud.com', 'radosavlevici210@icloud.com'];
+  const rootUsers = ['ervin210@icloud.com', 'radosavlevici210@icloud.com', 'radosavlevici.ervin@gmail.com'];
 
   const getRoleIcon = (role: string) => {
     switch (role) {
