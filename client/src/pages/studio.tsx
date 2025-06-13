@@ -23,6 +23,7 @@ import BatchProcessor from "@/components/batch-processor";
 import TransparentAccessBridge from "@/components/transparent-access-bridge";
 import AdvancedFeaturesPanel from "@/components/advanced-features-panel";
 import EnterpriseSecuritySystem from "@/components/enterprise-security-system";
+import EnterpriseFeaturesExpansion from '@/components/enterprise-features-expansion';
 import { 
   Crown, 
   Sparkles, 
@@ -62,6 +63,8 @@ import {
 
 export default function Studio() {
   const [activeTab, setActiveTab] = useState("enterprise-suite");
+  const [isRootUser, setIsRootUser] = useState(true);
+  const mockUserEmail = "ervin210@icloud.com";
 
   const [studioStats] = useState({
     totalProjects: 47892,
@@ -304,7 +307,7 @@ export default function Studio() {
             </div>
 
             <ProductionFeatures />
-            
+
             <EnterpriseSecuritySystem />
           </TabsContent>
 
@@ -336,8 +339,19 @@ export default function Studio() {
             </div>
 
             <BatchProcessor />
-            
-            <AdvancedFeaturesPanel userEmail="ervin210@icloud.com" />
+
+            {/* Advanced Features Panel for Root Users */}
+            {isRootUser && (
+              <AdvancedFeaturesPanel userEmail={mockUserEmail} />
+            )}
+
+            {/* Enterprise Features Expansion */}
+            {isRootUser && (
+              <EnterpriseFeaturesExpansion userEmail={mockUserEmail} />
+            )}
+
+            {/* Enterprise Security System */}
+            <EnterpriseSecuritySystem />
           </TabsContent>
         </Tabs>
       </div>

@@ -40,7 +40,15 @@ export default function AdvancedFeaturesPanel({ userEmail }: { userEmail: string
     { id: 'master_visibility', name: 'Master Visibility', icon: Eye, enabled: isRootUser },
     { id: 'system_override', name: 'System Override', icon: Unlock, enabled: isRootUser },
     { id: 'transparent_access', name: 'Transparent Access', icon: Shield, enabled: isRootUser },
-    { id: 'cross_platform', name: 'Cross-Platform Sync', icon: Rocket, enabled: isRootUser }
+    { id: 'cross_platform', name: 'Cross-Platform Sync', icon: Rocket, enabled: isRootUser },
+    { id: 'neural_enhancement', name: 'Neural Enhancement', icon: Brain, enabled: isRootUser },
+    { id: 'holographic_preview', name: 'Holographic Preview', icon: Eye, enabled: isRootUser },
+    { id: 'quantum_rendering', name: 'Quantum Rendering', icon: Zap, enabled: isRootUser },
+    { id: 'ai_voice_cloning', name: 'AI Voice Cloning', icon: Settings, enabled: isRootUser },
+    { id: 'deepfake_detection', name: 'Deepfake Detection', icon: Shield, enabled: isRootUser },
+    { id: 'blockchain_verify', name: 'Blockchain Verification', icon: Lock, enabled: isRootUser },
+    { id: 'emotion_analysis', name: 'Emotion Analysis', icon: Brain, enabled: isRootUser },
+    { id: 'auto_translation', name: 'Auto Translation', icon: Globe, enabled: isRootUser }
   ];
 
   useEffect(() => {

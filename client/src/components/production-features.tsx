@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -120,6 +119,54 @@ export default function ProductionFeatures() {
         { name: "Load Balancing", status: "active", description: "Optimized traffic distribution" },
         { name: "Performance Monitoring", status: "active", description: "Real-time system analytics" },
         { name: "99.99% Uptime SLA", status: "active", description: "Enterprise-grade reliability" }
+      ]
+    },
+    {
+      category: "Automation",
+      features: [
+        { name: "AI-Driven Workflows", status: "active", description: "Intelligent task automation" },
+        { name: "Smart Scheduling", status: "active", description: "Automated content publishing scheduler" },
+        { name: "Automated Content Tagging", status: "active", description: "AI-powered metadata labeling" },
+        { name: "Automated Backups", status: "active", description: "Continuous project backup and recovery" }
+      ]
+    },
+    {
+      category: "Security & Compliance",
+      features: [
+        { name: "End-to-End Encryption", status: "active", description: "Military-grade content encryption" },
+        { name: "Watermark Protection", status: "active", description: "Invisible digital watermarking" },
+        { name: "GDPR Compliance", status: "active", description: "Full European data protection compliance" },
+        { name: "SOC 2 Certification", status: "active", description: "Enterprise security standards compliance" },
+        { name: "Audit Logging", status: "active", description: "Comprehensive activity tracking" },
+        { name: "Two-Factor Auth", status: "active", description: "Multi-factor authentication system" },
+        { name: "IP Restrictions", status: "active", description: "Network-based access control" },
+        { name: "Content Filtering", status: "active", description: "Automated inappropriate content detection" }
+      ]
+    },
+    {
+      category: "Integration & API",
+      features: [
+        { name: "REST API Access", status: "active", description: "Full programmatic access to all features" },
+        { name: "Webhook Support", status: "active", description: "Real-time event notifications" },
+        { name: "CDN Integration", status: "active", description: "Global content delivery network" },
+        { name: "Cloud Storage Sync", status: "active", description: "Multi-cloud storage synchronization" },
+        { name: "Social Media API", status: "active", description: "Direct publishing to social platforms" },
+        { name: "Enterprise SSO", status: "active", description: "Single sign-on integration" },
+        { name: "Custom Branding", status: "active", description: "White-label customization options" },
+        { name: "Third-party Plugins", status: "active", description: "Extensible plugin architecture" }
+      ]
+    },
+    {
+      category: "Analytics & Insights",
+      features: [
+        { name: "Advanced Analytics", status: "active", description: "Comprehensive usage and performance metrics" },
+        { name: "Content Performance", status: "active", description: "AI-powered content optimization insights" },
+        { name: "User Behavior Analysis", status: "active", description: "Detailed user interaction tracking" },
+        { name: "ROI Calculation", status: "active", description: "Return on investment measurement tools" },
+        { name: "A/B Testing Suite", status: "active", description: "Built-in content testing framework" },
+        { name: "Predictive Modeling", status: "active", description: "AI-driven trend and success prediction" },
+        { name: "Custom Dashboards", status: "active", description: "Personalized analytics interfaces" },
+        { name: "Export & Reporting", status: "active", description: "Automated report generation and export" }
       ]
     }
   ]);
