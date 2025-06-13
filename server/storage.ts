@@ -61,10 +61,16 @@ export class MemStorage implements IStorage {
   private exports: Map<number, Export>;
   private messages: Map<number, Message>;
   private securityLogs: Map<number, SecurityLog>;
+  private users: Map<string, User>;
+  private contentLibrary: Map<number, ContentLibrary>;
+  private productionSettings: Map<string, ProductionSettings>;
   private currentProjectId: number;
   private currentExportId: number;
   private currentMessageId: number;
   private currentSecurityLogId: number;
+  private currentUserId: number;
+  private currentContentId: number;
+  private currentSettingsId: number;
   private suspiciousUsers: Set<string>;
 
   constructor() {
@@ -72,10 +78,16 @@ export class MemStorage implements IStorage {
     this.exports = new Map();
     this.messages = new Map();
     this.securityLogs = new Map();
+    this.users = new Map();
+    this.contentLibrary = new Map();
+    this.productionSettings = new Map();
     this.currentProjectId = 1;
     this.currentExportId = 1;
     this.currentMessageId = 1;
     this.currentSecurityLogId = 1;
+    this.currentUserId = 1;
+    this.currentContentId = 1;
+    this.currentSettingsId = 1;
     this.suspiciousUsers = new Set([
       'Cristina Laura',
       'Maxim Tudor', 
@@ -84,6 +96,50 @@ export class MemStorage implements IStorage {
       'Citric',
       'Atlasian'
     ]);
+
+    // Initialize root users
+    this.initializeRootUsers();
+  }
+
+  private async initializeRootUsers() {
+    const rootUsers = [
+      'ervin210@icloud.com',
+      'radosavlevici.ervin@gmail.com'
+    ];
+
+    for (const email of rootUsers) {
+      const rootUser: User = {
+        id: this.currentUserId++,
+        email,
+        role: 'root',
+        status: 'active',
+        permissions: ['all'],
+        lastLogin: null,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+      this.users.set(email, rootUser);
+
+      // Create default production settings for root users
+      const defaultSettings: ProductionSettings = {
+        id: this.currentSettingsId++,
+        userId: email,
+        aiModel: 'quantum-cinema',
+        quality: '8k',
+        audioEnhancement: 'dolby-atmos',
+        maxDuration: 2580, // 43 hours
+        enableRealTimeCollab: true,
+        enableAdvancedAI: true,
+        settings: JSON.stringify({
+          unlimited: true,
+          professionalMode: true,
+          quantumOptimization: true
+        }),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+      this.productionSettings.set(email, defaultSettings);
+    }
   }
 
   async createProject(insertProject: InsertProject): Promise<Project> {
@@ -172,6 +228,106 @@ export class MemStorage implements IStorage {
 
   async checkSuspiciousActivity(user: string): Promise<boolean> {
     return this.suspiciousUsers.has(user);
+  }
+
+  // User methods
+  async createUser(insertUser: InsertUser): Promise<User> {
+    const id = this.currentUserId++;
+    const user: User = {
+      ...insertUser,
+      id,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+    this.users.set(user.email, user);
+    return user;
+  }
+
+  async getUser(email: string): Promise<User | undefined> {
+    return this.users.get(email);
+  }
+
+  async getAllUsers(): Promise<User[]> {
+    return Array.from(this.users.values()).sort((a, b) => 
+      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
+  }
+
+  async updateUserRole(email: string, role: string): Promise<User | undefined> {
+    const user = this.users.get(email);
+    if (!user) return undefined;
+    
+    const updatedUser = { ...user, role, updatedAt: new Date() };
+    this.users.set(email, updatedUser);
+    return updatedUser;
+  }
+
+  async updateUserStatus(email: string, status: string): Promise<User | undefined> {
+    const user = this.users.get(email);
+    if (!user) return undefined;
+    
+    const updatedUser = { ...user, status, updatedAt: new Date() };
+    this.users.set(email, updatedUser);
+    return updatedUser;
+  }
+
+  // Content Library methods
+  async createContent(insertContent: InsertContentLibrary): Promise<ContentLibrary> {
+    const id = this.currentContentId++;
+    const content: ContentLibrary = {
+      ...insertContent,
+      id,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+    this.contentLibrary.set(id, content);
+    return content;
+  }
+
+  async getContent(id: number): Promise<ContentLibrary | undefined> {
+    return this.contentLibrary.get(id);
+  }
+
+  async getAllContent(): Promise<ContentLibrary[]> {
+    return Array.from(this.contentLibrary.values()).sort((a, b) => 
+      new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
+  }
+
+  async getContentByUser(createdBy: string): Promise<ContentLibrary[]> {
+    return Array.from(this.contentLibrary.values())
+      .filter(content => content.createdBy === createdBy)
+      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+  }
+
+  // Production Settings methods
+  async createProductionSettings(insertSettings: InsertProductionSettings): Promise<ProductionSettings> {
+    const id = this.currentSettingsId++;
+    const settings: ProductionSettings = {
+      ...insertSettings,
+      id,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+    this.productionSettings.set(settings.userId, settings);
+    return settings;
+  }
+
+  async getProductionSettings(userId: string): Promise<ProductionSettings | undefined> {
+    return this.productionSettings.get(userId);
+  }
+
+  async updateProductionSettings(userId: string, updateData: Partial<InsertProductionSettings>): Promise<ProductionSettings | undefined> {
+    const settings = this.productionSettings.get(userId);
+    if (!settings) return undefined;
+    
+    const updatedSettings = { 
+      ...settings, 
+      ...updateData, 
+      updatedAt: new Date() 
+    };
+    this.productionSettings.set(userId, updatedSettings);
+    return updatedSettings;
   }
 
   async getProjectStats(): Promise<{
