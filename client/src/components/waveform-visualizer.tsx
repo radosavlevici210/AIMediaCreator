@@ -4,7 +4,7 @@ interface WaveformVisualizerProps {
   isActive?: boolean;
 }
 
-function WaveformVisualizer({ isActive = false }: WaveformVisualizerProps) {
+export default function WaveformVisualizer({ isActive = false }: WaveformVisualizerProps) {
   const [bars, setBars] = useState<number[]>(Array(8).fill(12));
 
   useEffect(() => {
@@ -37,6 +37,3 @@ function WaveformVisualizer({ isActive = false }: WaveformVisualizerProps) {
     </div>
   );
 }
-
-export { WaveformVisualizer };
-export default WaveformVisualizer;
