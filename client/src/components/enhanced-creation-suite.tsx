@@ -40,7 +40,10 @@ import {
   Rocket,
   Crown,
   Diamond,
-  Flame
+  Flame,
+  FileText,
+  PenTool,
+  Infinity
 } from "lucide-react";
 
 interface CreationProject {

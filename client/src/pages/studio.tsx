@@ -43,7 +43,10 @@ import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function Studio() {
   const [activeTab, setActiveTab] = useState("dashboard");
-  const { isConnected, retryCount } = useRouterConnection();
+  const [isLoading, setIsLoading] = useState(false);
+  const [connectionStatus, setConnectionStatus] = useState("checking");
+
+  const { isConnected, lastChecked, checkConnection } = useRouterConnection();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 animate-fade-in">
