@@ -24,6 +24,13 @@ export default function SecurityMonitor() {
 
   const { data: securityLogs = [] } = useQuery({
     queryKey: ["/api/security"],
+    queryFn: async () => {
+      const response = await fetch("/api/security");
+      if (!response.ok) {
+        throw new Error("Failed to fetch security logs");
+      }
+      return response.json();
+    },
     refetchInterval: 5000,
   });
 

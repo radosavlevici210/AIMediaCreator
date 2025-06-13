@@ -57,10 +57,6 @@ export default function EnhancedStudioHeader() {
     </header>
   );
 }
-import React from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Wifi, WifiOff, Clock } from "lucide-react";
 
 interface EnhancedStudioHeaderProps {
   isConnected: boolean;
