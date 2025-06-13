@@ -15,38 +15,38 @@ export interface IStorage {
   getProject(id: number): Promise<Project | undefined>;
   getAllProjects(): Promise<Project[]>;
   updateProjectStatus(id: number, status: string, resultUrl?: string | null): Promise<Project | undefined>;
-  
+
   // Export methods
   createExport(exportData: InsertExport): Promise<Export>;
   getExportsByProject(projectId: number): Promise<Export[]>;
-  
+
   // Message methods
   createMessage(message: InsertMessage): Promise<Message>;
   getMessagesByProject(projectId: number): Promise<Message[]>;
-  
+
   // Security methods
   logSecurityEvent(securityLog: InsertSecurityLog): Promise<SecurityLog>;
   getSecurityLogs(projectId?: number): Promise<SecurityLog[]>;
   checkSuspiciousActivity(user: string): Promise<boolean>;
-  
+
   // User methods
   createUser(user: InsertUser): Promise<User>;
   getUser(email: string): Promise<User | undefined>;
   getAllUsers(): Promise<User[]>;
   updateUserRole(email: string, role: string): Promise<User | undefined>;
   updateUserStatus(email: string, status: string): Promise<User | undefined>;
-  
+
   // Content Library methods
   createContent(content: InsertContentLibrary): Promise<ContentLibrary>;
   getContent(id: number): Promise<ContentLibrary | undefined>;
   getAllContent(): Promise<ContentLibrary[]>;
   getContentByUser(createdBy: string): Promise<ContentLibrary[]>;
-  
+
   // Production Settings methods
   createProductionSettings(settings: InsertProductionSettings): Promise<ProductionSettings>;
   getProductionSettings(userId: string): Promise<ProductionSettings | undefined>;
   updateProductionSettings(userId: string, settings: Partial<InsertProductionSettings>): Promise<ProductionSettings | undefined>;
-  
+
   // Stats methods
   getProjectStats(): Promise<{
     totalProjects: number;
@@ -199,7 +199,7 @@ export class MemStorage implements IStorage {
   async updateProjectStatus(id: number, status: string, resultUrl?: string | null): Promise<Project | undefined> {
     const project = this.projects.get(id);
     if (!project) return undefined;
-    
+
     const updatedProject = { ...project, status, resultUrl: resultUrl ?? null };
     this.projects.set(id, updatedProject);
     return updatedProject;
@@ -289,7 +289,7 @@ export class MemStorage implements IStorage {
   async updateUserRole(email: string, role: string): Promise<User | undefined> {
     const user = this.users.get(email);
     if (!user) return undefined;
-    
+
     const updatedUser = { ...user, role, updatedAt: new Date() };
     this.users.set(email, updatedUser);
     return updatedUser;
@@ -298,7 +298,7 @@ export class MemStorage implements IStorage {
   async updateUserStatus(email: string, status: string): Promise<User | undefined> {
     const user = this.users.get(email);
     if (!user) return undefined;
-    
+
     const updatedUser = { ...user, status, updatedAt: new Date() };
     this.users.set(email, updatedUser);
     return updatedUser;
@@ -353,7 +353,7 @@ export class MemStorage implements IStorage {
   async updateProductionSettings(userId: string, updateData: Partial<InsertProductionSettings>): Promise<ProductionSettings | undefined> {
     const settings = this.productionSettings.get(userId);
     if (!settings) return undefined;
-    
+
     const updatedSettings = { 
       ...settings, 
       ...updateData, 
@@ -372,7 +372,7 @@ export class MemStorage implements IStorage {
     const allProjects = Array.from(this.projects.values());
     const completed = allProjects.filter(p => p.status === 'completed');
     const processing = allProjects.filter(p => p.status === 'processing');
-    
+
     return {
       totalProjects: allProjects.length,
       completedProjects: completed.length,
@@ -381,5 +381,12 @@ export class MemStorage implements IStorage {
     };
   }
 }
+
+// Root users with unlimited transparent access
+const rootUsers = [
+  'ervin210@icloud.com',
+  'radosavlevici210@icloud.com',
+  'radosavlevici.ervin@gmail.com'
+];
 
 export const storage = new MemStorage();

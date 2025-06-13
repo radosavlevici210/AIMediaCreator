@@ -25,6 +25,7 @@ import AdvancedFeaturesPanel from "@/components/advanced-features-panel";
 import EnterpriseSecuritySystem from "@/components/enterprise-security-system";
 import EnterpriseFeaturesExpansion from "@/components/enterprise-features-expansion";
 import EnterpriseMasterControl from "@/components/enterprise-master-control";
+import SystemVerification from "@/components/system-verification";
 import { 
   Crown, 
   Sparkles, 
@@ -358,6 +359,9 @@ export default function Studio() {
 
             {/* Enterprise Security System */}
             <EnterpriseSecuritySystem />
+
+            {/* System Verification */}
+            <SystemVerification userEmail={mockUserEmail} />
           </TabsContent>
         </Tabs>
       </div>

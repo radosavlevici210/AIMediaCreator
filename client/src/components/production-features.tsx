@@ -336,7 +336,7 @@ export default function ProductionFeatures() {
         </TabsContent>
 
         <TabsContent value="ai-features" className="space-y-6">
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Card className="bg-black/20 backdrop-blur-sm border-green-500/30">
             <CardHeader>
@@ -649,8 +649,7 @@ export default function ProductionFeatures() {
                     <span className="text-sm font-bold text-green-400">&lt;1ms</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-sm text-gray-300">CDN Nodes</span>
-                    <span<span className="text-sm font-bold text-blue-400">247 global</span>
+                    <span className="text-sm text-gray-300">CDN Nodes</span>                    <span className="text-sm font-bold text-blue-400">247 global</span>
                   </div>
                 </div>
               </CardContent>

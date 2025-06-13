@@ -166,6 +166,15 @@ export default function EnterpriseAIStudio() {
                 Quantum AI
               </Badge>
               <Badge className="bg-blue-500/20 text-blue-300 border-blue-500/30">
+                <Globe className="w-3 h-3 mr-1" />
+                Global
+              </Badge>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="container mx-auto p-6">0">
                 <Shield className="w-3 h-3 mr-1" />
                 SOC 2
               </Badge>
