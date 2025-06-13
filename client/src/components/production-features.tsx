@@ -339,37 +339,37 @@ export default function ProductionFeatures() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <Card className="bg-black/20 backdrop-blur-sm border-green-500/30">
               <CardHeader>
-              <CardTitle className="text-green-400 flex items-center gap-2">
-                <CheckCircle2 className="h-5 w-5" />
-                Production Status
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-300">Deployment</span>
-                  <Badge className="bg-green-500/20 text-green-400">READY</Badge>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-300">Security</span>
-                  <Badge className="bg-green-500/20 text-green-400">MILITARY</Badge>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-300">Performance</span>
-                  <Badge className="bg-green-500/20 text-green-400">QUANTUM</Badge>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-300">Monitoring</span>
-                  <Badge className="bg-green-500/20 text-green-400">AI-POWERED</Badge>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-300">Features</span>
-                  <Badge className="bg-green-500/20 text-green-400">UNLIMITED</Badge>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-300">Root Access</span>
-                  <Badge className="bg-yellow-500/20 text-yellow-400">ENABLED</Badge>
-                </div>
+                <CardTitle className="text-green-400 flex items-center gap-2">
+                  <CheckCircle2 className="h-5 w-5" />
+                  Production Status
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3">
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-300">Deployment</span>
+                    <Badge className="bg-green-500/20 text-green-400">READY</Badge>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-300">Security</span>
+                    <Badge className="bg-green-500/20 text-green-400">MILITARY</Badge>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-300">Performance</span>
+                    <Badge className="bg-green-500/20 text-green-400">QUANTUM</Badge>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-300">Monitoring</span>
+                    <Badge className="bg-green-500/20 text-green-400">AI-POWERED</Badge>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-300">Features</span>
+                    <Badge className="bg-green-500/20 text-green-400">UNLIMITED</Badge>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-300">Root Access</span>
+                    <Badge className="bg-yellow-500/20 text-yellow-400">ENABLED</Badge>
+                  </div>
               </div>
             </CardContent>
           </Card>
@@ -474,6 +474,7 @@ export default function ProductionFeatures() {
                 </div>
               </CardContent>
             </Card>
+          </div>
           </div>
         </TabsContent>
 
