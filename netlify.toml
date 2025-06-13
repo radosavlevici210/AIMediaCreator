@@ -1,9 +1,16 @@
 [build]
   publish = "dist"
-  command = "npm run build"
+  command = "node build-netlify.js"
 
 [functions]
   node_bundler = "esbuild"
+  included_files = ["server/**"]
+
+[build.environment]
+  NODE_VERSION = "20"
+  NPM_VERSION = "10"
+  NODE_ENV = "production"
+  GENERATE_SOURCEMAP = "false"
 
 [[edge_functions]]
   function = "security"

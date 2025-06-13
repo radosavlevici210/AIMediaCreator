@@ -1,96 +1,47 @@
 export default async (request: Request, context: any) => {
-  const url = new URL(request.url);
-  const clientIP = request.headers.get('CF-Connecting-IP') || 
-                   request.headers.get('X-Forwarded-For') || 
-                   'unknown';
-  
-  // Enhanced security monitoring
-  const suspiciousPatterns = [
-    /\.(php|asp|jsp|cgi)$/i,
-    /wp-admin|wp-login/i,
-    /<script|javascript:|onload=/i,
-    /\.\.|\/\.\./,
-    /union.*select|drop.*table/i,
-    /eval\(|document\.write|innerHTML/i
-  ];
-  
-  const isSuspicious = suspiciousPatterns.some(pattern => 
-    pattern.test(url.pathname) || pattern.test(url.search)
-  );
-  
-  if (isSuspicious) {
-    console.log(`Security: Blocked suspicious request from ${clientIP}: ${url.pathname}`);
-    return new Response('Access Denied', { 
-      status: 403,
-      headers: {
-        'Content-Type': 'text/plain',
-        'X-Security-Block': 'pattern-match'
-      }
-    });
-  }
-  
-  // Rate limiting for API endpoints
-  if (url.pathname.startsWith('/api/')) {
-    const userAgent = request.headers.get('User-Agent') || '';
-    const isBot = /bot|crawler|spider|scraper/i.test(userAgent);
-    
-    if (isBot && !userAgent.includes('Googlebot') && !userAgent.includes('Bingbot')) {
-      console.log(`Security: Blocked bot from ${clientIP}: ${userAgent}`);
-      return new Response('Access Denied', { 
-        status: 403,
-        headers: {
-          'Content-Type': 'text/plain',
-          'X-Security-Block': 'bot-detection'
-        }
-      });
-    }
-  }
-  
   const response = await context.next();
-  
-  // Enhanced security headers
+
+  // Security headers
   const headers = new Headers(response.headers);
+
+  // Enhanced security for AI Studio
   headers.set('X-Frame-Options', 'DENY');
   headers.set('X-Content-Type-Options', 'nosniff');
   headers.set('X-XSS-Protection', '1; mode=block');
   headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
-  headers.set('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), payment=(), usb=()');
   headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
-  headers.set('X-DNS-Prefetch-Control', 'off');
-  headers.set('X-Download-Options', 'noopen');
-  headers.set('X-Permitted-Cross-Domain-Policies', 'none');
-  
-  // Enhanced Content Security Policy
-  headers.set('Content-Security-Policy', [
+
+  // Content Security Policy for AI Enterprise Studio
+  const csp = [
     "default-src 'self'",
-    "style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://fonts.googleapis.com",
-    "script-src 'self' 'unsafe-eval' 'unsafe-inline'",
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+    "style-src 'self' 'unsafe-inline'",
     "img-src 'self' data: https: blob:",
-    "connect-src 'self' ws: wss: https:",
-    "font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com",
-    "object-src 'none'",
-    "media-src 'self' blob: data:",
-    "frame-src 'none'",
-    "base-uri 'self'",
-    "form-action 'self'",
-    "upgrade-insecure-requests"
-  ].join('; '));
-  
-  // Performance optimization headers
-  if (url.pathname.match(/\.(js|css|png|jpg|jpeg|gif|svg|woff|woff2|ico)$/)) {
-    headers.set('Cache-Control', 'public, max-age=31536000, immutable');
-    headers.set('Vary', 'Accept-Encoding');
-  } else if (url.pathname.startsWith('/api/')) {
-    headers.set('Cache-Control', 'no-cache, no-store, must-revalidate');
-    headers.set('Pragma', 'no-cache');
-    headers.set('Expires', '0');
-  } else {
-    headers.set('Cache-Control', 'public, max-age=3600');
-  }
-  
+    "font-src 'self' data:",
+    "connect-src 'self' wss: https:",
+    "media-src 'self' blob:",
+    "worker-src 'self' blob:",
+    "frame-ancestors 'none'"
+  ].join('; ');
+
+  headers.set('Content-Security-Policy', csp);
+
+  // AI Studio specific headers
+  headers.set('X-AI-Studio-Version', '1.0.0');
+  headers.set('X-Powered-By', 'AI Enterprise Studio Pro+');
+
+  // Rate limiting headers (simulated)
+  headers.set('X-RateLimit-Limit', '1000');
+  headers.set('X-RateLimit-Remaining', '999');
+  headers.set('X-RateLimit-Reset', String(Date.now() + 3600000));
+
   return new Response(response.body, {
     status: response.status,
     statusText: response.statusText,
     headers
   });
+};
+
+export const config = {
+  path: "/*"
 };

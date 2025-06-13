@@ -34,6 +34,13 @@ import EnhancedStudioHeader from "@/components/enhanced-studio-header";
 import ProductionDashboard from "@/components/production-dashboard";
 import AdvancedWorkspace from "@/components/advanced-workspace";
 import { Cpu, HardDrive, Activity } from "lucide-react";
+import { MusicGenerator } from "@/components/music-generator";
+import { VideoCreator } from "@/components/video-creator";
+import { AILearningSystem } from "@/components/ai-learning-system";
+import { CollaborationWorkspace } from "@/components/collaboration-workspace";
+import { AnalyticsWorkspace } from "@/components/analytics-workspace";
+import { DistributionWorkspace } from "@/components/distribution-workspace";
+import { EnterpriseAIStudio } from "@/components/enterprise-ai-studio";
 
 export default function Studio() {
   const [activeTab, setActiveTab] = useState("dashboard");
