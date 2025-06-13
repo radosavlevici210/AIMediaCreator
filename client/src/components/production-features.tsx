@@ -336,10 +336,9 @@ export default function ProductionFeatures() {
         </TabsContent>
 
         <TabsContent value="ai-features" className="space-y-6">
-
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card className="bg-black/20 backdrop-blur-sm border-green-500/30">
-            <CardHeader>
+            <Card className="bg-black/20 backdrop-blur-sm border-green-500/30">
+              <CardHeader>
               <CardTitle className="text-green-400 flex items-center gap-2">
                 <CheckCircle2 className="h-5 w-5" />
                 Production Status

@@ -174,20 +174,20 @@ export default function EnterpriseAIStudio() {
         </div>
       </div>
 
-      <div className="container mx-auto p-6">0">
-                <Shield className="w-3 h-3 mr-1" />
-                SOC 2
-              </Badge>
-              <Badge className="bg-red-500/20 text-red-300 border-red-500/30">
-                <Eye className="w-3 h-3 mr-1" />
-                8K/IMAX
-              </Badge>
-              <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-500/30">
-                <Globe className="w-3 h-3 mr-1" />
-                Global CDN
-              </Badge>
-            </div>
-          </div>
+      <div className="container mx-auto p-6">
+        <div className="flex items-center gap-2 mb-4">
+          <Badge className="bg-green-500/20 text-green-300 border-green-500/30">
+            <Shield className="w-3 h-3 mr-1" />
+            SOC 2
+          </Badge>
+          <Badge className="bg-red-500/20 text-red-300 border-red-500/30">
+            <Eye className="w-3 h-3 mr-1" />
+            8K/IMAX
+          </Badge>
+          <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-500/30">
+            <Globe className="w-3 h-3 mr-1" />
+            Global CDN
+          </Badge>
         </div>
       </div>
 
