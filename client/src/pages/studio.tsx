@@ -75,108 +75,66 @@ export default function Studio() {
   };
 
   return (
-    <div className="min-h-screen ultra-modern-bg">
-      <div className="relative z-10">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-8">
         <EnhancedStudioHeader />
 
-        <div className="container mx-auto px-6 py-8 space-y-12">
-          <ProductionDashboard />
+        <ProductionDashboard />
 
-          <div className="space-y-12">
-            <ProfessionalDashboard />
+        <div className="space-y-8">
+          <ProfessionalDashboard />
 
-            <AdvancedWorkspace />
+          <AdvancedWorkspace />
 
-            {/* Ultra-Modern Tab System */}
-            <div className="ultra-modern-card p-2">
-              <Tabs defaultValue="video" className="space-y-8">
-                <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 bg-transparent p-0 h-auto">
-                  <TabsTrigger 
-                    value="video" 
-                    className="glass-morphism flex items-center justify-center space-x-2 text-sm hover:bg-purple-500/20 data-[state=active]:bg-purple-500/30 data-[state=active]:text-white data-[state=active]:shadow-lg rounded-xl py-4 transition-all duration-300"
-                  >
-                    <Play className="h-4 w-4" />
-                    <span className="hidden sm:inline font-semibold">Video Creator</span>
-                    <span className="sm:hidden font-semibold">Video</span>
-                  </TabsTrigger>
-                  <TabsTrigger 
-                    value="music" 
-                    className="glass-morphism flex items-center justify-center space-x-2 text-sm hover:bg-blue-500/20 data-[state=active]:bg-blue-500/30 data-[state=active]:text-white data-[state=active]:shadow-lg rounded-xl py-4 transition-all duration-300"
-                  >
-                    <Pause className="h-4 w-4" />
-                    <span className="hidden sm:inline font-semibold">Music Generator</span>
-                    <span className="sm:hidden font-semibold">Music</span>
-                  </TabsTrigger>
-                  <TabsTrigger 
-                    value="collaboration" 
-                    className="glass-morphism flex items-center justify-center space-x-2 text-sm hover:bg-green-500/20 data-[state=active]:bg-green-500/30 data-[state=active]:text-white data-[state=active]:shadow-lg rounded-xl py-4 transition-all duration-300"
-                  >
-                    <Users className="h-4 w-4" />
-                    <span className="hidden sm:inline font-medium">Collaboration</span>
-                    <span className="sm:hidden font-medium">Collab</span>
-                  </TabsTrigger>
-                  <TabsTrigger 
-                    value="analytics" 
-                    className="glass-morphism flex items-center justify-center space-x-2 text-sm hover:bg-orange-500/20 data-[state=active]:bg-orange-500/30 data-[state=active]:text-white data-[state=active]:shadow-lg rounded-xl py-4 transition-all duration-300"
-                  >
-                    <BarChart3 className="h-4 w-4" />
-                    <span className="hidden sm:inline font-semibold">Analytics</span>
-                    <span className="sm:hidden font-semibold">Analytics</span>
-                  </TabsTrigger>
-                  <TabsTrigger 
-                    value="distribution" 
-                    className="glass-morphism flex items-center justify-center space-x-2 text-sm hover:bg-indigo-500/20 data-[state=active]:bg-indigo-500/30 data-[state=active]:text-white data-[state=active]:shadow-lg rounded-xl py-4 transition-all duration-300"
-                  >
-                    <Share2 className="h-4 w-4" />
-                    <span className="hidden sm:inline font-semibold">Distribution</span>
-                    <span className="sm:hidden font-semibold">Share</span>
-                  </TabsTrigger>
-                </TabsList>
+          <Tabs defaultValue="video" className="space-y-6">
+            <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
+              <TabsTrigger value="video" className="flex items-center justify-center space-x-2 text-xs sm:text-sm">
+                <Play className="h-4 w-4" />
+                <span className="hidden sm:inline">Video Creator</span>
+                <span className="sm:hidden">Video</span>
+              </TabsTrigger>
+              <TabsTrigger value="music" className="flex items-center justify-center space-x-2 text-xs sm:text-sm">
+                <Pause className="h-4 w-4" />
+                <span className="hidden sm:inline">Music Generator</span>
+                <span className="sm:hidden">Music</span>
+              </TabsTrigger>
+              <TabsTrigger value="collaboration" className="flex items-center justify-center space-x-2 text-xs sm:text-sm">
+                <Users className="h-4 w-4" />
+                <span className="hidden sm:inline">Collaboration</span>
+                <span className="sm:hidden">Collab</span>
+              </TabsTrigger>
+              <TabsTrigger value="analytics" className="flex items-center justify-center space-x-2 text-xs sm:text-sm">
+                <BarChart3 className="h-4 w-4" />
+                <span className="hidden sm:inline">Analytics</span>
+                <span className="sm:hidden">Stats</span>
+              </TabsTrigger>
+              <TabsTrigger value="distribution" className="flex items-center justify-center space-x-2 text-xs sm:text-sm">
+                <Share2 className="h-4 w-4" />
+                <span className="hidden sm:inline">Distribution</span>
+                <span className="sm:hidden">Share</span>
+              </TabsTrigger>
+            </TabsList>
 
-                <TabsContent value="video" className="space-y-6">
-                  <EnhancedVideoCreator />
-                </TabsContent>
+            <TabsContent value="video" className="space-y-4">
+              <EnhancedVideoCreator />
+            </TabsContent>
 
-                <TabsContent value="music" className="space-y-6">
-                  <EnhancedMusicGenerator />
-                </TabsContent>
+            <TabsContent value="music" className="space-y-4">
+              <EnhancedMusicGenerator />
+            </TabsContent>
 
-                <TabsContent value="collaboration" className="space-y-6">
-                  <CollaborationWorkspace />
-                </TabsContent>
+            <TabsContent value="collaboration" className="space-y-4">
+              <CollaborationWorkspace />
+            </TabsContent>
 
-                <TabsContent value="analytics" className="space-y-6">
-                  <AnalyticsWorkspace />
-                </TabsContent>
+            <TabsContent value="analytics" className="space-y-4">
+              <AnalyticsWorkspace />
+            </TabsContent>
 
-                <TabsContent value="distribution" className="space-y-6">
-                  <DistributionWorkspace />
-                </TabsContent>
-              </Tabs>
-            </div>
-
-            {/* Advanced Features Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <UniversalWorkspace />
-              <BatchProcessor />
-            </div>
-
-            {/* AI & Monitoring Systems */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              <AILearningSystem />
-              <SecurityMonitor />
-              <PerformanceMonitor />
-            </div>
-
-            {/* Copyright Footer */}
-            <div className="ultra-modern-card production-ready">
-              <div className="text-center p-6">
-                <p className="text-sm font-medium text-primary">© 2025 Ervin Remus Radosavlevici</p>
-                <p className="text-xs text-muted-foreground mt-1">ervin210@icloud.com | radosavlevici.ervin@gmail.com</p>
-                <p className="text-xs text-muted-foreground">AI Creative Studio Pro+ | Production Ready | All Rights Reserved</p>
-              </div>
-            </div>
-          </div>
+            <TabsContent value="distribution" className="space-y-4">
+              <DistributionWorkspace />
+            </TabsContent>
+          </Tabs>
         </div>
       </div>
     </div>

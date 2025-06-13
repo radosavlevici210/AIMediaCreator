@@ -29,168 +29,159 @@ export default function EnhancedStudioHeader() {
   };
 
   return (
-    <header className="relative">
-      {/* Professional Navigation Bar */}
-      <div className="ultra-modern-card mx-6 mt-6 mb-0 rounded-2xl">
-        <div className="flex items-center justify-between p-6">
-          {/* Professional Branding */}
-          <div className="flex items-center space-x-6">
-            <div className="relative group">
-              <div className="w-16 h-16 rounded-2xl flex items-center justify-center shadow-xl transition-all duration-300 group-hover:scale-105" 
-                   style={{ background: 'var(--gradient-primary)' }}>
-                <Sparkles className="w-8 h-8 text-white" />
-              </div>
-              <div className="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-3 border-white animate-pulse"></div>
-            </div>
-            
-            <div className="space-y-2">
-              <h1 className="text-3xl font-black bg-gradient-to-r from-white via-purple-200 to-blue-200 bg-clip-text text-transparent">
-                Creative Studio Pro+
-              </h1>
-              <div className="flex items-center space-x-3">
-                <div className="glass-morphism px-3 py-1 rounded-full">
-                  <div className="flex items-center space-x-2">
-                    <Rocket className="w-3 h-3 text-green-400" />
-                    <span className="text-green-400 font-semibold text-xs">PRODUCTION</span>
-                  </div>
-                </div>
-                <div className="glass-morphism px-3 py-1 rounded-full">
-                  <div className="flex items-center space-x-2">
-                    <Crown className="w-3 h-3 text-yellow-400" />
-                    <span className="text-yellow-400 font-semibold text-xs">ENTERPRISE</span>
-                  </div>
-                </div>
-                <div className="glass-morphism px-3 py-1 rounded-full">
-                  <div className="flex items-center space-x-2">
-                    <Zap className="w-3 h-3 text-blue-400" />
-                    <span className="text-blue-400 font-semibold text-xs">UNLIMITED</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Professional Actions */}
-          <div className="hidden md:flex items-center space-x-4">
+    <header className="nav-modern border-b border-border/50 bg-background/80 backdrop-blur-xl sticky top-0 z-50">
+      <div className="container-padding">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo & Title */}
+          <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
-              <Button
-                className="glass-morphism px-4 py-2 hover:bg-purple-500/20 transition-all duration-300"
-                onClick={() => handleQuickAction('video')}
-                disabled={isProcessing}
-              >
-                <Video className="w-4 h-4 mr-2 text-blue-400" />
-                <span className="text-white font-medium">Video</span>
-              </Button>
-              <Button
-                className="glass-morphism px-4 py-2 hover:bg-purple-500/20 transition-all duration-300"
-                onClick={() => handleQuickAction('music')}
-                disabled={isProcessing}
-              >
-                <Music className="w-4 h-4 mr-2 text-purple-400" />
-                <span className="text-white font-medium">Music</span>
-              </Button>
-              <Button
-                className="glass-morphism px-4 py-2 hover:bg-purple-500/20 transition-all duration-300"
-                onClick={() => handleQuickAction('animation')}
-                disabled={isProcessing}
-              >
-                <Palette className="w-4 h-4 mr-2 text-pink-400" />
-                <span className="text-white font-medium">Animation</span>
-              </Button>
-            </div>
-
-            {/* System Status */}
-            <div className="glass-morphism px-4 py-2 rounded-xl">
-              <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-primary to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                <Sparkles className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <h1 className="text-xl font-bold text-gradient">Creative Studio</h1>
                 <div className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                  <span className="text-green-400 font-medium text-sm">Online</span>
-                </div>
-                <div className="w-px h-4 bg-white/20"></div>
-                <div className="flex items-center space-x-1">
-                  <BarChart3 className="w-4 h-4 text-blue-400" />
-                  <span className="text-blue-400 font-medium text-sm">99.9%</span>
-                </div>
-                <div className="w-px h-4 bg-white/20"></div>
-                <div className="flex items-center space-x-1">
-                  <Users className="w-4 h-4 text-cyan-400" />
-                  <span className="text-cyan-400 font-medium text-sm">1.2k</span>
+                  <Badge className="production-ready text-xs px-2 py-1">
+                    <Rocket className="w-3 h-3 mr-1" />
+                    PRODUCTION
+                  </Badge>
+                  <Badge className="premium-feature text-xs px-2 py-1">
+                    <Crown className="w-3 h-3 mr-1" />
+                    PRO+
+                  </Badge>
                 </div>
               </div>
             </div>
-
           </div>
 
-          {/* Action Buttons */}
-          <div className="flex items-center space-x-2">
+          {/* Quick Actions */}
+          <div className="hidden md:flex items-center space-x-2">
             <Button
-              className="glass-morphism px-3 py-2 hover:bg-blue-500/20 transition-all duration-300"
-              onClick={() => handleQuickAction('share')}
-            >
-              <Share2 className="w-4 h-4 mr-2 text-blue-400" />
-              <span className="text-white font-medium">Share</span>
-            </Button>
-            <Button
-              className="glass-morphism px-3 py-2 hover:bg-green-500/20 transition-all duration-300"
-              onClick={() => handleQuickAction('download')}
-            >
-              <Download className="w-4 h-4 mr-2 text-green-400" />
-              <span className="text-white font-medium">Export</span>
-            </Button>
-            <Button
-              className="px-6 py-2 rounded-xl font-medium text-white shadow-lg transition-all duration-300 hover:scale-105"
-              style={{ background: 'var(--gradient-primary)' }}
-              onClick={() => handleQuickAction('enhance')}
+              variant="ghost"
+              size="sm"
+              className="nav-item hover-lift"
+              onClick={() => handleQuickAction('video')}
               disabled={isProcessing}
             >
-              <Zap className="w-4 h-4 mr-2" />
-              {isProcessing ? 'Processing...' : 'AI Enhance'}
+              <Video className="w-4 h-4 mr-2" />
+              Video
             </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="nav-item hover-lift"
+              onClick={() => handleQuickAction('music')}
+              disabled={isProcessing}
+            >
+              <Music className="w-4 h-4 mr-2" />
+              Music
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="nav-item hover-lift"
+              onClick={() => handleQuickAction('animation')}
+              disabled={isProcessing}
+            >
+              <Palette className="w-4 h-4 mr-2" />
+              Animation
+            </Button>
+          </div>
+
+          {/* Status & Actions */}
+          <div className="flex items-center space-x-4">
+            {/* System Status */}
+            <div className="hidden lg:flex items-center space-x-3">
+              <div className="flex items-center space-x-2">
+                <div className="w-2 h-2 bg-green-500 rounded-full status-online"></div>
+                <span className="text-xs text-muted-foreground">Online</span>
+              </div>
+              <div className="flex items-center space-x-1 text-xs text-muted-foreground">
+                <BarChart3 className="w-3 h-3" />
+                <span>99.9%</span>
+              </div>
+              <div className="flex items-center space-x-1 text-xs text-muted-foreground">
+                <Users className="w-3 h-3" />
+                <span>1.2k</span>
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex items-center space-x-2">
+              <Button
+                variant="outline"
+                size="sm"
+                className="btn-outline"
+                onClick={() => handleQuickAction('share')}
+              >
+                <Share2 className="w-4 h-4 mr-2" />
+                Share
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                className="btn-outline"
+                onClick={() => handleQuickAction('download')}
+              >
+                <Download className="w-4 h-4 mr-2" />
+                Export
+              </Button>
+              <Button
+                className="btn-gradient-primary"
+                size="sm"
+                onClick={() => handleQuickAction('enhance')}
+                disabled={isProcessing}
+              >
+                <Zap className="w-4 h-4 mr-2" />
+                {isProcessing ? 'Processing...' : 'AI Enhance'}
+              </Button>
+            </div>
+
+            {/* Settings & Theme */}
+            <div className="flex items-center space-x-2">
+              <ThemeToggle />
+              <Button variant="ghost" size="sm" className="w-9 h-9 p-0">
+                <Settings className="w-4 h-4" />
+              </Button>
+            </div>
           </div>
         </div>
 
-        {/* Professional Feature Bar */}
-        <div className="flex items-center justify-between py-4 px-6 border-t border-white/10">
-          <div className="flex items-center space-x-8">
+        {/* Feature Bar */}
+        <div className="hidden lg:flex items-center justify-between py-2 border-t border-border/20">
+          <div className="flex items-center space-x-6 text-xs">
             <div className="flex items-center space-x-2 text-green-400">
-              <Shield className="w-4 h-4" />
-              <span className="font-medium">Enterprise Security</span>
+              <Shield className="w-3 h-3" />
+              <span>Enterprise Security</span>
             </div>
             <div className="flex items-center space-x-2 text-blue-400">
-              <Globe className="w-4 h-4" />
-              <span className="font-medium">Global CDN</span>
+              <Globe className="w-3 h-3" />
+              <span>Global CDN</span>
             </div>
             <div className="flex items-center space-x-2 text-purple-400">
-              <Zap className="w-4 h-4" />
-              <span className="font-medium">AI-Powered</span>
+              <Zap className="w-3 h-3" />
+              <span>AI-Powered</span>
             </div>
             <div className="flex items-center space-x-2 text-pink-400">
-              <Rocket className="w-4 h-4" />
-              <span className="font-medium">Production Ready</span>
+              <Rocket className="w-3 h-3" />
+              <span>Production Ready</span>
             </div>
           </div>
 
-          <div className="glass-morphism px-4 py-2 rounded-full">
-            <div className="flex items-center space-x-3 text-sm">
-              <span className="text-white font-bold">v2.0.0</span>
-              <div className="w-px h-4 bg-white/20"></div>
-              <span className="text-gray-300">Last updated: {new Date().toLocaleDateString()}</span>
-            </div>
+          <div className="flex items-center space-x-2 text-xs text-muted-foreground">
+            <span>v2.0.0</span>
+            <span>•</span>
+            <span>Last updated: {new Date().toLocaleDateString()}</span>
           </div>
         </div>
       </div>
 
       {/* Processing Overlay */}
       {isProcessing && (
-        <div className="absolute top-0 left-0 right-0 h-1 rounded-t-2xl overflow-hidden">
-          <div className="h-full bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 animate-pulse"></div>
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-purple-500 to-pink-500 animate-pulse">
+          <div className="h-full bg-gradient-to-r from-primary to-purple-600 animate-glow"></div>
         </div>
       )}
-
-      {/* Copyright Attribution */}
-      <div className="text-center py-2 text-xs text-gray-400">
-        © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com) - All Rights Reserved
-      </div>
     </header>
   );
 }
