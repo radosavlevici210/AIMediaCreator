@@ -20,6 +20,7 @@ interface WorkspaceTabsProps {
 export default function WorkspaceTabs({ activeWorkspace, onWorkspaceChange }: WorkspaceTabsProps) {
   const workspaces = [
     { id: 'content', name: 'Content Creation', icon: Video },
+    { id: 'development', name: 'Development Hub', icon: Cog },
     { id: 'advanced', name: 'Advanced Tools', icon: Settings },
     { id: 'collaboration', name: 'Collaboration', icon: Users },
     { id: 'analytics', name: 'Analytics', icon: BarChart3 },

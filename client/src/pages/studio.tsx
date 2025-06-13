@@ -26,6 +26,7 @@ import EnterpriseSecuritySystem from "@/components/enterprise-security-system";
 import EnterpriseFeaturesExpansion from "@/components/enterprise-features-expansion";
 import EnterpriseMasterControl from "@/components/enterprise-master-control";
 import SystemVerification from "@/components/system-verification";
+import DevelopmentDashboard from "@/components/development-dashboard";
 import { 
   Crown, 
   Sparkles, 
@@ -177,6 +178,14 @@ export default function Studio() {
               <span className="text-xs">Animation</span>
             </TabsTrigger>
 
+             <TabsTrigger 
+              value="development" 
+              className="data-[state=active]:bg-gray-500/20 data-[state=active]:text-gray-300 flex flex-col items-center gap-1 p-3"
+            >
+              <Zap className="w-5 h-5" />
+              <span className="text-xs">Development</span>
+            </TabsTrigger>
+
             <TabsTrigger 
               value="collaboration" 
               className="data-[state=active]:bg-yellow-500/20 data-[state=active]:text-yellow-300 flex flex-col items-center gap-1 p-3"
@@ -267,6 +276,10 @@ export default function Studio() {
 
           <TabsContent value="animation-studio" className="mt-6">
             <AdvancedAnimationStudio />
+          </TabsContent>
+
+           <TabsContent value="development" className="mt-6">
+            <DevelopmentDashboard />
           </TabsContent>
 
           <TabsContent value="collaboration" className="mt-6">

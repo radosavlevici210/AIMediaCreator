@@ -658,3 +658,60 @@ export async function registerRoutes(app: Express): Promise<Server> {
   const httpServer = createServer(app);
   return httpServer;
 }
+// Development Dashboard API endpoints
+app.get("/api/branches", async (req, res) => {
+  try {
+    // Mock branch data - replace with actual git integration
+    const branches = [
+      { name: 'main', status: 'production', lastCommit: '2 hours ago', url: process.env.PRODUCTION_URL, port: 5000 },
+      { name: 'development', status: 'development', lastCommit: '30 minutes ago', port: 5001 },
+      { name: 'feature/ai-enhancement', status: 'testing', lastCommit: '1 hour ago', port: 5002 },
+      { name: 'feature/enterprise-dashboard', status: 'active', lastCommit: '5 minutes ago', port: 5003 },
+      { name: 'hotfix/security-patch', status: 'testing', lastCommit: '45 minutes ago', port: 5004 },
+    ];
+    res.json(branches);
+  } catch (error) {
+    console.error('Error fetching branches:', error);
+    res.status(500).json({ error: 'Failed to fetch branches' });
+  }
+});
+
+app.get("/api/environments", async (req, res) => {
+  try {
+    // Mock environment data - replace with actual environment monitoring
+    const environments = [
+      { id: 'prod', name: 'Production', type: 'fullstack', status: 'running', port: 5000, branch: 'main', lastActivity: '2 mins ago' },
+      { id: 'staging', name: 'Staging', type: 'fullstack', status: 'running', port: 5001, branch: 'development', lastActivity: '5 mins ago' },
+      { id: 'api-test', name: 'API Testing', type: 'api', status: 'running', port: 3000, branch: 'feature/ai-enhancement', lastActivity: '1 min ago' },
+      { id: 'frontend-dev', name: 'Frontend Dev', type: 'frontend', status: 'building', port: 3001, branch: 'feature/enterprise-dashboard', lastActivity: '30 secs ago' },
+    ];
+    res.json(environments);
+  } catch (error) {
+    console.error('Error fetching environments:', error);
+    res.status(500).json({ error: 'Failed to fetch environments' });
+  }
+});
+
+app.post("/api/environments/:id/start", async (req, res) => {
+  try {
+    const { id } = req.params;
+    // Mock environment start - replace with actual environment management
+    console.log(`Starting environment: ${id}`);
+    res.json({ success: true, message: `Environment ${id} started successfully` });
+  } catch (error) {
+    console.error('Error starting environment:', error);
+    res.status(500).json({ error: 'Failed to start environment' });
+  }
+});
+
+app.post("/api/environments/:id/stop", async (req, res) => {
+  try {
+    const { id } = req.params;
+    // Mock environment stop - replace with actual environment management
+    console.log(`Stopping environment: ${id}`);
+    res.json({ success: true, message: `Environment ${id} stopped successfully` });
+  } catch (error) {
+    console.error('Error stopping environment:', error);
+    res.status(500).json({ error: 'Failed to stop environment' });
+  }
+});
