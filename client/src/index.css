@@ -5,30 +5,88 @@
 
 @layer base {
   :root {
+    /* Modern Dark Theme - Production Ready */
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
+    --card: 224 71.4% 4.1%;
     --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
+    --popover: 224 71.4% 4.1%;
     --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 84% 4.9%;
-    --secondary: 217.2 32.6% 17.5%;
+    --primary: 263.4 70% 50.4%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 215 27.9% 16.9%;
     --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
+    --muted: 215 27.9% 16.9%;
+    --muted-foreground: 217.9 10.6% 64.9%;
+    --accent: 215 27.9% 16.9%;
     --accent-foreground: 210 40% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    --border: 215 27.9% 16.9%;
+    --input: 215 27.9% 16.9%;
+    --ring: 263.4 70% 50.4%;
+    
+    /* Modern gradient system */
+    --gradient-primary: linear-gradient(135deg, hsl(263.4, 70%, 50.4%) 0%, hsl(293.4, 70%, 60.4%) 50%, hsl(323.4, 70%, 55.4%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(217.2, 32.6%, 17.5%) 0%, hsl(215, 27.9%, 16.9%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(173, 58%, 39%) 0%, hsl(193, 58%, 49%) 100%);
+    --gradient-success: linear-gradient(135deg, hsl(142.1, 76.2%, 36.3%) 0%, hsl(142.1, 70.6%, 45.3%) 100%);
+    --gradient-warning: linear-gradient(135deg, hsl(45.4, 93.4%, 47.5%) 0%, hsl(32.6, 93.4%, 57.5%) 100%);
+    --gradient-error: linear-gradient(135deg, hsl(0, 62.8%, 30.6%) 0%, hsl(0, 84.2%, 60.2%) 100%);
+    --gradient-info: linear-gradient(135deg, hsl(198.6, 88.7%, 48.4%) 0%, hsl(218.6, 88.7%, 58.4%) 100%);
+    
+    /* Glass morphism system */
+    --glass-bg: rgba(15, 23, 42, 0.8);
+    --glass-backdrop: blur(16px) saturate(180%);
+    --glass-border: rgba(148, 163, 184, 0.1);
+    
+    /* Shadow system */
+    --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-large: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    --shadow-glow: 0 0 30px hsl(var(--primary) / 0.3);
+    --shadow-depth: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    
+    /* Chart colors - Modern palette */
+    --chart-1: 263.4 70% 50.4%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 142.1 76.2% 36.3%;
+    --chart-4: 45.4 93.4% 47.5%;
+    --chart-5: 0 62.8% 50.6%;
+    --chart-6: 293.4 69% 49%;
+    --chart-7: 198.6 88.7% 48.4%;
+    --chart-8: 32.6 93.4% 57.5%;
+    
+    /* AI & Production specific colors */
+    --ai-primary: 263.4 70% 50.4%;
+    --ai-secondary: 293.4 69% 49%;
+    --production-primary: 142.1 76.2% 36.3%;
+    --production-secondary: 173 58% 39%;
+    --quantum-primary: 323.4 70% 55.4%;
+    --enterprise-primary: 217.2 32.6% 17.5%;
+  }
+
+  .light {
+    /* Light theme support */
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 263.4 70% 50.4%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 84% 4.9%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 84% 4.9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 263.4 70% 50.4%;
   }
 }
 

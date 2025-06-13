@@ -67,24 +67,25 @@ export default function ProfessionalDashboard() {
   return (
     <div className="space-y-6">
       {/* Pro Status Banner */}
-      <Card className="bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border-yellow-500/50">
+      <Card className="ultra-modern-card production-ready">
         <CardContent className="p-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-yellow-500/20 border border-yellow-500/50">
-                <Crown className="h-6 w-6 text-yellow-400" />
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-yellow-500 to-orange-500 shadow-lg glow-primary">
+                <Crown className="h-6 w-6 text-white animate-float" />
               </div>
               <div>
-                <h3 className="text-xl font-bold text-yellow-400">Professional Studio - All Features Unlocked</h3>
-                <p className="text-sm text-gray-300">Production-ready multimedia creation platform</p>
+                <h3 className="text-xl font-bold text-gradient">Professional Studio - All Features Unlocked</h3>
+                <p className="text-sm text-muted-foreground">Production-ready multimedia creation platform</p>
+                <p className="text-xs text-muted-foreground mt-1">© 2025 Ervin Remus Radosavlevici - ervin210@icloud.com</p>
               </div>
             </div>
             <div className="flex items-center space-x-2">
-              <Badge className="bg-green-500/20 text-green-400 border-green-500/50">
+              <Badge className="success-state">
                 <Sparkles className="h-3 w-3 mr-1" />
                 PRO ACTIVE
               </Badge>
-              <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/50">
+              <Badge className="premium-feature">
                 <TrendingUp className="h-3 w-3 mr-1" />
                 UNLIMITED
               </Badge>
@@ -94,30 +95,28 @@ export default function ProfessionalDashboard() {
       </Card>
 
       {/* Professional Features Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="modern-grid">
         {proFeatures.map((feature, index) => {
           const Icon = feature.icon;
           return (
-            <Card key={index} className="bg-gradient-to-br from-gray-900/50 to-gray-800/50 border-gray-700/50 hover:border-gray-600/50 transition-all duration-300">
+            <Card key={index} className="premium-feature hover-lift glass-morphism">
               <CardHeader className="pb-3">
-                <div className="flex items-center space-x-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20">
+                <CardTitle className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
                     <Icon className={`h-5 w-5 ${feature.color}`} />
+                    <span>{feature.title}</span>
                   </div>
-                  <div>
-                    <CardTitle className="text-lg">{feature.title}</CardTitle>
-                    <Badge variant="outline" className="bg-green-500/10 text-green-400 border-green-500/20 text-xs">
-                      {feature.status.toUpperCase()}
-                    </Badge>
-                  </div>
-                </div>
+                  <Badge className="success-state">ACTIVE</Badge>
+                </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-gray-400 mb-4">{feature.description}</p>
-                <Progress value={100} className="h-2 mb-3" />
-                <div className="flex justify-between text-xs text-gray-500">
-                  <span>Fully Unlocked</span>
-                  <span>100%</span>
+                <p className="text-sm text-muted-foreground mb-4">{feature.description}</p>
+                <div className="flex items-center justify-between mb-3">
+                  <Progress value={100} className="w-full mr-3" />
+                  <span className="text-xs text-green-400 font-medium">100%</span>
+                </div>
+                <div className="text-xs text-muted-foreground border-t border-border/30 pt-2">
+                  © 2025 Ervin Remus Radosavlevici - ervin210@icloud.com
                 </div>
               </CardContent>
             </Card>
@@ -125,20 +124,30 @@ export default function ProfessionalDashboard() {
         })}
       </div>
 
-      {/* Global Status */}
-      <Card className="bg-gradient-to-r from-green-500/10 to-blue-500/10 border-green-500/30">
+      {/* Copyright and Production Credits */}
+      <Card className="ultra-modern-card production-ready">
         <CardContent className="p-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <Award className="h-8 w-8 text-green-400" />
-              <div>
-                <h4 className="text-lg font-semibold text-green-400">Production Environment Active</h4>
-                <p className="text-sm text-gray-300">All professional features enabled • Global deployment ready</p>
-              </div>
+          <div className="text-center space-y-3">
+            <div className="flex items-center justify-center space-x-2 mb-4">
+              <Crown className="w-6 h-6 text-primary" />
+              <span className="text-lg font-bold text-gradient">Production Credits</span>
             </div>
-            <div className="text-right">
-              <div className="text-2xl font-bold text-green-400">100%</div>
-              <div className="text-xs text-gray-400">System Performance</div>
+            <p className="text-sm font-medium text-primary">© 2025 Ervin Remus Radosavlevici</p>
+            <p className="text-xs text-muted-foreground">ervin210@icloud.com | radosavlevici.ervin@gmail.com</p>
+            <p className="text-xs text-muted-foreground">AI Creative Studio Pro+ | Enterprise Production Ready | All Rights Reserved</p>
+            <div className="flex items-center justify-center space-x-2 mt-4">
+              <Badge className="production-ready">
+                <Shield className="w-3 h-3 mr-1" />
+                ENTERPRISE
+              </Badge>
+              <Badge className="premium-feature">
+                <Sparkles className="w-3 h-3 mr-1" />
+                UNLIMITED
+              </Badge>
+              <Badge className="bg-gradient-to-r from-green-500 to-emerald-500 text-white">
+                <Rocket className="w-3 h-3 mr-1" />
+                PRODUCTION
+              </Badge>
             </div>
           </div>
         </CardContent>
