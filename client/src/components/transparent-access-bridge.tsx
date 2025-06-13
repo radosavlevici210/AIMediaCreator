@@ -57,6 +57,20 @@ export default function TransparentAccessBridge({ userEmail }: TransparentAccess
       const bridgeData = await bridgeResponse.json();
       setBridgeStatus(bridgeData);
 
+      // Initialize global access permissions
+      await fetch('/api/global-permissions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-User-Email': userEmail
+        },
+        body: JSON.stringify({
+          userEmail,
+          permissions: ['all', 'unlimited', 'transparent', 'master'],
+          scope: 'global'
+        })
+      });
+
     } catch (error) {
       console.error('Failed to initialize transparent access:', error);
     }

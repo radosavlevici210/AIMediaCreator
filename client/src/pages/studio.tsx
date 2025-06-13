@@ -21,6 +21,8 @@ import DistributionWorkspace from "@/components/distribution-workspace";
 import AnalyticsWorkspace from "@/components/analytics-workspace";
 import BatchProcessor from "@/components/batch-processor";
 import TransparentAccessBridge from "@/components/transparent-access-bridge";
+import AdvancedFeaturesPanel from "@/components/advanced-features-panel";
+import EnterpriseSecuritySystem from "@/components/enterprise-security-system";
 import { 
   Crown, 
   Sparkles, 
@@ -302,6 +304,8 @@ export default function Studio() {
             </div>
 
             <ProductionFeatures />
+            
+            <EnterpriseSecuritySystem />
           </TabsContent>
 
           <TabsContent value="admin" className="mt-6 space-y-6">
@@ -332,6 +336,8 @@ export default function Studio() {
             </div>
 
             <BatchProcessor />
+            
+            <AdvancedFeaturesPanel userEmail="ervin210@icloud.com" />
           </TabsContent>
         </Tabs>
       </div>
