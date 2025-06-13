@@ -4,6 +4,7 @@ import { storage } from "./storage";
 import { insertProjectSchema, insertExportSchema, insertSecurityLogSchema } from "@shared/schema";
 import { z } from "zod";
 import rateLimit from "express-rate-limit";
+import { securityBlockingSystem } from "./agent-detection";
 
 // Security middleware with transparent access for root users
 const rootUsers = [
@@ -57,6 +58,20 @@ export async function registerRoutes(app: Express): Promise<Server> {
     res.setHeader('X-Frame-Options', 'DENY');
     res.setHeader('X-XSS-Protection', '1; mode=block');
     res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+    
+    // Agent detection and blocking
+    const userAgent = req.get('User-Agent') || '';
+    const userEmail = req.headers['x-user-email'] as string;
+    const suspicious = securityBlockingSystem.detectSuspiciousActivity(userAgent, req.ip, userEmail);
+    
+    if (suspicious) {
+      return res.status(403).json({ 
+        error: "Access blocked - Suspicious activity detected",
+        blocked: true,
+        timestamp: new Date().toISOString()
+      });
+    }
+    
     next();
   });
 
@@ -644,6 +659,106 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Flag Replit agent endpoint
+  app.post("/api/security/flag-agent", (req, res) => {
+    const { identifier, reason } = req.body;
+    const userEmail = req.headers['x-user-email'] as string;
+    const isRootUser = rootUsers.includes(userEmail);
+    
+    if (!isRootUser) {
+      return res.status(403).json({ error: "Unauthorized - Root access required" });
+    }
+    
+    try {
+      const flaggedEntity = securityBlockingSystem.flagReplitAgent(identifier, reason);
+      res.json({
+        success: true,
+        entity: flaggedEntity,
+        message: "Replit agent flagged successfully"
+      });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to flag agent" });
+    }
+  });
+
+  // Block GitHub account endpoint
+  app.post("/api/security/block-github", (req, res) => {
+    const { githubUrl, reason } = req.body;
+    const userEmail = req.headers['x-user-email'] as string;
+    const isRootUser = rootUsers.includes(userEmail);
+    
+    if (!isRootUser) {
+      return res.status(403).json({ error: "Unauthorized - Root access required" });
+    }
+    
+    try {
+      const blockedEntity = securityBlockingSystem.blockGithubAccount(githubUrl, reason);
+      res.json({
+        success: true,
+        entity: blockedEntity,
+        message: "GitHub account blocked successfully"
+      });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to block GitHub account" });
+    }
+  });
+
+  // Get blocked entities endpoint
+  app.get("/api/security/blocked-entities", (req, res) => {
+    const userEmail = req.headers['x-user-email'] as string;
+    const isRootUser = rootUsers.includes(userEmail);
+    
+    if (!isRootUser) {
+      return res.status(403).json({ error: "Unauthorized - Root access required" });
+    }
+    
+    try {
+      const entities = securityBlockingSystem.getBlockedEntities();
+      res.json({ entities });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch blocked entities" });
+    }
+  });
+
+  // Get data recovery logs endpoint
+  app.get("/api/security/recovery-logs", (req, res) => {
+    const userEmail = req.headers['x-user-email'] as string;
+    const isRootUser = rootUsers.includes(userEmail);
+    
+    if (!isRootUser) {
+      return res.status(403).json({ error: "Unauthorized - Root access required" });
+    }
+    
+    try {
+      const logs = securityBlockingSystem.getRecoveryLogs();
+      res.json({ logs });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch recovery logs" });
+    }
+  });
+
+  // Manual data recovery endpoint
+  app.post("/api/security/recover-data", (req, res) => {
+    const { entityId, recoveryType } = req.body;
+    const userEmail = req.headers['x-user-email'] as string;
+    const isRootUser = rootUsers.includes(userEmail);
+    
+    if (!isRootUser) {
+      return res.status(403).json({ error: "Unauthorized - Root access required" });
+    }
+    
+    try {
+      const recoveryLog = securityBlockingSystem.initiateDataRecovery(entityId, recoveryType);
+      res.json({
+        success: true,
+        recovery: recoveryLog,
+        message: "Data recovery initiated"
+      });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to initiate data recovery" });
+    }
+  });
+
   // Get security logs
   app.get("/api/security", async (req, res) => {
     try {
@@ -656,10 +771,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   const httpServer = createServer(app);
-  return httpServer;
-}
-// Development Dashboard API endpoints
-app.get("/api/branches", async (req, res) => {
+  // Development Dashboard API endpoints
+  app.get("/api/branches", async (req, res) => {
   try {
     // Mock branch data - replace with actual git integration
     const branches = [
@@ -715,3 +828,6 @@ app.post("/api/environments/:id/stop", async (req, res) => {
     res.status(500).json({ error: 'Failed to stop environment' });
   }
 });
+
+  return httpServer;
+}

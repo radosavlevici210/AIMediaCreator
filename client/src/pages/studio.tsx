@@ -185,6 +185,13 @@ export default function Studio() {
               <Zap className="w-5 h-5" />
               <span className="text-xs">Development</span>
             </TabsTrigger>
+            <TabsTrigger 
+              value="security" 
+              className="data-[state=active]:bg-cyan-500/20 data-[state=active]:text-cyan-300 flex flex-col items-center gap-1 p-3"
+            >
+              <Shield className="w-5 h-5" />
+              <span className="text-xs">Security</span>
+            </TabsTrigger>
 
             <TabsTrigger 
               value="collaboration" 
@@ -280,6 +287,10 @@ export default function Studio() {
 
            <TabsContent value="development" className="mt-6">
             <DevelopmentDashboard />
+          </TabsContent>
+
+          <TabsContent value="security" className="mt-6">
+            <SecurityBlockingDashboard />
           </TabsContent>
 
           <TabsContent value="collaboration" className="mt-6">
