@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import EnhancedStudioHeader from "@/components/enhanced-studio-header";
+import EnterpriseHeader from "@/components/enterprise-header";
 import ProfessionalDashboard from "@/components/professional-dashboard";
-import AdvancedWorkspace from "@/components/advanced-workspace";
+import UniversalWorkspace from "@/components/universal-workspace";
 import AnalyticsWorkspace from "@/components/analytics-workspace";
 import CollaborationWorkspace from "@/components/collaboration-workspace";
 import DistributionWorkspace from "@/components/distribution-workspace";
@@ -75,7 +75,7 @@ export default function Studio() {
 
   return (
     <div className="min-h-screen bg-background">
-      <EnhancedStudioHeader />
+      <EnterpriseHeader />
       
       {/* Main Content */}
       <div className="container-padding section-padding">
@@ -228,7 +228,7 @@ export default function Studio() {
           </TabsContent>
 
           <TabsContent value="workspace" className="space-y-8">
-            <AdvancedWorkspace />
+            <UniversalWorkspace type="video" />
           </TabsContent>
 
           <TabsContent value="analytics" className="space-y-8">
