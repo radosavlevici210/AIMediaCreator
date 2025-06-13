@@ -1,3 +1,5 @@
+import { useQuery } from "@tanstack/react-query";
+
 interface ProductionDashboardProps {
   stats?: {
     totalProjects: number;
@@ -6,8 +8,6 @@ interface ProductionDashboardProps {
     avgProcessingTime: number;
   };
 }
-
-import { useQuery } from "@tanstack/react-query";
 
 // © 2025 Ervin Radosavlevici - Professional Production Dashboard
 export default function ProductionDashboard({ stats }: ProductionDashboardProps) {
@@ -79,132 +79,6 @@ export default function ProductionDashboard({ stats }: ProductionDashboardProps)
             <i className="fas fa-spinner text-3xl text-gray-400 opacity-60"></i>
           </div>
         </div>
-      </div>
-    </div>
-  );
-}
-
-
-      icon: BarChart3,
-      trend: "up"
-    },
-    {
-      title: "Active Users",
-      value: "1,234",
-      change: "+23%",
-      icon: Users,
-      trend: "up"
-    },
-    {
-      title: "Avg. Processing Time",
-      value: "2.3s",
-      change: "-15%",
-      icon: Clock,
-      trend: "down"
-    },
-    {
-      title: "System Performance",
-      value: "99.9%",
-      change: "+0.1%",
-      icon: Zap,
-      trend: "up"
-    }
-  ];
-
-  return (
-    <div className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {stats.map((stat, index) => {
-          const Icon = stat.icon;
-          return (
-            <Card key={index}>
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">
-                  {stat.title}
-                </CardTitle>
-                <Icon className="h-4 w-4 text-muted-foreground" />
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{stat.value}</div>
-                <p className="text-xs text-muted-foreground">
-                  <span className={stat.trend === 'up' ? 'text-green-500' : 'text-red-500'}>
-                    {stat.change}
-                  </span>
-                  {" "}from last month
-                </p>
-              </CardContent>
-            </Card>
-          );
-        })}
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <TrendingUp className="h-5 w-5" />
-              Creation Analytics
-            </CardTitle>
-            <CardDescription>
-              Real-time project creation statistics
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <div className="flex justify-between text-sm">
-                <span>Video Projects</span>
-                <span>45%</span>
-              </div>
-              <Progress value={45} className="h-2" />
-            </div>
-            <div className="space-y-2">
-              <div className="flex justify-between text-sm">
-                <span>Music Projects</span>
-                <span>30%</span>
-              </div>
-              <Progress value={30} className="h-2" />
-            </div>
-            <div className="space-y-2">
-              <div className="flex justify-between text-sm">
-                <span>Animation Projects</span>
-                <span>25%</span>
-              </div>
-              <Progress value={25} className="h-2" />
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Activity className="h-5 w-5" />
-              System Health
-            </CardTitle>
-            <CardDescription>
-              Real-time system monitoring
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center justify-between">
-              <span className="text-sm">CPU Usage</span>
-              <Badge variant="outline" className="bg-green-500/10 text-green-400">
-                23%
-              </Badge>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="text-sm">Memory Usage</span>
-              <Badge variant="outline" className="bg-blue-500/10 text-blue-400">
-                67%
-              </Badge>
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="text-sm">Network I/O</span>
-              <Badge variant="outline" className="bg-purple-500/10 text-purple-400">
-                Low
-              </Badge>
-            </div>
-          </CardContent>
-        </Card>
       </div>
     </div>
   );
