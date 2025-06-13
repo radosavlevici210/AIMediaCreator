@@ -11,10 +11,6 @@ deploymentTarget = "autoscale"
 build = ["npm", "run", "build"]
 run = ["npm", "run", "start"]
 
-[[ports]]
-localPort = 5000
-externalPort = 80
-
 [workflows]
 runButton = "Project"
 
@@ -44,3 +40,7 @@ mode = "sequential"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "npm run dev"
+
+[[ports]]
+localPort = 1111
+externalPort = 3000
