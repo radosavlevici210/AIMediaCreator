@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import EnhancedStudioHeader from "@/components/enhanced-studio-header";
-import ProductionDashboard from "@/components/production-dashboard";
+import ProfessionalDashboard from "@/components/professional-dashboard";
 import AdvancedWorkspace from "@/components/advanced-workspace";
 import AnalyticsWorkspace from "@/components/analytics-workspace";
 import CollaborationWorkspace from "@/components/collaboration-workspace";
@@ -219,7 +219,7 @@ export default function Studio() {
           <TabsContent value="dashboard" className="space-y-8">
             <div className="grid grid-cols-1 xl:grid-cols-4 gap-8">
               <div className="xl:col-span-3">
-                <ProductionDashboard stats={systemStats as any} />
+                <ProfessionalDashboard />
               </div>
               <div className="xl:col-span-1">
                 <PerformanceMonitor />
