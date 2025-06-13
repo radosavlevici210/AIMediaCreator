@@ -1,22 +1,26 @@
 {
-  "name": "AI Media Creator",
-  "short_name": "AI Creator",
-  "description": "Professional AI-powered video, music, and animation generation platform",
+  "name": "Professional Media Studio",
+  "short_name": "MediaStudio",
+  "description": "Advanced AI-powered media creation and production studio",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#ffffff",
-  "orientation": "portrait-primary",
-  "scope": "/",
+  "background_color": "#0F172A",
+  "theme_color": "#8B5CF6",
   "icons": [
     {
-      "src": "/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
   ],
-  "categories": ["productivity", "multimedia", "entertainment"],
-  "lang": "en-US",
-  "dir": "ltr"
+  "categories": ["productivity", "multimedia", "business"],
+  "lang": "en",
+  "dir": "ltr",
+  "orientation": "any",
+  "prefer_related_applications": false
 }

@@ -104,6 +104,7 @@ export class MemStorage implements IStorage {
   private async initializeRootUsers() {
     const rootUsers = [
       'ervin210@icloud.com',
+      'radosavlevici210@icloud.com',
       'radosavlevici.ervin@gmail.com'
     ];
 
@@ -151,8 +152,14 @@ export class MemStorage implements IStorage {
   async createProject(insertProject: InsertProject): Promise<Project> {
     const id = this.currentProjectId++;
     const project: Project = {
-      ...insertProject,
       id,
+      title: insertProject.title,
+      content: insertProject.content,
+      type: insertProject.type,
+      settings: insertProject.settings,
+      status: insertProject.status || 'pending',
+      resultUrl: insertProject.resultUrl || null,
+      duration: insertProject.duration || null,
       createdAt: new Date(),
     };
     this.projects.set(id, project);
