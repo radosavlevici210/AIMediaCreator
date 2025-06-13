@@ -5,35 +5,46 @@
 
 @layer base {
   :root {
-    /* Modern Dark Theme - Production Ready */
-    --background: 222.2 84% 4.9%;
+    /* Ultra Modern Professional Theme */
+    --background: 220 20% 5%;
     --foreground: 210 40% 98%;
-    --card: 224 71.4% 4.1%;
+    --card: 220 25% 8%;
     --card-foreground: 210 40% 98%;
-    --popover: 224 71.4% 4.1%;
+    --popover: 220 25% 8%;
     --popover-foreground: 210 40% 98%;
-    --primary: 263.4 70% 50.4%;
+    --primary: 262 83% 58%;
     --primary-foreground: 210 40% 98%;
-    --secondary: 215 27.9% 16.9%;
+    --secondary: 215 25% 12%;
     --secondary-foreground: 210 40% 98%;
-    --muted: 215 27.9% 16.9%;
+    --muted: 215 25% 12%;
     --muted-foreground: 217.9 10.6% 64.9%;
-    --accent: 215 27.9% 16.9%;
+    --accent: 262 83% 58%;
     --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 72% 51%;
     --destructive-foreground: 210 40% 98%;
-    --border: 215 27.9% 16.9%;
-    --input: 215 27.9% 16.9%;
-    --ring: 263.4 70% 50.4%;
+    --border: 215 25% 15%;
+    --input: 215 25% 12%;
+    --ring: 262 83% 58%;
     
-    /* Modern gradient system */
-    --gradient-primary: linear-gradient(135deg, hsl(263.4, 70%, 50.4%) 0%, hsl(293.4, 70%, 60.4%) 50%, hsl(323.4, 70%, 55.4%) 100%);
-    --gradient-secondary: linear-gradient(135deg, hsl(217.2, 32.6%, 17.5%) 0%, hsl(215, 27.9%, 16.9%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(173, 58%, 39%) 0%, hsl(193, 58%, 49%) 100%);
-    --gradient-success: linear-gradient(135deg, hsl(142.1, 76.2%, 36.3%) 0%, hsl(142.1, 70.6%, 45.3%) 100%);
-    --gradient-warning: linear-gradient(135deg, hsl(45.4, 93.4%, 47.5%) 0%, hsl(32.6, 93.4%, 57.5%) 100%);
-    --gradient-error: linear-gradient(135deg, hsl(0, 62.8%, 30.6%) 0%, hsl(0, 84.2%, 60.2%) 100%);
-    --gradient-info: linear-gradient(135deg, hsl(198.6, 88.7%, 48.4%) 0%, hsl(218.6, 88.7%, 58.4%) 100%);
+    /* Professional gradient system */
+    --gradient-primary: linear-gradient(135deg, #8B5CF6 0%, #A855F7 50%, #C084FC 100%);
+    --gradient-secondary: linear-gradient(135deg, #1F2937 0%, #374151 100%);
+    --gradient-accent: linear-gradient(135deg, #06B6D4 0%, #0891B2 100%);
+    --gradient-success: linear-gradient(135deg, #10B981 0%, #059669 100%);
+    --gradient-warning: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+    --gradient-error: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+    --gradient-info: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+    
+    /* Professional glass system */
+    --glass-bg: rgba(17, 24, 39, 0.85);
+    --glass-border: rgba(156, 163, 175, 0.15);
+    --glass-backdrop: blur(20px) saturate(180%);
+    
+    /* Professional shadows */
+    --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    --shadow-elevation: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+    --shadow-glow-primary: 0 0 40px rgba(139, 92, 246, 0.4);
+    --shadow-glow-success: 0 0 40px rgba(16, 185, 129, 0.4);
     
     /* Glass morphism system */
     --glass-bg: rgba(15, 23, 42, 0.8);
@@ -296,26 +307,39 @@
 }
 
 @layer components {
-  /* Modern glass morphism system */
-  .glass {
+  /* Professional glass morphism system */
+  .glass-morphism {
     background: var(--glass-bg);
     backdrop-filter: var(--glass-backdrop);
     border: 1px solid var(--glass-border);
-    box-shadow: var(--shadow-soft);
+    box-shadow: var(--shadow-glass);
+    border-radius: 1rem;
+    position: relative;
+    overflow: hidden;
   }
 
-  .glass-card {
-    @apply glass rounded-2xl p-8 shadow-2xl border;
+  .glass-morphism::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
   }
 
-  .glass-morphism {
-    @apply glass rounded-xl p-6;
-    background: linear-gradient(145deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255,255,255,0.1);
-    box-shadow: 
-      0 8px 32px rgba(0,0,0,0.3),
-      inset 0 1px 0 rgba(255,255,255,0.1);
+  .ultra-modern-card {
+    @apply glass-morphism p-6;
+    background: linear-gradient(145deg, rgba(17, 24, 39, 0.9) 0%, rgba(17, 24, 39, 0.7) 100%);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    box-shadow: var(--shadow-elevation);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .ultra-modern-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow-primary);
+    border-color: rgba(139, 92, 246, 0.4);
   }
 
   /* Modern gradient buttons */
