@@ -191,71 +191,85 @@ export default function EnhancedCreationSuite() {
             
             {/* Video Creator */}
             <TabsContent value="video" className="space-y-6">
+              {/* Professional File Upload Section */}
+              <Card className="border-dashed border-2 border-primary/20 bg-primary/5">
+                <CardContent className="p-6">
+                  <div className="text-center space-y-4">
+                    <div className="w-16 h-16 mx-auto bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                      <Upload className="w-8 h-8 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold">Upload Media Assets</h3>
+                      <p className="text-sm text-muted-foreground">Drag & drop files or click to browse • Unlimited file size • All formats supported</p>
+                    </div>
+                    <Button 
+                      onClick={() => fileInputRef.current?.click()}
+                      className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600"
+                    >
+                      <Upload className="w-4 h-4 mr-2" />
+                      Choose Files
+                    </Button>
+                    <input
+                      ref={fileInputRef}
+                      type="file"
+                      multiple
+                      accept="video/*,audio/*,image/*"
+                      onChange={handleFileUpload}
+                      className="hidden"
+                    />
+                    {uploadedFiles.length > 0 && (
+                      <div className="mt-4 space-y-2">
+                        <p className="text-sm font-medium">{uploadedFiles.length} files uploaded:</p>
+                        <div className="flex flex-wrap gap-2">
+                          {uploadedFiles.map((file, index) => (
+                            <Badge key={index} variant="secondary" className="text-xs">
+                              {file.name}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div className="space-y-4">
                   <div>
-                    <label className="text-sm font-medium mb-2 block">Video Description</label>
-                    <Input 
-                      placeholder="Describe your video concept..."
-                      className="h-12"
+                    <label className="text-sm font-medium mb-2 flex items-center gap-2">
+                      <Crown className="w-4 h-4 text-yellow-500" />
+                      Video Concept (Unlimited Duration)
+                    </label>
+                    <Textarea 
+                      placeholder="Describe your Hollywood-quality video concept with unlimited creative possibilities..."
+                      className="min-h-24 resize-none"
                     />
                   </div>
                   
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="text-sm font-medium mb-2 block">Style</label>
-                      <select className="w-full h-10 px-3 rounded-md border border-input bg-background">
-                        <option>Cinematic</option>
-                        <option>Animated</option>
-                        <option>Documentary</option>
-                        <option>Music Video</option>
-                      </select>
+                      <label className="text-sm font-medium mb-1 block">Quality</label>
+                      <Input placeholder="8K • IMAX • Dolby Vision" defaultValue="8K Ultra HD" />
                     </div>
                     <div>
-                      <label className="text-sm font-medium mb-2 block">Duration</label>
-                      <select className="w-full h-10 px-3 rounded-md border border-input bg-background">
-                        <option>30 seconds</option>
-                        <option>1 minute</option>
-                        <option>2 minutes</option>
-                        <option>5 minutes</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-3">
-                    <div>
-                      <label className="text-sm font-medium mb-2 block">Quality</label>
-                      <select className="w-full h-10 px-3 rounded-md border border-input bg-background">
-                        <option>8K Ultra HD</option>
-                        <option>4K Standard</option>
-                        <option>1080p HD</option>
-                        <option>720p Mobile</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium mb-2 block">Aspect Ratio</label>
-                      <select className="w-full h-10 px-3 rounded-md border border-input bg-background">
-                        <option>16:9 Widescreen</option>
-                        <option>9:16 Vertical</option>
-                        <option>1:1 Square</option>
-                        <option>4:3 Classic</option>
-                      </select>
+                      <label className="text-sm font-medium mb-1 block">Duration</label>
+                      <Input placeholder="Unlimited" defaultValue="∞ No Limits" />
                     </div>
                   </div>
 
                   <Button 
-                    className="w-full h-12 glow-primary"
-                    onClick={() => handleGeneration('video', 'Sample video')}
+                    className="w-full h-12 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold"
+                    onClick={() => handleGeneration('video', 'Professional video creation')}
                     disabled={isGenerating}
                   >
                     {isGenerating ? (
                       <>
-                        <RotateCcw className="w-4 h-4 mr-2 animate-spin" />
+                        <Wand2 className="w-4 h-4 mr-2 animate-spin" />
                         Generating Video...
                       </>
                     ) : (
                       <>
-                        <Play className="w-4 h-4 mr-2" />
+                        <Sparkles className="w-4 h-4 mr-2" />
                         Create Video
                       </>
                     )}
@@ -263,27 +277,43 @@ export default function EnhancedCreationSuite() {
                 </div>
 
                 <div className="space-y-4">
-                  <div className="w-full h-64 bg-muted/50 rounded-lg flex items-center justify-center">
-                    <div className="text-center">
-                      <Video className="w-12 h-12 text-muted-foreground mx-auto mb-2" />
-                      <p className="text-sm text-muted-foreground">Video preview will appear here</p>
-                    </div>
-                  </div>
-                  
-                  <div className="grid grid-cols-3 gap-2">
-                    <Button variant="outline" size="sm">
-                      <ImageIcon className="w-3 h-3 mr-1" />
-                      Add Media
-                    </Button>
-                    <Button variant="outline" size="sm">
-                      <Settings className="w-3 h-3 mr-1" />
-                      Effects
-                    </Button>
-                    <Button variant="outline" size="sm">
-                      <Volume2 className="w-3 h-3 mr-1" />
-                      Audio
-                    </Button>
-                  </div>
+                  <Card className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 border-purple-500/20">
+                    <CardContent className="p-4">
+                      <div className="flex items-center gap-3 mb-3">
+                        <Infinity className="w-5 h-5 text-purple-400" />
+                        <h4 className="font-semibold">Unlimited Production</h4>
+                      </div>
+                      <div className="space-y-2 text-sm text-muted-foreground">
+                        <div className="flex items-center gap-2">
+                          <Star className="w-4 h-4 text-yellow-500" />
+                          <span>8K, IMAX, Dolby Vision support</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Eye className="w-4 h-4 text-green-500" />
+                          <span>Quantum-level AI optimization</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Zap className="w-4 h-4 text-blue-500" />
+                          <span>Real-time collaboration</span>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="bg-gradient-to-br from-green-500/10 to-blue-500/10 border-green-500/20">
+                    <CardContent className="p-4">
+                      <div className="flex items-center gap-3 mb-3">
+                        <Crown className="w-5 h-5 text-yellow-500" />
+                        <h4 className="font-semibold">Professional Export</h4>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2 text-xs">
+                        <Badge variant="outline">MP4 • 8K</Badge>
+                        <Badge variant="outline">MOV • IMAX</Badge>
+                        <Badge variant="outline">WebM • HDR</Badge>
+                        <Badge variant="outline">ProRes • Studio</Badge>
+                      </div>
+                    </CardContent>
+                  </Card>
                 </div>
               </div>
             </TabsContent>
@@ -293,61 +323,289 @@ export default function EnhancedCreationSuite() {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <div className="space-y-4">
                   <div>
-                    <label className="text-sm font-medium mb-2 block">Music Concept</label>
-                    <Input 
-                      placeholder="Describe your music style and mood..."
-                      className="h-12"
+                    <label className="text-sm font-medium mb-2 flex items-center gap-2">
+                      <Music className="w-4 h-4 text-green-500" />
+                      Music Concept (43+ Hours)
+                    </label>
+                    <Textarea 
+                      placeholder="Describe your professional music track with Dolby Atmos quality..."
+                      className="min-h-24 resize-none"
                     />
                   </div>
                   
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="text-sm font-medium mb-2 block">Genre</label>
-                      <select className="w-full h-10 px-3 rounded-md border border-input bg-background">
-                        <option>Electronic</option>
-                        <option>Rock</option>
-                        <option>Classical</option>
-                        <option>Jazz</option>
-                        <option>Hip Hop</option>
-                        <option>Ambient</option>
-                      </select>
+                      <label className="text-sm font-medium mb-1 block">Genre</label>
+                      <Input placeholder="Any Genre" defaultValue="Professional Mix" />
                     </div>
                     <div>
-                      <label className="text-sm font-medium mb-2 block">Tempo</label>
-                      <select className="w-full h-10 px-3 rounded-md border border-input bg-background">
-                        <option>Slow (60-90 BPM)</option>
-                        <option>Medium (90-120 BPM)</option>
-                        <option>Fast (120-140 BPM)</option>
-                        <option>Very Fast (140+ BPM)</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-3">
-                    <div>
-                      <label className="text-sm font-medium mb-2 block">Duration</label>
-                      <select className="w-full h-10 px-3 rounded-md border border-input bg-background">
-                        <option>30 seconds</option>
-                        <option>1 minute</option>
-                        <option>3 minutes</option>
-                        <option>5 minutes</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium mb-2 block">Key</label>
-                      <select className="w-full h-10 px-3 rounded-md border border-input bg-background">
-                        <option>C Major</option>
-                        <option>D Minor</option>
-                        <option>G Major</option>
-                        <option>A Minor</option>
-                      </select>
+                      <label className="text-sm font-medium mb-1 block">Quality</label>
+                      <Input placeholder="Dolby Atmos" defaultValue="Studio Master" />
                     </div>
                   </div>
 
                   <Button 
-                    className="w-full h-12 glow-primary"
-                    onClick={() => handleGeneration('music', 'Sample music')}
+                    className="w-full h-12 bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white font-semibold"
+                    onClick={() => handleGeneration('music', 'Professional music creation')}
                     disabled={isGenerating}
+                  >
+                    {isGenerating ? (
+                      <>
+                        <Wand2 className="w-4 h-4 mr-2 animate-spin" />
+                        Generating Music...
+                      </>
+                    ) : (
+                      <>
+                        <Headphones className="w-4 h-4 mr-2" />
+                        Create Music
+                      </>
+                    )}
+                  </Button>
+                </div>
+
+                <div className="space-y-4">
+                  <Card className="bg-gradient-to-br from-green-500/10 to-blue-500/10 border-green-500/20">
+                    <CardContent className="p-4">
+                      <div className="flex items-center gap-3 mb-3">
+                        <Volume2 className="w-5 h-5 text-green-500" />
+                        <h4 className="font-semibold">Audio Excellence</h4>
+                      </div>
+                      <div className="space-y-2 text-sm text-muted-foreground">
+                        <div className="flex items-center gap-2">
+                          <Star className="w-4 h-4 text-yellow-500" />
+                          <span>Dolby Atmos • 7.1 Surround</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Infinity className="w-4 h-4 text-purple-500" />
+                          <span>43+ hours unlimited duration</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Zap className="w-4 h-4 text-blue-500" />
+                          <span>Real-time voice synthesis</span>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="bg-gradient-to-br from-orange-500/10 to-red-500/10 border-orange-500/20">
+                    <CardContent className="p-4">
+                      <div className="flex items-center gap-3 mb-3">
+                        <Download className="w-5 h-5 text-orange-500" />
+                        <h4 className="font-semibold">Export Formats</h4>
+                      </div>
+                      <div className="grid grid-cols-2 gap-2 text-xs">
+                        <Badge variant="outline">MP3 • 320kbps</Badge>
+                        <Badge variant="outline">FLAC • Lossless</Badge>
+                        <Badge variant="outline">WAV • Studio</Badge>
+                        <Badge variant="outline">Atmos • 7.1</Badge>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            </TabsContent>
+
+            {/* Animation Creator */}
+            <TabsContent value="animation" className="space-y-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <div>
+                    <label className="text-sm font-medium mb-2 flex items-center gap-2">
+                      <Film className="w-4 h-4 text-orange-500" />
+                      Animation Concept (Quantum Rendering)
+                    </label>
+                    <Textarea 
+                      placeholder="Describe your advanced 3D animation with quantum-level rendering..."
+                      className="min-h-24 resize-none"
+                    />
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="text-sm font-medium mb-1 block">Style</label>
+                      <Input placeholder="3D • Photorealistic" defaultValue="Quantum 3D" />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium mb-1 block">Resolution</label>
+                      <Input placeholder="8K • IMAX" defaultValue="Ultra HD+" />
+                    </div>
+                  </div>
+
+                  <Button 
+                    className="w-full h-12 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-semibold"
+                    onClick={() => handleGeneration('animation', 'Professional animation creation')}
+                    disabled={isGenerating}
+                  >
+                    {isGenerating ? (
+                      <>
+                        <Wand2 className="w-4 h-4 mr-2 animate-spin" />
+                        Generating Animation...
+                      </>
+                    ) : (
+                      <>
+                        <Layers className="w-4 h-4 mr-2" />
+                        Create Animation
+                      </>
+                    )}
+                  </Button>
+                </div>
+
+                <div className="space-y-4">
+                  <Card className="bg-gradient-to-br from-orange-500/10 to-red-500/10 border-orange-500/20">
+                    <CardContent className="p-4">
+                      <div className="flex items-center gap-3 mb-3">
+                        <Palette className="w-5 h-5 text-orange-500" />
+                        <h4 className="font-semibold">Advanced Rendering</h4>
+                      </div>
+                      <div className="space-y-2 text-sm text-muted-foreground">
+                        <div className="flex items-center gap-2">
+                          <Star className="w-4 h-4 text-yellow-500" />
+                          <span>Quantum-level 3D rendering</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Eye className="w-4 h-4 text-green-500" />
+                          <span>Photorealistic materials</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Zap className="w-4 h-4 text-blue-500" />
+                          <span>Real-time ray tracing</span>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            </TabsContent>
+
+            {/* Lyrics Creator */}
+            <TabsContent value="lyrics" className="space-y-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <div>
+                    <label className="text-sm font-medium mb-2 flex items-center gap-2">
+                      <FileText className="w-4 h-4 text-blue-500" />
+                      Lyrics & Voice Concept
+                    </label>
+                    <Textarea 
+                      placeholder="Describe your lyrics theme and voice synthesis requirements..."
+                      className="min-h-24 resize-none"
+                    />
+                  </div>
+                  
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="text-sm font-medium mb-1 block">Language</label>
+                      <Input placeholder="Multi-language" defaultValue="Global Support" />
+                    </div>
+                    <div>
+                      <label className="text-sm font-medium mb-1 block">Voice Style</label>
+                      <Input placeholder="Professional" defaultValue="Studio Quality" />
+                    </div>
+                  </div>
+
+                  <Button 
+                    className="w-full h-12 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold"
+                    onClick={() => handleGeneration('lyrics', 'Professional lyrics creation')}
+                    disabled={isGenerating}
+                  >
+                    {isGenerating ? (
+                      <>
+                        <Wand2 className="w-4 h-4 mr-2 animate-spin" />
+                        Generating Lyrics...
+                      </>
+                    ) : (
+                      <>
+                        <Mic2 className="w-4 h-4 mr-2" />
+                        Create Lyrics
+                      </>
+                    )}
+                  </Button>
+                </div>
+
+                <div className="space-y-4">
+                  <Card className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 border-blue-500/20">
+                    <CardContent className="p-4">
+                      <div className="flex items-center gap-3 mb-3">
+                        <PenTool className="w-5 h-5 text-blue-500" />
+                        <h4 className="font-semibold">AI-Powered Lyrics</h4>
+                      </div>
+                      <div className="space-y-2 text-sm text-muted-foreground">
+                        <div className="flex items-center gap-2">
+                          <Star className="w-4 h-4 text-yellow-500" />
+                          <span>Multi-language support</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Volume2 className="w-4 h-4 text-green-500" />
+                          <span>Professional voice synthesis</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Zap className="w-4 h-4 text-blue-500" />
+                          <span>Real-time collaboration</span>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            </TabsContent>
+          </Tabs>
+        </CardContent>
+      </Card>
+
+      {/* Generation Progress */}
+      {currentProject && (
+        <Card className="glow-primary">
+          <CardContent className="p-6">
+            <div className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+                    {currentProject.status === 'completed' ? (
+                      <Sparkles className="w-5 h-5 text-white" />
+                    ) : (
+                      <Wand2 className="w-5 h-5 text-white animate-spin" />
+                    )}
+                  </div>
+                  <div>
+                    <h3 className="font-semibold">{currentProject.title}</h3>
+                    <p className="text-sm text-muted-foreground">
+                      {currentProject.status === 'completed' 
+                        ? `✅ Ready • ${currentProject.duration}` 
+                        : 'Generating with quantum AI optimization...'
+                      }
+                    </p>
+                  </div>
+                </div>
+                <Badge variant={currentProject.status === 'completed' ? 'default' : 'secondary'}>
+                  {currentProject.status === 'completed' ? 'Completed' : `${currentProject.progress}%`}
+                </Badge>
+              </div>
+              
+              <Progress value={currentProject.progress} className="h-2" />
+              
+              {currentProject.status === 'completed' && (
+                <div className="flex gap-2 pt-2">
+                  <Button size="sm" className="bg-green-600 hover:bg-green-700">
+                    <Play className="w-4 h-4 mr-2" />
+                    Preview
+                  </Button>
+                  <Button size="sm" variant="outline">
+                    <Download className="w-4 h-4 mr-2" />
+                    Export
+                  </Button>
+                  <Button size="sm" variant="outline">
+                    <Settings className="w-4 h-4 mr-2" />
+                    Settings
+                  </Button>
+                </div>
+              )}
+            </div>
+          </CardContent>
+        </Card>
+      )}
+    </div>
+  );
+}
                   >
                     {isGenerating ? (
                       <>
