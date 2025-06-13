@@ -41,18 +41,33 @@ export default function Studio() {
   // Real-time system stats
   const { data: systemStats } = useQuery({
     queryKey: ["/api/stats"],
+    queryFn: async () => {
+      const response = await fetch("/api/stats");
+      if (!response.ok) throw new Error("Failed to fetch stats");
+      return response.json();
+    },
     refetchInterval: 3000,
   });
 
   const { data: routerStatus } = useQuery({
     queryKey: ["/api/router-status"],
+    queryFn: async () => {
+      const response = await fetch("/api/router-status");
+      if (!response.ok) throw new Error("Failed to fetch router status");
+      return response.json();
+    },
     refetchInterval: 5000,
   });
 
   const { data: performance } = useQuery({
     queryKey: ["/api/performance"],
+    queryFn: async () => {
+      const response = await fetch("/api/performance");
+      if (!response.ok) throw new Error("Failed to fetch performance");
+      return response.json();
+    },
     refetchInterval: 2000,
-  }) as { data?: { cpu: number; memory: number } };
+  });
 
   const handleRecordingToggle = () => {
     setIsRecording(!isRecording);
@@ -107,7 +122,7 @@ export default function Studio() {
                   <div>
                     <div className="text-sm text-muted-foreground">CPU</div>
                     <div className="font-bold text-blue-400">
-                      {performance?.cpu ? `${Math.round(performance.cpu)}%` : '0%'}
+                      {performance?.cpu ? `${Math.round(performance.cpu as number)}%` : '0%'}
                     </div>
                   </div>
                 </div>
@@ -118,7 +133,7 @@ export default function Studio() {
                   <div>
                     <div className="text-sm text-muted-foreground">Memory</div>
                     <div className="font-bold text-purple-400">
-                      {performance?.memory ? `${Math.round(performance.memory)}%` : '0%'}
+                      {performance?.memory ? `${Math.round(performance.memory as number)}%` : '0%'}
                     </div>
                   </div>
                 </div>
@@ -204,7 +219,7 @@ export default function Studio() {
           <TabsContent value="dashboard" className="space-y-8">
             <div className="grid grid-cols-1 xl:grid-cols-4 gap-8">
               <div className="xl:col-span-3">
-                <ProductionDashboard stats={systemStats} />
+                <ProductionDashboard stats={systemStats as any} />
               </div>
               <div className="xl:col-span-1">
                 <PerformanceMonitor />
@@ -254,7 +269,7 @@ export default function Studio() {
             </div>
             <div className="flex items-center space-x-4">
               <Badge variant="outline" className="text-xs">
-                {routerStatus?.status === 'connected' ? 'Connected' : 'Disconnected'}
+                {(routerStatus as any)?.status === 'connected' ? 'Connected' : 'Disconnected'}
               </Badge>
               <Badge variant="outline" className="text-xs">
                 Production Ready
