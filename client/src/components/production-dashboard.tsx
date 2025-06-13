@@ -83,25 +83,8 @@ export default function ProductionDashboard({ stats }: ProductionDashboardProps)
     </div>
   );
 }
-import React from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
-import { 
-  BarChart3, 
-  Users, 
-  Clock, 
-  Zap,
-  TrendingUp,
-  Activity
-} from "lucide-react";
 
-export default function ProductionDashboard() {
-  const stats = [
-    {
-      title: "Total Projects",
-      value: "2,847",
-      change: "+12%",
+
       icon: BarChart3,
       trend: "up"
     },

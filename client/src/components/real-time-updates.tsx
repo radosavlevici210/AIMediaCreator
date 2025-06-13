@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Bell, CheckCircle, AlertCircle, Clock } from "lucide-react";
@@ -123,63 +123,5 @@ export default function RealTimeUpdates() {
         </div>
       </CardContent>
     </Card>
-  );
-}
-import React, { useState, useEffect } from "react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Bell, X } from "lucide-react";
-
-export default function RealTimeUpdates() {
-  const [notifications, setNotifications] = useState([
-    {
-      id: 1,
-      type: "success",
-      message: "Video generation completed successfully",
-      timestamp: Date.now()
-    }
-  ]);
-
-  const removeNotification = (id: number) => {
-    setNotifications(prev => prev.filter(n => n.id !== id));
-  };
-
-  useEffect(() => {
-    // Auto-remove notifications after 5 seconds
-    const timer = setTimeout(() => {
-      setNotifications(prev => prev.filter(n => Date.now() - n.timestamp < 5000));
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, [notifications]);
-
-  if (notifications.length === 0) return null;
-
-  return (
-    <div className="fixed bottom-4 right-4 z-50 space-y-2">
-      {notifications.map((notification) => (
-        <Card key={notification.id} className="w-80 animate-slide-up">
-          <CardContent className="p-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <Bell className="h-4 w-4 text-blue-500" />
-                <div>
-                  <p className="text-sm font-medium">{notification.message}</p>
-                  <Badge variant="outline" className="mt-1">
-                    {notification.type}
-                  </Badge>
-                </div>
-              </div>
-              <button
-                onClick={() => removeNotification(notification.id)}
-                className="text-muted-foreground hover:text-foreground"
-              >
-                <X className="h-4 w-4" />
-              </button>
-            </div>
-          </CardContent>
-        </Card>
-      ))}
-    </div>
   );
 }
