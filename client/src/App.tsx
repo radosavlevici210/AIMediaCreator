@@ -6,6 +6,7 @@ import ErrorBoundary from "@/components/error-boundary";
 import Studio from "@/pages/studio";
 import AdminPanel from "@/components/admin-panel";
 import RootUserPanel from "@/components/root-user-panel";
+import ProtectionSystem from "@/components/protection-system";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient({
@@ -27,6 +28,7 @@ function App() {
             <Route path="/studio" component={Studio} />
             <Route path="/admin" component={AdminPanel} />
             <Route path="/root" component={RootUserPanel} />
+            <Route path="/protection" component={ProtectionSystem} />
             <Route component={NotFound} />
           </Router>
           <Toaster />
