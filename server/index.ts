@@ -1,13 +1,18 @@
-// © 2025 Ervin Radosavlevici - Professional AI Studio Server
+// 🔒 MASTER PROTECTED SERVER – Auto Enforcement Activated
+// © 2025 Ervin Remus Radosavlevici - Professional AI Studio Server
+// Owner: Ervin Remus Radosavlevici | GitHub: https://github.com/radosavlevici210
+// Email: radosavlevici210@icloud.com | All Rights Reserved
+// Watermarked by Ervin Remus Radosavlevici
+
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
-
-// Project: AI Movie & Music Studio Pro+
-// Owner: Ervin Radosavlevici <ervin210@icloud.com>
-// Team: radosavlevici210@icloud.com
 import helmet from "helmet";
 import cors from "cors";
+
+// 🚀 AI Movie & Music Studio Pro+ - PRODUCTION READY
+// ✅ ALL FEATURES UNLOCKED - NO DEVELOPMENT RESTRICTIONS
+// ⚡ ENTERPRISE SCALE - READY FOR GLOBAL DEPLOYMENT
 
 const app = express();
 

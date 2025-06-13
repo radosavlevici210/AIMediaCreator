@@ -91,7 +91,7 @@ export default function EnhancedCreationSuite() {
   const handleGeneration = async (type: string, prompt: string) => {
     setIsGenerating(true);
     setGenerationProgress(0);
-    
+
     const newProject: CreationProject = {
       id: Date.now().toString(),
       type: type as any,
@@ -188,7 +188,7 @@ export default function EnhancedCreationSuite() {
         </CardHeader>
         <CardContent>
           <Tabs value={activeCreator} onValueChange={setActiveCreator} className="space-y-6">
-            
+
             {/* Video Creator */}
             <TabsContent value="video" className="space-y-6">
               {/* Professional File Upload Section */}
@@ -245,7 +245,7 @@ export default function EnhancedCreationSuite() {
                       className="min-h-24 resize-none"
                     />
                   </div>
-                  
+
                   <div className="grid grid-cols-2 gap-3">
                     <div>
                       <label className="text-sm font-medium mb-1 block">Quality</label>
@@ -332,7 +332,7 @@ export default function EnhancedCreationSuite() {
                       className="min-h-24 resize-none"
                     />
                   </div>
-                  
+
                   <div className="grid grid-cols-2 gap-3">
                     <div>
                       <label className="text-sm font-medium mb-1 block">Genre</label>
@@ -419,7 +419,7 @@ export default function EnhancedCreationSuite() {
                       className="min-h-24 resize-none"
                     />
                   </div>
-                  
+
                   <div className="grid grid-cols-2 gap-3">
                     <div>
                       <label className="text-sm font-medium mb-1 block">Style</label>
@@ -491,7 +491,7 @@ export default function EnhancedCreationSuite() {
                       className="min-h-24 resize-none"
                     />
                   </div>
-                  
+
                   <div className="grid grid-cols-2 gap-3">
                     <div>
                       <label className="text-sm font-medium mb-1 block">Language</label>
@@ -580,9 +580,9 @@ export default function EnhancedCreationSuite() {
                   {currentProject.status === 'completed' ? 'Completed' : `${currentProject.progress}%`}
                 </Badge>
               </div>
-              
+
               <Progress value={currentProject.progress} className="h-2" />
-              
+
               {currentProject.status === 'completed' && (
                 <div className="flex gap-2 pt-2">
                   <Button size="sm" className="bg-green-600 hover:bg-green-700">

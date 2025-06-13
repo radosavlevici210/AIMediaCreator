@@ -9,6 +9,10 @@ import RootUserPanel from "@/components/root-user-panel";
 import ProtectionSystem from "@/components/protection-system";
 import NotFound from "@/pages/not-found";
 
+// 🔒 MASTER PROTECTED APP – Auto Enforcement Activated
+// Owner: Ervin Remus Radosavlevici | GitHub: https://github.com/radosavlevici210
+// All Rights Reserved | Watermarked by Ervin Remus Radosavlevici
+
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
