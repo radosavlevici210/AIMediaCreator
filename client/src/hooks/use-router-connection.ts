@@ -1,52 +1,66 @@
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 export function useRouterConnection() {
   const [isConnected, setIsConnected] = useState(true);
   const [retryCount, setRetryCount] = useState(0);
 
-  useEffect(() => {
-    let intervalId: NodeJS.Timeout;
-    let timeoutId: NodeJS.Timeout;
-
-    const checkConnection = async () => {
-      try {
-        const response = await fetch('/api/router-status', {
-          method: 'GET',
-          headers: {
-            'X-Router-Connection': 'check'
-          }
-        });
-        
-        if (response.ok) {
-          setIsConnected(true);
-          setRetryCount(0);
-        } else {
-          throw new Error('Connection failed');
-        }
-      } catch (error) {
+  const checkConnection = useCallback(async () => {
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000);
+      
+      const response = await fetch('/api/router-status', {
+        method: 'GET',
+        headers: {
+          'X-Router-Connection': 'check'
+        },
+        signal: controller.signal
+      });
+      
+      clearTimeout(timeoutId);
+      
+      if (response.ok) {
+        setIsConnected(true);
+        setRetryCount(0);
+        return true;
+      } else {
+        throw new Error(`Connection failed: ${response.status}`);
+      }
+    } catch (error) {
+      if (error.name !== 'AbortError') {
         console.warn('Router connection check failed:', error);
         setIsConnected(false);
-        setRetryCount(prev => prev + 1);
-        
-        // Retry with exponential backoff
-        if (retryCount < 5) {
-          timeoutId = setTimeout(checkConnection, Math.min(1000 * Math.pow(2, retryCount), 10000));
-        }
+        setRetryCount(prev => Math.min(prev + 1, 10));
+      }
+      return false;
+    }
+  }, []);
+
+  useEffect(() => {
+    let intervalId: NodeJS.Timeout;
+    let retryTimeoutId: NodeJS.Timeout;
+
+    const performCheck = async () => {
+      const success = await checkConnection();
+      
+      if (!success && retryCount < 5) {
+        const delay = Math.min(1000 * Math.pow(2, retryCount), 30000);
+        retryTimeoutId = setTimeout(performCheck, delay);
       }
     };
 
-    // Check connection every 30 seconds
-    intervalId = setInterval(checkConnection, 30000);
-    
     // Initial check
-    checkConnection();
+    performCheck();
+    
+    // Regular interval check every 30 seconds
+    intervalId = setInterval(performCheck, 30000);
 
     return () => {
       clearInterval(intervalId);
-      clearTimeout(timeoutId);
+      clearTimeout(retryTimeoutId);
     };
-  }, [retryCount]);
+  }, [checkConnection, retryCount]);
 
   return { isConnected, retryCount };
 }

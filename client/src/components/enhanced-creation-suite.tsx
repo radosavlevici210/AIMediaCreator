@@ -1,38 +1,47 @@
-import React, { useState, useRef } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Progress } from '@/components/ui/progress';
+import React, { useState, useRef, useEffect } from "react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Slider } from "@/components/ui/slider";
+import { Switch } from "@/components/ui/switch";
 import { 
+  Play, 
+  Pause, 
+  Download, 
+  Upload, 
+  Mic, 
   Video, 
   Music, 
-  Mic2, 
-  FileText, 
+  Image,
+  Sparkles, 
   Wand2, 
-  Play, 
-  Pause,
-  Download,
-  Settings,
-  Sparkles,
-  Film,
-  Headphones,
-  PenTool,
-  Palette,
-  Layers,
-  Volume2,
-  ImageIcon,
-  RotateCcw,
-  Upload,
-  Crown,
+  Settings, 
+  Clock,
   Zap,
-  Infinity,
-  Star,
+  Brain,
+  Palette,
+  Volume2,
+  Film,
+  Camera,
+  Headphones,
+  Layers,
+  RotateCcw,
+  Save,
+  Share2,
   Eye,
-  Lock
-} from 'lucide-react';
+  Star,
+  Rocket,
+  Crown,
+  Diamond,
+  Flame
+} from "lucide-react";
 
 interface CreationProject {
   id: string;
@@ -274,7 +283,7 @@ export default function EnhancedCreationSuite() {
                         Batch Processing Mode
                       </label>
                     </div>
-                    
+
                     <div className="flex items-center gap-2 text-sm">
                       <input 
                         type="checkbox" 
@@ -554,7 +563,7 @@ export default function EnhancedCreationSuite() {
                       </>
                     ) : (
                       <>
-                        <Mic2 className="w-4 h-4 mr-2" />
+                        <Mic className="w-4 h-4 mr-2" />
                         Create Lyrics
                       </>
                     )}
