@@ -8,11 +8,11 @@ packages = ["unzipNLS"]
 
 [deployment]
 deploymentTarget = "autoscale"
-build = ["sh", "-c", "npm run build"]
-run = ["sh", "-c", "npm start"]
+build = ["npm", "run", "build"]
+run = ["npm", "run", "start"]
 
 [workflows]
-runButton = "Production Deploy"
+runButton = "Project"
 
 [[workflows.workflow]]
 name = "Project"
