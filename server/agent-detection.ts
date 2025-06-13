@@ -40,6 +40,12 @@ class SecurityBlockingSystem {
     'claude.ai/artifacts/abuse-link'
   ];
 
+  private protectedAccounts = [
+    'radosavlevici210',
+    'radosavlevici210@icloud.com',
+    'github.com/radosavlevici210'
+  ];
+
   flagReplitAgent(identifier: string, reason: string): BlockedEntity {
     const entity: BlockedEntity = {
       id: `agent-${Date.now()}`,
@@ -139,6 +145,32 @@ class SecurityBlockingSystem {
     return Array.from(this.blockedEntities.values()).some(
       entity => entity.identifier === identifier && entity.status === 'active'
     );
+  }
+
+  isProtectedAccount(identifier: string): boolean {
+    return this.protectedAccounts.some(account => 
+      identifier.toLowerCase().includes(account.toLowerCase())
+    );
+  }
+
+  protectAccount(identifier: string, reason: string): BlockedEntity {
+    const entity: BlockedEntity = {
+      id: `protection-${Date.now()}`,
+      type: 'github',
+      identifier,
+      reason: `PROTECTED ACCOUNT: ${reason}`,
+      timestamp: new Date(),
+      severity: 'critical',
+      status: 'active'
+    };
+    
+    this.blockedEntities.set(entity.id, entity);
+    console.log(`🛡️ ACCOUNT PROTECTED: ${identifier} - ${reason}`);
+    
+    // Trigger immediate data recovery
+    this.initiateDataRecovery(entity.id, 'user-data');
+    
+    return entity;
   }
 }
 

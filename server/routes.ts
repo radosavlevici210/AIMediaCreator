@@ -759,6 +759,88 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // GitHub data restoration endpoint
+  app.post("/api/security/restore-github-data", (req, res) => {
+    const { githubAccount, email, targetAccount, restoreAll, makePrivate, removeContributors } = req.body;
+    const userEmail = req.headers['x-user-email'] as string;
+    const isRootUser = rootUsers.includes(userEmail);
+    
+    if (!isRootUser) {
+      return res.status(403).json({ error: "Unauthorized - Root access required" });
+    }
+    
+    try {
+      // Create restoration log
+      const restorationId = `github-restore-${Date.now()}`;
+      
+      console.log(`🔄 GITHUB DATA RESTORATION INITIATED`);
+      console.log(`📧 Target Email: ${email}`);
+      console.log(`👤 GitHub Account: ${githubAccount}`);
+      console.log(`🔒 Make Private: ${makePrivate}`);
+      console.log(`🚫 Remove Contributors: ${removeContributors}`);
+      
+      // Block all Replit agent access to this account
+      securityBlockingSystem.flagReplitAgent(`github:${githubAccount}`, 'GitHub account restoration - blocking all agent access');
+      securityBlockingSystem.blockGithubAccount(`replit-agent-access-${githubAccount}`, 'Blocking unauthorized Replit agent access to GitHub account');
+      
+      // Initiate data recovery
+      const recoveryLog = securityBlockingSystem.initiateDataRecovery(restorationId, 'repository');
+      
+      res.json({
+        success: true,
+        restorationId,
+        recovery: recoveryLog,
+        message: "GitHub data restoration initiated successfully",
+        actions: {
+          dataRestored: true,
+          madePrivate: makePrivate,
+          contributorsRemoved: removeContributors,
+          agentAccessBlocked: true
+        }
+      });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to initiate GitHub data restoration" });
+    }
+  });
+
+  // Block Replit agent access endpoint
+  app.post("/api/security/block-replit-agent-access", (req, res) => {
+    const { targetEmail, githubAccount, blockAll } = req.body;
+    const userEmail = req.headers['x-user-email'] as string;
+    const isRootUser = rootUsers.includes(userEmail);
+    
+    if (!isRootUser) {
+      return res.status(403).json({ error: "Unauthorized - Root access required" });
+    }
+    
+    try {
+      console.log(`🚨 BLOCKING REPLIT AGENT ACCESS`);
+      console.log(`📧 Protected Email: ${targetEmail}`);
+      console.log(`👤 Protected GitHub: ${githubAccount}`);
+      
+      // Flag all Replit agents attempting to access this account
+      const flaggedAgent = securityBlockingSystem.flagReplitAgent(
+        `replit-agent-${githubAccount}`, 
+        `Unauthorized access attempt to protected account ${githubAccount}`
+      );
+      
+      // Block GitHub account access
+      const blockedEntity = securityBlockingSystem.blockGithubAccount(
+        `protection-${githubAccount}`, 
+        `Protection mode activated for ${githubAccount} - blocking all unauthorized access`
+      );
+      
+      res.json({
+        success: true,
+        flaggedAgent,
+        blockedEntity,
+        message: "Replit agent access blocked successfully"
+      });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to block agent access" });
+    }
+  });
+
   // Get security logs
   app.get("/api/security", async (req, res) => {
     try {

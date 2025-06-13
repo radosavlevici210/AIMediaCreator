@@ -27,6 +27,7 @@ import EnterpriseFeaturesExpansion from "@/components/enterprise-features-expans
 import EnterpriseMasterControl from "@/components/enterprise-master-control";
 import SystemVerification from "@/components/system-verification";
 import DevelopmentDashboard from "@/components/development-dashboard";
+import SecurityBlockingDashboard from "@/components/security-blocking-dashboard";
 import { 
   Crown, 
   Sparkles, 
@@ -290,7 +291,9 @@ export default function Studio() {
           </TabsContent>
 
           <TabsContent value="security" className="mt-6">
-            <SecurityBlockingDashboard />
+            <div className="space-y-6">
+              <SecurityBlockingDashboard />
+            </div>
           </TabsContent>
 
           <TabsContent value="collaboration" className="mt-6">

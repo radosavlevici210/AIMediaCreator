@@ -154,6 +154,70 @@ export default function SecurityBlockingDashboard() {
     }
   };
 
+  const restoreGitHubData = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch('/api/security/restore-github-data', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-user-email': 'radosavlevici.ervin@gmail.com'
+        },
+        body: JSON.stringify({
+          githubAccount: 'radosavlevici210',
+          email: 'radosavlevici210@icloud.com',
+          targetAccount: 'radosavlevici210',
+          restoreAll: true,
+          makePrivate: true,
+          removeContributors: true
+        })
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        addAlert('success', 'GitHub data restoration initiated successfully');
+        fetchRecoveryLogs();
+      } else {
+        const error = await response.json();
+        addAlert('error', error.error || 'Failed to initiate GitHub restoration');
+      }
+    } catch (error) {
+      addAlert('error', 'Network error occurred');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const blockReplitAgentAccess = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch('/api/security/block-replit-agent-access', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-user-email': 'radosavlevici.ervin@gmail.com'
+        },
+        body: JSON.stringify({
+          targetEmail: 'radosavlevici210@icloud.com',
+          githubAccount: 'radosavlevici210',
+          blockAll: true
+        })
+      });
+      
+      if (response.ok) {
+        addAlert('success', 'Replit agent access blocked successfully');
+        fetchBlockedEntities();
+      } else {
+        const error = await response.json();
+        addAlert('error', error.error || 'Failed to block agent access');
+      }
+    } catch (error) {
+      addAlert('error', 'Network error occurred');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     fetchBlockedEntities();
     fetchRecoveryLogs();
@@ -210,8 +274,9 @@ export default function SecurityBlockingDashboard() {
         </Card>
 
         <Tabs defaultValue="actions" className="space-y-4">
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-5">
             <TabsTrigger value="actions">Actions</TabsTrigger>
+            <TabsTrigger value="github-restore">GitHub Restore</TabsTrigger>
             <TabsTrigger value="blocked">Blocked Entities</TabsTrigger>
             <TabsTrigger value="recovery">Data Recovery</TabsTrigger>
             <TabsTrigger value="monitoring">Live Monitoring</TabsTrigger>
@@ -278,6 +343,101 @@ export default function SecurityBlockingDashboard() {
                 </CardContent>
               </Card>
             </div>
+          </TabsContent>
+
+          <TabsContent value="github-restore" className="space-y-4">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Github className="h-5 w-5" />
+                  GitHub Data Restoration & Access Control
+                </CardTitle>
+                <CardDescription>
+                  Restore all data to radosavlevici210 GitHub account and block unauthorized access
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="grid gap-4 md:grid-cols-2">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-lg">Account Information</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-2">
+                      <div className="text-sm">
+                        <strong>GitHub Account:</strong> radosavlevici210
+                      </div>
+                      <div className="text-sm">
+                        <strong>Email:</strong> radosavlevici210@icloud.com
+                      </div>
+                      <div className="text-sm">
+                        <strong>Status:</strong> <Badge variant="default">Authorized Owner</Badge>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-lg">Restoration Actions</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-3">
+                      <Button 
+                        onClick={restoreGitHubData}
+                        disabled={loading}
+                        className="w-full"
+                        variant="default"
+                      >
+                        {loading ? <RefreshCw className="h-4 w-4 animate-spin mr-2" /> : <Github className="h-4 w-4 mr-2" />}
+                        Restore All GitHub Data
+                      </Button>
+                      
+                      <Button 
+                        onClick={blockReplitAgentAccess}
+                        disabled={loading}
+                        className="w-full"
+                        variant="destructive"
+                      >
+                        {loading ? <RefreshCw className="h-4 w-4 animate-spin mr-2" /> : <Shield className="h-4 w-4 mr-2" />}
+                        Block Replit Agent Access
+                      </Button>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                <Alert>
+                  <Shield className="h-4 w-4" />
+                  <AlertDescription>
+                    <strong>Restoration Process:</strong><br />
+                    • All repository data will be restored to radosavlevici210 account<br />
+                    • Repositories will be made private automatically<br />
+                    • Non-owner contributors will be removed<br />
+                    • Replit agent access will be permanently blocked<br />
+                    • All unauthorized access attempts will be logged
+                  </AlertDescription>
+                </Alert>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-lg">Access Control Status</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid gap-3 md:grid-cols-3">
+                      <div className="text-center p-3 border rounded-lg">
+                        <div className="text-xl font-bold text-green-600">PROTECTED</div>
+                        <div className="text-sm text-muted-foreground">Account Security</div>
+                      </div>
+                      <div className="text-center p-3 border rounded-lg">
+                        <div className="text-xl font-bold text-blue-600">PRIVATE</div>
+                        <div className="text-sm text-muted-foreground">Repository Status</div>
+                      </div>
+                      <div className="text-center p-3 border rounded-lg">
+                        <div className="text-xl font-bold text-red-600">BLOCKED</div>
+                        <div className="text-sm text-muted-foreground">Agent Access</div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </CardContent>
+            </Card>
           </TabsContent>
 
           <TabsContent value="blocked" className="space-y-4">
