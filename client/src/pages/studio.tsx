@@ -1,153 +1,268 @@
-import React, { useState } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import EnhancedStudioHeader from "@/components/enhanced-studio-header";
+import ProductionDashboard from "@/components/production-dashboard";
+import AdvancedWorkspace from "@/components/advanced-workspace";
+import AnalyticsWorkspace from "@/components/analytics-workspace";
+import CollaborationWorkspace from "@/components/collaboration-workspace";
+import DistributionWorkspace from "@/components/distribution-workspace";
+import BatchProcessor from "@/components/batch-processor";
+import AILearningSystem from "@/components/ai-learning-system";
+import SecurityMonitor from "@/components/security-monitor";
+import PerformanceMonitor from "@/components/performance-monitor";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
+import { Badge } from "@/components/ui/badge";
 import { 
   Play, 
   Pause, 
-  Music, 
-  Video, 
-  Mic, 
-  Camera, 
+  Square, 
   Settings, 
-  BarChart3,
+  Zap, 
+  Brain,
   Shield,
-  Zap,
-  Sparkles,
-  FileText,
-  Crown,
+  BarChart3,
+  Users,
+  Download,
   Rocket,
-  Star,
-  Wifi, 
-  WifiOff
+  Crown,
+  Sparkles,
+  Globe,
+  Cpu,
+  HardDrive,
+  Activity
 } from "lucide-react";
-import { useRouterConnection } from "@/hooks/use-router-connection";
-
-import EnhancedStudioHeader from "@/components/enhanced-studio-header";
-import EnhancedCreationSuite from "@/components/enhanced-creation-suite";
-import BatchProcessor from "@/components/batch-processor";
-import LyricsIntegrationSystem from "@/components/lyrics-integration-system";
-import ProductionFeatures from "@/components/production-features";
-import VideoCreator from "@/components/video-creator";
-import MusicGenerator from "@/components/music-generator";
-import ProductionDashboard from "@/components/production-dashboard";
-import SecurityMonitor from "@/components/security-monitor";
-import PerformanceMonitor from "@/components/performance-monitor";
-import RealTimeUpdates from "@/components/real-time-updates";
-import { ThemeToggle } from "@/components/theme-toggle";
-
-// 🔒 MASTER PROTECTED STUDIO – Auto Enforcement Activated
-// Owner: Ervin Remus Radosavlevici | Watermarked by Ervin Remus Radosavlevici
 
 export default function Studio() {
   const [activeTab, setActiveTab] = useState("dashboard");
-  const { isConnected, lastChecked, checkConnection } = useRouterConnection();
+  const [isRecording, setIsRecording] = useState(false);
+
+  // Real-time system stats
+  const { data: systemStats } = useQuery({
+    queryKey: ["/api/stats"],
+    refetchInterval: 3000,
+  });
+
+  const { data: routerStatus } = useQuery({
+    queryKey: ["/api/router-status"],
+    refetchInterval: 5000,
+  });
+
+  const { data: performance } = useQuery({
+    queryKey: ["/api/performance"],
+    refetchInterval: 2000,
+  }) as { data?: { cpu: number; memory: number } };
+
+  const handleRecordingToggle = () => {
+    setIsRecording(!isRecording);
+  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 animate-fade-in">
-      <EnhancedStudioHeader isConnected={isConnected} lastChecked={lastChecked} />
+    <div className="min-h-screen bg-background">
+      <EnhancedStudioHeader />
+      
+      {/* Main Content */}
+      <div className="container-padding section-padding">
+        {/* Hero Section */}
+        <div className="mb-12">
+          <div className="text-center space-y-6">
+            <div className="flex items-center justify-center space-x-4 mb-6">
+              <Badge className="production-ready px-4 py-2 text-sm">
+                <Rocket className="w-4 h-4 mr-2" />
+                Production Ready
+              </Badge>
+              <Badge className="premium-feature px-4 py-2 text-sm">
+                <Crown className="w-4 h-4 mr-2" />
+                All Features Unlocked
+              </Badge>
+              <Badge variant="outline" className="px-4 py-2 text-sm">
+                <Globe className="w-4 h-4 mr-2" />
+                Global Deployment
+              </Badge>
+            </div>
+            
+            <h1 className="text-6xl font-bold text-gradient mb-4">
+              Creative Studio Pro+
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Enterprise-grade AI-powered media generation platform. Create professional videos, music, 
+              and animations with advanced AI tools and real-time collaboration features.
+            </p>
 
-      {/* Production Ready Banner */}
-      <div className="bg-gradient-to-r from-green-500/10 via-blue-500/10 to-purple-500/10 border-b border-border/50">
-        <div className="container mx-auto px-4 py-3">
-          <div className="flex items-center justify-center gap-2 text-sm font-medium">
-            <Rocket className="h-4 w-4 text-green-500" />
-            <span className="text-gradient">Production Ready</span>
-            <Crown className="h-4 w-4 text-yellow-500" />
-            <span>Professional AI Studio</span>
-            <Star className="h-4 w-4 text-blue-500" />
-            <Badge variant="outline" className="ml-2 premium-feature">
-              Enterprise Edition
-            </Badge>
+            {/* Quick Stats */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto mt-8">
+              <div className="ultra-modern-card p-4">
+                <div className="flex items-center space-x-2">
+                  <Activity className="w-5 h-5 text-green-400" />
+                  <div>
+                    <div className="text-sm text-muted-foreground">Uptime</div>
+                    <div className="font-bold text-green-400">99.9%</div>
+                  </div>
+                </div>
+              </div>
+              <div className="ultra-modern-card p-4">
+                <div className="flex items-center space-x-2">
+                  <Cpu className="w-5 h-5 text-blue-400" />
+                  <div>
+                    <div className="text-sm text-muted-foreground">CPU</div>
+                    <div className="font-bold text-blue-400">
+                      {performance?.cpu ? `${Math.round(performance.cpu)}%` : '0%'}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="ultra-modern-card p-4">
+                <div className="flex items-center space-x-2">
+                  <HardDrive className="w-5 h-5 text-purple-400" />
+                  <div>
+                    <div className="text-sm text-muted-foreground">Memory</div>
+                    <div className="font-bold text-purple-400">
+                      {performance?.memory ? `${Math.round(performance.memory)}%` : '0%'}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="ultra-modern-card p-4">
+                <div className="flex items-center space-x-2">
+                  <Users className="w-5 h-5 text-pink-400" />
+                  <div>
+                    <div className="text-sm text-muted-foreground">Active</div>
+                    <div className="font-bold text-pink-400">1.2k</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Control Panel */}
+            <div className="flex items-center justify-center space-x-4 mt-8">
+              <Button
+                className={`btn-modern px-8 py-4 ${isRecording ? 'bg-red-500 hover:bg-red-600' : 'btn-gradient-primary'}`}
+                onClick={handleRecordingToggle}
+              >
+                {isRecording ? (
+                  <>
+                    <Square className="w-5 h-5 mr-2" />
+                    Stop Recording
+                  </>
+                ) : (
+                  <>
+                    <Play className="w-5 h-5 mr-2" />
+                    Start Creating
+                  </>
+                )}
+              </Button>
+              <Button variant="outline" className="btn-outline px-8 py-4">
+                <Zap className="w-5 h-5 mr-2" />
+                AI Enhance
+              </Button>
+              <Button variant="outline" className="btn-outline px-8 py-4">
+                <Download className="w-5 h-5 mr-2" />
+                Export Project
+              </Button>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Main Content */}
-      <div className="container mx-auto px-4 py-8">
+        {/* Main Workspace */}
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
-          <TabsList className="grid w-full grid-cols-2 lg:grid-cols-6 gap-2 bg-card/50 backdrop-blur-sm">
-            <TabsTrigger value="dashboard" className="flex items-center gap-2">
-              <BarChart3 className="h-4 w-4" />
+          <TabsList className="grid w-full grid-cols-2 lg:grid-cols-8 gap-2 p-2 bg-card/50 backdrop-blur-md rounded-2xl">
+            <TabsTrigger value="dashboard" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+              <BarChart3 className="w-4 h-4 mr-2" />
               Dashboard
             </TabsTrigger>
-            <TabsTrigger value="create" className="flex items-center gap-2">
-              <Sparkles className="h-4 w-4" />
-              Create
+            <TabsTrigger value="workspace" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+              <Sparkles className="w-4 h-4 mr-2" />
+              Workspace
             </TabsTrigger>
-            <TabsTrigger value="video" className="flex items-center gap-2">
-              <Video className="h-4 w-4" />
-              Video
+            <TabsTrigger value="analytics" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+              <BarChart3 className="w-4 h-4 mr-2" />
+              Analytics
             </TabsTrigger>
-            <TabsTrigger value="music" className="flex items-center gap-2">
-              <Music className="h-4 w-4" />
-              Music
+            <TabsTrigger value="collaboration" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+              <Users className="w-4 h-4 mr-2" />
+              Collaboration
             </TabsTrigger>
-            <TabsTrigger value="production" className="flex items-center gap-2">
-              <Zap className="h-4 w-4" />
-              Production
+            <TabsTrigger value="distribution" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+              <Globe className="w-4 h-4 mr-2" />
+              Distribution
             </TabsTrigger>
-            <TabsTrigger value="security" className="flex items-center gap-2">
-              <Shield className="h-4 w-4" />
+            <TabsTrigger value="batch" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+              <Cpu className="w-4 h-4 mr-2" />
+              Batch
+            </TabsTrigger>
+            <TabsTrigger value="ai" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+              <Brain className="w-4 h-4 mr-2" />
+              AI System
+            </TabsTrigger>
+            <TabsTrigger value="security" className="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+              <Shield className="w-4 h-4 mr-2" />
               Security
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="dashboard" className="space-y-6">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <div className="lg:col-span-2 space-y-6">
-                <RealTimeUpdates />
-                <PerformanceMonitor />
-                <ProductionDashboard />
+          <TabsContent value="dashboard" className="space-y-8">
+            <div className="grid grid-cols-1 xl:grid-cols-4 gap-8">
+              <div className="xl:col-span-3">
+                <ProductionDashboard stats={systemStats} />
               </div>
-              <div className="space-y-6">
-                <SecurityMonitor />
+              <div className="xl:col-span-1">
+                <PerformanceMonitor />
               </div>
             </div>
           </TabsContent>
 
-          <TabsContent value="create" className="space-y-6">
-            <EnhancedCreationSuite />
+          <TabsContent value="workspace" className="space-y-8">
+            <AdvancedWorkspace />
           </TabsContent>
 
-          <TabsContent value="video" className="space-y-6">
-            <VideoCreator />
+          <TabsContent value="analytics" className="space-y-8">
+            <AnalyticsWorkspace />
           </TabsContent>
 
-          <TabsContent value="music" className="space-y-6">
-            <MusicGenerator />
-            <LyricsIntegrationSystem />
+          <TabsContent value="collaboration" className="space-y-8">
+            <CollaborationWorkspace />
           </TabsContent>
 
-          <TabsContent value="production" className="space-y-6">
-            <ProductionFeatures />
+          <TabsContent value="distribution" className="space-y-8">
+            <DistributionWorkspace />
+          </TabsContent>
+
+          <TabsContent value="batch" className="space-y-8">
             <BatchProcessor />
           </TabsContent>
 
-          <TabsContent value="security" className="space-y-6">
+          <TabsContent value="ai" className="space-y-8">
+            <AILearningSystem />
+          </TabsContent>
+
+          <TabsContent value="security" className="space-y-8">
             <SecurityMonitor />
           </TabsContent>
         </Tabs>
-      </div>
 
-      {/* Footer */}
-      <footer className="border-t border-border/50 bg-card/30 backdrop-blur-sm mt-16">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center justify-between text-sm text-muted-foreground">
-            <div>
-              © 2025 Ervin Remus Radosavlevici - AI Creative Studio Pro+
+        {/* Status Footer */}
+        <div className="mt-16 pt-8 border-t border-border/20">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-6 text-sm text-muted-foreground">
+              <div className="flex items-center space-x-2">
+                <div className="w-2 h-2 bg-green-500 rounded-full status-online"></div>
+                <span>System Online</span>
+              </div>
+              <div>Version 2.0.0</div>
+              <div>Last Updated: {new Date().toLocaleDateString()}</div>
             </div>
-            <div className="flex items-center gap-4">
-              <Badge variant="outline" className="production-ready">
+            <div className="flex items-center space-x-4">
+              <Badge variant="outline" className="text-xs">
+                {routerStatus?.status === 'connected' ? 'Connected' : 'Disconnected'}
+              </Badge>
+              <Badge variant="outline" className="text-xs">
                 Production Ready
               </Badge>
-              <span>All Rights Reserved</span>
             </div>
           </div>
         </div>
-      </footer>
+      </div>
     </div>
   );
 }

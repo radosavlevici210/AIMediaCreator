@@ -10,9 +10,9 @@ import ProtectionSystem from "@/components/protection-system";
 import NotFound from "@/pages/not-found";
 import { Suspense } from "react";
 
-// 🔒 MASTER PROTECTED APP – Auto Enforcement Activated
-// Owner: Ervin Remus Radosavlevici | GitHub: https://github.com/radosavlevici210
-// All Rights Reserved | Watermarked by Ervin Remus Radosavlevici
+// 🚀 Creative Studio - Production Ready Application
+// Enterprise-grade AI-powered media generation platform
+// All features unlocked - Ready for global deployment
 
 const queryClient = new QueryClient({
   defaultOptions: {

@@ -1,88 +1,187 @@
-import React from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from "@/components/ui/card";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ThemeToggle } from '@/components/theme-toggle';
-import { Crown, Settings, User, Zap, Wifi, WifiOff, Clock } from 'lucide-react';
-import { Link } from 'wouter';
+import { ThemeToggle } from "@/components/theme-toggle";
+import { 
+  Video, 
+  Music, 
+  Palette, 
+  Settings, 
+  Download, 
+  Share2,
+  Zap,
+  Crown,
+  Rocket,
+  BarChart3,
+  Users,
+  Globe,
+  Shield,
+  Sparkles
+} from "lucide-react";
 
-interface EnhancedStudioHeaderProps {
-  isConnected: boolean;
-  lastChecked: Date | null;
-}
+export default function EnhancedStudioHeader() {
+  const [isProcessing, setIsProcessing] = useState(false);
 
-export default function EnhancedStudioHeader({ isConnected, lastChecked }: EnhancedStudioHeaderProps) {
+  const handleQuickAction = (action: string) => {
+    setIsProcessing(true);
+    // Simulate processing
+    setTimeout(() => setIsProcessing(false), 2000);
+  };
+
   return (
-    <header className="relative bg-card/50 backdrop-blur-xl border-b border-border/50 p-4 sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
-        {/* Logo and Brand */}
-        <div className="flex items-center space-x-4">
-          <div className="relative">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center glow-primary">
-              <Zap className="w-6 h-6 text-white" />
+    <header className="nav-modern border-b border-border/50 bg-background/80 backdrop-blur-xl sticky top-0 z-50">
+      <div className="container-padding">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo & Title */}
+          <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2">
+              <div className="w-10 h-10 bg-gradient-to-br from-primary to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                <Sparkles className="w-5 h-5 text-white" />
+              </div>
+              <div>
+                <h1 className="text-xl font-bold text-gradient">Creative Studio</h1>
+                <div className="flex items-center space-x-2">
+                  <Badge className="production-ready text-xs px-2 py-1">
+                    <Rocket className="w-3 h-3 mr-1" />
+                    PRODUCTION
+                  </Badge>
+                  <Badge className="premium-feature text-xs px-2 py-1">
+                    <Crown className="w-3 h-3 mr-1" />
+                    PRO+
+                  </Badge>
+                </div>
+              </div>
             </div>
-            <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-background ai-pulse"></div>
-          </div>
-          <div>
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-              AI Creative Studio Pro+
-            </h1>
-            <p className="text-sm text-muted-foreground">Professional Media Generation Platform</p>
-          </div>
-        </div>
-
-        {/* Status Indicator */}
-        <div className="hidden md:flex items-center space-x-6">
-          <div className="flex items-center space-x-2 px-3 py-1.5 bg-green-500/10 rounded-full border border-green-500/20">
-            <div className="w-2 h-2 bg-green-500 rounded-full ai-pulse"></div>
-            <span className="text-sm text-green-400 font-medium">Production Ready</span>
           </div>
 
-          <div className="flex items-center space-x-2 px-3 py-1.5 bg-blue-500/10 rounded-full border border-blue-500/20">
-            <Crown className="w-4 h-4 text-yellow-400" />
-            <span className="text-sm text-blue-400 font-medium">Pro License</span>
-          </div>
-
-          {/* Connection Status */}
-          <div className="flex items-center gap-2 text-sm">
-            {isConnected ? (
-              <>
-                <Wifi className="h-4 w-4 text-green-500" />
-                <span className="text-green-500">Connected</span>
-              </>
-            ) : (
-              <>
-                <WifiOff className="h-4 w-4 text-red-500" />
-                <span className="text-red-500">Disconnected</span>
-              </>
-            )}
-          </div>
-
-          {lastChecked && (
-            <div className="flex items-center gap-2 text-xs text-muted-foreground">
-              <Clock className="h-3 w-3" />
-              <span>Last checked: {lastChecked.toLocaleTimeString()}</span>
-            </div>
-          )}
-        </div>
-
-        {/* Actions */}
-        <div className="flex items-center space-x-3">
-          <Link href="/admin">
-            <Button variant="outline" size="sm" className="glow-hover">
-              <Settings className="w-4 h-4 mr-2" />
-              Admin
+          {/* Quick Actions */}
+          <div className="hidden md:flex items-center space-x-2">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="nav-item hover-lift"
+              onClick={() => handleQuickAction('video')}
+              disabled={isProcessing}
+            >
+              <Video className="w-4 h-4 mr-2" />
+              Video
             </Button>
-          </Link>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="nav-item hover-lift"
+              onClick={() => handleQuickAction('music')}
+              disabled={isProcessing}
+            >
+              <Music className="w-4 h-4 mr-2" />
+              Music
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="nav-item hover-lift"
+              onClick={() => handleQuickAction('animation')}
+              disabled={isProcessing}
+            >
+              <Palette className="w-4 h-4 mr-2" />
+              Animation
+            </Button>
+          </div>
 
-          <Button variant="outline" size="sm" className="glow-hover">
-            <User className="w-4 h-4 mr-2" />
-            Profile
-          </Button>
+          {/* Status & Actions */}
+          <div className="flex items-center space-x-4">
+            {/* System Status */}
+            <div className="hidden lg:flex items-center space-x-3">
+              <div className="flex items-center space-x-2">
+                <div className="w-2 h-2 bg-green-500 rounded-full status-online"></div>
+                <span className="text-xs text-muted-foreground">Online</span>
+              </div>
+              <div className="flex items-center space-x-1 text-xs text-muted-foreground">
+                <BarChart3 className="w-3 h-3" />
+                <span>99.9%</span>
+              </div>
+              <div className="flex items-center space-x-1 text-xs text-muted-foreground">
+                <Users className="w-3 h-3" />
+                <span>1.2k</span>
+              </div>
+            </div>
 
-          <ThemeToggle />
+            {/* Action Buttons */}
+            <div className="flex items-center space-x-2">
+              <Button
+                variant="outline"
+                size="sm"
+                className="btn-outline"
+                onClick={() => handleQuickAction('share')}
+              >
+                <Share2 className="w-4 h-4 mr-2" />
+                Share
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                className="btn-outline"
+                onClick={() => handleQuickAction('download')}
+              >
+                <Download className="w-4 h-4 mr-2" />
+                Export
+              </Button>
+              <Button
+                className="btn-gradient-primary"
+                size="sm"
+                onClick={() => handleQuickAction('enhance')}
+                disabled={isProcessing}
+              >
+                <Zap className="w-4 h-4 mr-2" />
+                {isProcessing ? 'Processing...' : 'AI Enhance'}
+              </Button>
+            </div>
+
+            {/* Settings & Theme */}
+            <div className="flex items-center space-x-2">
+              <ThemeToggle />
+              <Button variant="ghost" size="sm" className="w-9 h-9 p-0">
+                <Settings className="w-4 h-4" />
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        {/* Feature Bar */}
+        <div className="hidden lg:flex items-center justify-between py-2 border-t border-border/20">
+          <div className="flex items-center space-x-6 text-xs">
+            <div className="flex items-center space-x-2 text-green-400">
+              <Shield className="w-3 h-3" />
+              <span>Enterprise Security</span>
+            </div>
+            <div className="flex items-center space-x-2 text-blue-400">
+              <Globe className="w-3 h-3" />
+              <span>Global CDN</span>
+            </div>
+            <div className="flex items-center space-x-2 text-purple-400">
+              <Zap className="w-3 h-3" />
+              <span>AI-Powered</span>
+            </div>
+            <div className="flex items-center space-x-2 text-pink-400">
+              <Rocket className="w-3 h-3" />
+              <span>Production Ready</span>
+            </div>
+          </div>
+
+          <div className="flex items-center space-x-2 text-xs text-muted-foreground">
+            <span>v2.0.0</span>
+            <span>•</span>
+            <span>Last updated: {new Date().toLocaleDateString()}</span>
+          </div>
         </div>
       </div>
+
+      {/* Processing Overlay */}
+      {isProcessing && (
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-purple-500 to-pink-500 animate-pulse">
+          <div className="h-full bg-gradient-to-r from-primary to-purple-600 animate-glow"></div>
+        </div>
+      )}
     </header>
   );
 }
