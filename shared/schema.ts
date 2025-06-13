@@ -45,6 +45,48 @@ export const securityLogs = pgTable("security_logs", {
   createdAt: timestamp("created_at").defaultNow(),
 });
 
+export const users = pgTable("users", {
+  id: serial("id").primaryKey(),
+  email: text("email").notNull().unique(),
+  role: text("role").notNull().default("user"), // 'root', 'admin', 'user', 'collaborator'
+  status: text("status").notNull().default("active"), // 'active', 'inactive', 'pending'
+  permissions: text("permissions").array().default([]),
+  lastLogin: timestamp("last_login"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+export const contentLibrary = pgTable("content_library", {
+  id: serial("id").primaryKey(),
+  title: text("title").notNull(),
+  type: text("type").notNull(), // 'video', 'music', 'animation', 'lyrics'
+  duration: text("duration"),
+  quality: text("quality").notNull(),
+  fileSize: text("file_size"),
+  fileUrl: text("file_url"),
+  thumbnailUrl: text("thumbnail_url"),
+  metadata: text("metadata"), // JSON string for additional data
+  tags: text("tags").array().default([]),
+  createdBy: text("created_by").notNull(),
+  isPublic: boolean("is_public").default(false),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+export const productionSettings = pgTable("production_settings", {
+  id: serial("id").primaryKey(),
+  userId: text("user_id").notNull(),
+  aiModel: text("ai_model").notNull().default("cinematic-pro"),
+  quality: text("quality").notNull().default("4k"),
+  audioEnhancement: text("audio_enhancement").notNull().default("dolby-atmos"),
+  maxDuration: integer("max_duration").notNull().default(2580), // 43 hours in minutes
+  enableRealTimeCollab: boolean("enable_real_time_collab").default(true),
+  enableAdvancedAI: boolean("enable_advanced_ai").default(true),
+  settings: text("settings"), // JSON string for additional settings
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
 export const insertProjectSchema = createInsertSchema(projects).omit({
   id: true,
   createdAt: true,
@@ -65,6 +107,24 @@ export const insertSecurityLogSchema = createInsertSchema(securityLogs).omit({
   createdAt: true,
 });
 
+export const insertUserSchema = createInsertSchema(users).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export const insertContentLibrarySchema = createInsertSchema(contentLibrary).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export const insertProductionSettingsSchema = createInsertSchema(productionSettings).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
 export type InsertProject = z.infer<typeof insertProjectSchema>;
 export type Project = typeof projects.$inferSelect;
 export type InsertExport = z.infer<typeof insertExportSchema>;
@@ -73,3 +133,9 @@ export type InsertMessage = z.infer<typeof insertMessageSchema>;
 export type Message = typeof messages.$inferSelect;
 export type InsertSecurityLog = z.infer<typeof insertSecurityLogSchema>;
 export type SecurityLog = typeof securityLogs.$inferSelect;
+export type InsertUser = z.infer<typeof insertUserSchema>;
+export type User = typeof users.$inferSelect;
+export type InsertContentLibrary = z.infer<typeof insertContentLibrarySchema>;
+export type ContentLibrary = typeof contentLibrary.$inferSelect;
+export type InsertProductionSettings = z.infer<typeof insertProductionSettingsSchema>;
+export type ProductionSettings = typeof productionSettings.$inferSelect;

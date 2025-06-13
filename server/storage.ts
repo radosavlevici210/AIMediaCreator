@@ -1,9 +1,12 @@
 import { 
-  projects, exports, messages, securityLogs,
+  projects, exports, messages, securityLogs, users, contentLibrary, productionSettings,
   type Project, type InsertProject, 
   type Export, type InsertExport,
   type Message, type InsertMessage,
-  type SecurityLog, type InsertSecurityLog
+  type SecurityLog, type InsertSecurityLog,
+  type User, type InsertUser,
+  type ContentLibrary, type InsertContentLibrary,
+  type ProductionSettings, type InsertProductionSettings
 } from "@shared/schema";
 
 export interface IStorage {
@@ -25,6 +28,24 @@ export interface IStorage {
   logSecurityEvent(securityLog: InsertSecurityLog): Promise<SecurityLog>;
   getSecurityLogs(projectId?: number): Promise<SecurityLog[]>;
   checkSuspiciousActivity(user: string): Promise<boolean>;
+  
+  // User methods
+  createUser(user: InsertUser): Promise<User>;
+  getUser(email: string): Promise<User | undefined>;
+  getAllUsers(): Promise<User[]>;
+  updateUserRole(email: string, role: string): Promise<User | undefined>;
+  updateUserStatus(email: string, status: string): Promise<User | undefined>;
+  
+  // Content Library methods
+  createContent(content: InsertContentLibrary): Promise<ContentLibrary>;
+  getContent(id: number): Promise<ContentLibrary | undefined>;
+  getAllContent(): Promise<ContentLibrary[]>;
+  getContentByUser(createdBy: string): Promise<ContentLibrary[]>;
+  
+  // Production Settings methods
+  createProductionSettings(settings: InsertProductionSettings): Promise<ProductionSettings>;
+  getProductionSettings(userId: string): Promise<ProductionSettings | undefined>;
+  updateProductionSettings(userId: string, settings: Partial<InsertProductionSettings>): Promise<ProductionSettings | undefined>;
   
   // Stats methods
   getProjectStats(): Promise<{
