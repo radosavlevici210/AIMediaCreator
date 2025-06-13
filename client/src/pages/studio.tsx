@@ -77,7 +77,7 @@ export default function Studio() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950/50 to-slate-950 relative overflow-hidden">
       {/* Animated background effects */}
-      <div className="absolute inset-0 opacity-40">
+      <div className="absolute inset-0 opacity-30">
         <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-pink-500/5 to-blue-500/5"></div>
       </div>
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
@@ -139,43 +139,51 @@ export default function Studio() {
                     <span className="sm:hidden font-medium">Share</span>
                   </TabsTrigger>
                 </TabsList>
-              <TabsTrigger value="collaboration" className="flex items-center justify-center space-x-2 text-xs sm:text-sm">
-                <Users className="h-4 w-4" />
-                <span className="hidden sm:inline">Collaboration</span>
-                <span className="sm:hidden">Collab</span>
-              </TabsTrigger>
-              <TabsTrigger value="analytics" className="flex items-center justify-center space-x-2 text-xs sm:text-sm">
-                <BarChart3 className="h-4 w-4" />
-                <span className="hidden sm:inline">Analytics</span>
-                <span className="sm:hidden">Stats</span>
-              </TabsTrigger>
-              <TabsTrigger value="distribution" className="flex items-center justify-center space-x-2 text-xs sm:text-sm">
-                <Share2 className="h-4 w-4" />
-                <span className="hidden sm:inline">Distribution</span>
-                <span className="sm:hidden">Share</span>
-              </TabsTrigger>
-            </TabsList>
 
-            <TabsContent value="video" className="space-y-4">
-              <EnhancedVideoCreator />
-            </TabsContent>
+                <TabsContent value="video" className="space-y-6">
+                  <EnhancedVideoCreator />
+                </TabsContent>
 
-            <TabsContent value="music" className="space-y-4">
-              <EnhancedMusicGenerator />
-            </TabsContent>
+                <TabsContent value="music" className="space-y-6">
+                  <EnhancedMusicGenerator />
+                </TabsContent>
 
-            <TabsContent value="collaboration" className="space-y-4">
-              <CollaborationWorkspace />
-            </TabsContent>
+                <TabsContent value="collaboration" className="space-y-6">
+                  <CollaborationWorkspace />
+                </TabsContent>
 
-            <TabsContent value="analytics" className="space-y-4">
-              <AnalyticsWorkspace />
-            </TabsContent>
+                <TabsContent value="analytics" className="space-y-6">
+                  <AnalyticsWorkspace />
+                </TabsContent>
 
-            <TabsContent value="distribution" className="space-y-4">
-              <DistributionWorkspace />
-            </TabsContent>
-          </Tabs>
+                <TabsContent value="distribution" className="space-y-6">
+                  <DistributionWorkspace />
+                </TabsContent>
+              </Tabs>
+            </div>
+
+            {/* Advanced Features Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <UniversalWorkspace />
+              <BatchProcessor />
+            </div>
+
+            {/* AI & Monitoring Systems */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <AILearningSystem />
+              <SecurityMonitor />
+              <PerformanceMonitor />
+            </div>
+
+            {/* Copyright Footer */}
+            <div className="ultra-modern-card production-ready">
+              <div className="text-center p-6">
+                <p className="text-sm font-medium text-primary">© 2025 Ervin Remus Radosavlevici</p>
+                <p className="text-xs text-muted-foreground mt-1">ervin210@icloud.com | radosavlevici.ervin@gmail.com</p>
+                <p className="text-xs text-muted-foreground">AI Creative Studio Pro+ | Production Ready | All Rights Reserved</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

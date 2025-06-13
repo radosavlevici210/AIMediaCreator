@@ -28,10 +28,10 @@ import {
 } from "lucide-react";
 
 interface WorkspaceProps {
-  type: 'video' | 'music' | 'animation';
+  type?: 'video' | 'music' | 'animation';
 }
 
-export default function UniversalWorkspace({ type }: WorkspaceProps) {
+export default function UniversalWorkspace({ type = 'video' }: WorkspaceProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(65);
   const [isFullscreen, setIsFullscreen] = useState(false);
