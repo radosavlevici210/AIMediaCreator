@@ -24,6 +24,7 @@ import {
 
 import EnhancedStudioHeader from "@/components/enhanced-studio-header";
 import EnhancedCreationSuite from "@/components/enhanced-creation-suite";
+import BatchProcessor from "@/components/batch-processor";
 import LyricsIntegrationSystem from "@/components/lyrics-integration-system";
 import ProductionFeatures from "@/components/production-features";
 import VideoCreator from "@/components/video-creator";
@@ -136,6 +137,8 @@ export default function Studio() {
               </div>
               <EnhancedCreationSuite />
             </div>
+            
+            <BatchProcessor />
           </TabsContent>
 
           <TabsContent value="lyrics" className="space-y-8 animate-slide-up">

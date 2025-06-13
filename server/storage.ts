@@ -124,16 +124,22 @@ export class MemStorage implements IStorage {
       const defaultSettings: ProductionSettings = {
         id: this.currentSettingsId++,
         userId: email,
-        aiModel: 'quantum-cinema',
-        quality: '8k',
-        audioEnhancement: 'dolby-atmos',
-        maxDuration: 2580, // 43 hours
+        aiModel: 'quantum-cinema-pro',
+        quality: '8k-ultra',
+        audioEnhancement: 'dolby-atmos-pro',
+        maxDuration: 999999, // Unlimited
         enableRealTimeCollab: true,
         enableAdvancedAI: true,
         settings: JSON.stringify({
           unlimited: true,
           professionalMode: true,
-          quantumOptimization: true
+          quantumOptimization: true,
+          batchProcessing: true,
+          collaborativeMode: true,
+          advancedExport: true,
+          distributionHub: true,
+          analyticsTracking: true,
+          productionReady: true
         }),
         createdAt: new Date(),
         updatedAt: new Date(),

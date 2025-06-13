@@ -50,6 +50,9 @@ export default function EnhancedCreationSuite() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   const [generationProgress, setGenerationProgress] = useState(0);
+  const [exportFormat, setExportFormat] = useState('8K-ULTRA');
+  const [batchMode, setBatchMode] = useState(false);
+  const [collaborativeMode, setCollaborativeMode] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const creationTypes = [
@@ -257,23 +260,53 @@ export default function EnhancedCreationSuite() {
                     </div>
                   </div>
 
-                  <Button 
-                    className="w-full h-12 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold"
-                    onClick={() => handleGeneration('video', 'Professional video creation')}
-                    disabled={isGenerating}
-                  >
-                    {isGenerating ? (
-                      <>
-                        <Wand2 className="w-4 h-4 mr-2 animate-spin" />
-                        Generating Video...
-                      </>
-                    ) : (
-                      <>
-                        <Sparkles className="w-4 h-4 mr-2" />
-                        Create Video
-                      </>
-                    )}
-                  </Button>
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-2 text-sm">
+                      <input 
+                        type="checkbox" 
+                        id="batch-mode" 
+                        checked={batchMode}
+                        onChange={(e) => setBatchMode(e.target.checked)}
+                        className="rounded"
+                      />
+                      <label htmlFor="batch-mode" className="flex items-center gap-2">
+                        <Layers className="w-4 h-4" />
+                        Batch Processing Mode
+                      </label>
+                    </div>
+                    
+                    <div className="flex items-center gap-2 text-sm">
+                      <input 
+                        type="checkbox" 
+                        id="collab-mode" 
+                        checked={collaborativeMode}
+                        onChange={(e) => setCollaborativeMode(e.target.checked)}
+                        className="rounded"
+                      />
+                      <label htmlFor="collab-mode" className="flex items-center gap-2">
+                        <Crown className="w-4 h-4 text-yellow-500" />
+                        Real-time Collaboration
+                      </label>
+                    </div>
+
+                    <Button 
+                      className="w-full h-12 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold production-ready"
+                      onClick={() => handleGeneration('video', 'Professional video creation')}
+                      disabled={isGenerating}
+                    >
+                      {isGenerating ? (
+                        <>
+                          <Wand2 className="w-4 h-4 mr-2 animate-spin" />
+                          Generating {batchMode ? 'Batch' : 'Video'}...
+                        </>
+                      ) : (
+                        <>
+                          <Sparkles className="w-4 h-4 mr-2" />
+                          Create {batchMode ? 'Batch Videos' : 'Video'}
+                        </>
+                      )}
+                    </Button>
+                  </div>
                 </div>
 
                 <div className="space-y-4">
@@ -306,11 +339,17 @@ export default function EnhancedCreationSuite() {
                         <Crown className="w-5 h-5 text-yellow-500" />
                         <h4 className="font-semibold">Professional Export</h4>
                       </div>
-                      <div className="grid grid-cols-2 gap-2 text-xs">
-                        <Badge variant="outline">MP4 • 8K</Badge>
-                        <Badge variant="outline">MOV • IMAX</Badge>
-                        <Badge variant="outline">WebM • HDR</Badge>
-                        <Badge variant="outline">ProRes • Studio</Badge>
+                      <div className="space-y-3">
+                        <div className="grid grid-cols-2 gap-2 text-xs">
+                          <Badge variant="outline" className="production-ready">MP4 • 8K Ultra</Badge>
+                          <Badge variant="outline" className="premium-feature">MOV • IMAX Ready</Badge>
+                          <Badge variant="outline">WebM • HDR10+</Badge>
+                          <Badge variant="outline">ProRes • Cinema</Badge>
+                        </div>
+                        <div className="flex items-center gap-2 text-xs">
+                          <Infinity className="w-3 h-3 text-purple-500" />
+                          <span className="text-muted-foreground">Unlimited duration • Batch export</span>
+                        </div>
                       </div>
                     </CardContent>
                   </Card>
