@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
@@ -19,8 +19,11 @@ import {
   FileText,
   Crown,
   Rocket,
-  Star
+  Star,
+  Wifi, 
+  WifiOff
 } from "lucide-react";
+import { useRouterConnection } from "@/hooks/use-router-connection";
 
 import EnhancedStudioHeader from "@/components/enhanced-studio-header";
 import EnhancedCreationSuite from "@/components/enhanced-creation-suite";
@@ -40,10 +43,11 @@ import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function Studio() {
   const [activeTab, setActiveTab] = useState("dashboard");
+  const { isConnected, retryCount } = useRouterConnection();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 animate-fade-in">
-      <EnhancedStudioHeader />
+      <EnhancedStudioHeader isConnected={isConnected} retryCount={retryCount}/>
 
       {/* Production Ready Banner */}
       <div className="bg-gradient-to-r from-green-500/10 via-blue-500/10 to-purple-500/10 border-b border-border/50">
@@ -137,7 +141,7 @@ export default function Studio() {
               </div>
               <EnhancedCreationSuite />
             </div>
-            
+
             <BatchProcessor />
           </TabsContent>
 

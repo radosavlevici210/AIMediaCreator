@@ -47,10 +47,10 @@ app.use(helmet({
 app.use(cors({
   origin: process.env.NODE_ENV === 'production' ? 
     ['https://replit.app', 'https://*.replit.app', 'https://*.replit.dev'] : 
-    true,
+    ['http://localhost:5173', 'http://127.0.0.1:5173', 'http://0.0.0.0:5173', true],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'X-Router-Connection']
 }));
 
 app.use(express.json({ limit: '10mb' }));
@@ -95,7 +95,17 @@ app.use((req, res, next) => {
       status: "healthy", 
       timestamp: new Date().toISOString(),
       uptime: process.uptime(),
-      memory: process.memoryUsage()
+      memory: process.memoryUsage(),
+      router: "connected"
+    });
+  });
+
+  // Router connection check endpoint
+  app.get("/api/router-status", (req, res) => {
+    res.status(200).json({ 
+      status: "connected", 
+      timestamp: new Date().toISOString(),
+      server: "online"
     });
   });
 
