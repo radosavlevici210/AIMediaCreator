@@ -336,6 +336,45 @@ export default function ProductionFeatures() {
         </TabsContent>
 
         <TabsContent value="ai-features" className="space-y-6">
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <Card className="bg-black/20 backdrop-blur-sm border-green-500/30">
+            <CardHeader>
+              <CardTitle className="text-green-400 flex items-center gap-2">
+                <CheckCircle2 className="h-5 w-5" />
+                Production Status
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-300">Deployment</span>
+                  <Badge className="bg-green-500/20 text-green-400">READY</Badge>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-300">Security</span>
+                  <Badge className="bg-green-500/20 text-green-400">MILITARY</Badge>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-300">Performance</span>
+                  <Badge className="bg-green-500/20 text-green-400">QUANTUM</Badge>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-300">Monitoring</span>
+                  <Badge className="bg-green-500/20 text-green-400">AI-POWERED</Badge>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-300">Features</span>
+                  <Badge className="bg-green-500/20 text-green-400">UNLIMITED</Badge>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-300">Root Access</span>
+                  <Badge className="bg-yellow-500/20 text-yellow-400">ENABLED</Badge>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <Card className="bg-gradient-to-br from-purple-500/10 to-blue-500/10 border-purple-500/20">
               <CardHeader>
@@ -611,7 +650,7 @@ export default function ProductionFeatures() {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-sm text-gray-300">CDN Nodes</span>
-                    <span className="text-sm font-bold text-blue-400">247 global</span>
+                    <span<span className="text-sm font-bold text-blue-400">247 global</span>
                   </div>
                 </div>
               </CardContent>

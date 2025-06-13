@@ -89,7 +89,15 @@ export default function EnterpriseAIStudio() {
     enterpriseSupport: true,
     customBranding: true,
     apiAccess: true,
-    whiteLabel: true
+    whiteLabel: true,
+    neuralProcessing: true,
+    holographicRendering: true,
+    voiceSynthesis: true,
+    blockchainVerification: true,
+    edgeComputing: true,
+    globalCDN: true,
+    enterpriseSecurity: true,
+    complianceReady: true
   });
 
   useEffect(() => {

@@ -23,7 +23,8 @@ import BatchProcessor from "@/components/batch-processor";
 import TransparentAccessBridge from "@/components/transparent-access-bridge";
 import AdvancedFeaturesPanel from "@/components/advanced-features-panel";
 import EnterpriseSecuritySystem from "@/components/enterprise-security-system";
-import EnterpriseFeaturesExpansion from '@/components/enterprise-features-expansion';
+import EnterpriseFeaturesExpansion from "@/components/enterprise-features-expansion";
+import EnterpriseMasterControl from "@/components/enterprise-master-control";
 import { 
   Crown, 
   Sparkles, 
@@ -343,6 +344,11 @@ export default function Studio() {
             {/* Advanced Features Panel for Root Users */}
             {isRootUser && (
               <AdvancedFeaturesPanel userEmail={mockUserEmail} />
+            )}
+
+            {/* Enterprise Master Control */}
+            {isRootUser && (
+              <EnterpriseMasterControl userEmail={mockUserEmail} />
             )}
 
             {/* Enterprise Features Expansion */}
