@@ -1,259 +1,144 @@
-import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { 
-  TrendingUp, 
-  TrendingDown, 
-  Activity, 
-  Users, 
-  Clock, 
-  Zap,
-  BarChart3,
-  Cpu,
-  HardDrive,
-  Network,
-  Shield,
-  Globe
+  Zap, 
+  Crown, 
+  Shield, 
+  Globe, 
+  Rocket,
+  Star,
+  Sparkles,
+  Infinity,
+  Award,
+  TrendingUp
 } from "lucide-react";
 
-interface DashboardMetrics {
-  totalProjects: number;
-  completedProjects: number;
-  processingProjects: number;
-  avgProcessingTime: number;
-  systemHealth: number;
-  activeUsers: number;
-  networkStatus: 'optimal' | 'good' | 'slow';
-  securityScore: number;
-}
-
 export default function ProfessionalDashboard() {
-  const { data: metrics, isLoading } = useQuery({
-    queryKey: ["/api/stats"],
-    queryFn: async () => {
-      const response = await fetch("/api/stats");
-      if (!response.ok) throw new Error("Failed to fetch metrics");
-      return response.json();
-    },
-    refetchInterval: 5000,
-  });
+  const [unlocked] = useState(true); // Always unlocked for production
 
-  const { data: performance } = useQuery({
-    queryKey: ["/api/performance"],
-    queryFn: async () => {
-      const response = await fetch("/api/performance");
-      if (!response.ok) throw new Error("Failed to fetch performance");
-      return response.json();
-    },
-    refetchInterval: 3000,
-  });
-
-  const kpis = [
+  const proFeatures = [
     {
-      title: "Active Projects",
-      value: metrics?.totalProjects || 0,
-      change: "+12%",
-      trend: "up" as const,
-      icon: BarChart3,
+      icon: Crown,
+      title: "Unlimited Creation",
+      description: "Create unlimited videos, music, and animations",
+      status: "active",
+      color: "text-yellow-400"
+    },
+    {
+      icon: Rocket,
+      title: "8K Ultra HD Video",
+      description: "Professional cinema-quality video generation",
+      status: "active", 
       color: "text-blue-400"
     },
     {
-      title: "Completion Rate",
-      value: `${Math.round(((metrics?.completedProjects || 0) / Math.max(metrics?.totalProjects || 1, 1)) * 100)}%`,
-      change: "+8%",
-      trend: "up" as const,
-      icon: TrendingUp,
-      color: "text-green-400"
-    },
-    {
-      title: "Active Users",
-      value: "1,247",
-      change: "+23%",
-      trend: "up" as const,
-      icon: Users,
+      icon: Star,
+      title: "Studio Quality Audio",
+      description: "Dolby Atmos and professional mixing",
+      status: "active",
       color: "text-purple-400"
     },
     {
-      title: "Avg Processing",
-      value: `${metrics?.avgProcessingTime || 0}s`,
-      change: "-15%",
-      trend: "down" as const,
-      icon: Clock,
-      color: "text-orange-400"
+      icon: Globe,
+      title: "Global Distribution",
+      description: "Export to 10+ professional formats",
+      status: "active",
+      color: "text-green-400"
+    },
+    {
+      icon: Infinity,
+      title: "Quantum AI Processing", 
+      description: "Advanced AI with unlimited processing power",
+      status: "active",
+      color: "text-cyan-400"
+    },
+    {
+      icon: Shield,
+      title: "Enterprise Security",
+      description: "Advanced protection and monitoring",
+      status: "active",
+      color: "text-red-400"
     }
   ];
-
-  const systemMetrics = [
-    {
-      label: "CPU Usage",
-      value: Math.round(performance?.cpu || 0),
-      max: 100,
-      color: "bg-blue-500",
-      icon: Cpu
-    },
-    {
-      label: "Memory Usage",
-      value: Math.round(performance?.memory || 0),
-      max: 100,
-      color: "bg-purple-500",
-      icon: HardDrive
-    },
-    {
-      label: "Network Load",
-      value: 23,
-      max: 100,
-      color: "bg-green-500",
-      icon: Network
-    },
-    {
-      label: "Security Score",
-      value: 98,
-      max: 100,
-      color: "bg-emerald-500",
-      icon: Shield
-    }
-  ];
-
-  if (isLoading) {
-    return (
-      <div className="space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[...Array(4)].map((_, i) => (
-            <Card key={i} className="animate-pulse">
-              <CardContent className="p-6">
-                <div className="h-20 bg-muted/20 rounded"></div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </div>
-    );
-  }
 
   return (
-    <div className="space-y-8">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-3xl font-bold tracking-tight">Production Dashboard</h2>
-          <p className="text-muted-foreground">Enterprise-grade performance monitoring and analytics</p>
-        </div>
-        <div className="flex items-center space-x-2">
-          <Badge variant="outline" className="bg-green-500/10 text-green-400 border-green-500/20">
-            <Activity className="w-3 h-3 mr-1" />
-            System Online
-          </Badge>
-          <Badge variant="outline" className="bg-blue-500/10 text-blue-400 border-blue-500/20">
-            <Globe className="w-3 h-3 mr-1" />
-            Global CDN
-          </Badge>
-        </div>
-      </div>
+    <div className="space-y-6">
+      {/* Pro Status Banner */}
+      <Card className="bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border-yellow-500/50">
+        <CardContent className="p-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-yellow-500/20 border border-yellow-500/50">
+                <Crown className="h-6 w-6 text-yellow-400" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-yellow-400">Professional Studio - All Features Unlocked</h3>
+                <p className="text-sm text-gray-300">Production-ready multimedia creation platform</p>
+              </div>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Badge className="bg-green-500/20 text-green-400 border-green-500/50">
+                <Sparkles className="h-3 w-3 mr-1" />
+                PRO ACTIVE
+              </Badge>
+              <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/50">
+                <TrendingUp className="h-3 w-3 mr-1" />
+                UNLIMITED
+              </Badge>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
 
-      {/* KPI Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {kpis.map((kpi, index) => {
-          const Icon = kpi.icon;
-          const TrendIcon = kpi.trend === "up" ? TrendingUp : TrendingDown;
-          const trendColor = kpi.trend === "up" ? "text-green-400" : "text-red-400";
-          
+      {/* Professional Features Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {proFeatures.map((feature, index) => {
+          const Icon = feature.icon;
           return (
-            <Card key={index} className="relative overflow-hidden group hover:shadow-xl transition-all duration-300">
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-muted-foreground">
-                  {kpi.title}
-                </CardTitle>
-                <Icon className={`h-4 w-4 ${kpi.color}`} />
+            <Card key={index} className="bg-gradient-to-br from-gray-900/50 to-gray-800/50 border-gray-700/50 hover:border-gray-600/50 transition-all duration-300">
+              <CardHeader className="pb-3">
+                <div className="flex items-center space-x-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20">
+                    <Icon className={`h-5 w-5 ${feature.color}`} />
+                  </div>
+                  <div>
+                    <CardTitle className="text-lg">{feature.title}</CardTitle>
+                    <Badge variant="outline" className="bg-green-500/10 text-green-400 border-green-500/20 text-xs">
+                      {feature.status.toUpperCase()}
+                    </Badge>
+                  </div>
+                </div>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{kpi.value}</div>
-                <div className="flex items-center text-xs mt-1">
-                  <TrendIcon className={`h-3 w-3 mr-1 ${trendColor}`} />
-                  <span className={trendColor}>{kpi.change}</span>
-                  <span className="text-muted-foreground ml-1">from last month</span>
+                <p className="text-sm text-gray-400 mb-4">{feature.description}</p>
+                <Progress value={100} className="h-2 mb-3" />
+                <div className="flex justify-between text-xs text-gray-500">
+                  <span>Fully Unlocked</span>
+                  <span>100%</span>
                 </div>
               </CardContent>
-              <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent group-hover:via-primary transition-all duration-300"></div>
             </Card>
           );
         })}
       </div>
 
-      {/* System Metrics */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Zap className="h-5 w-5 text-yellow-400" />
-              System Performance
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            {systemMetrics.map((metric, index) => {
-              const Icon = metric.icon;
-              const percentage = (metric.value / metric.max) * 100;
-              
-              return (
-                <div key={index} className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-2">
-                      <Icon className="h-4 w-4 text-muted-foreground" />
-                      <span className="text-sm font-medium">{metric.label}</span>
-                    </div>
-                    <span className="text-sm font-mono">{metric.value}%</span>
-                  </div>
-                  <Progress value={percentage} className="h-2" />
-                </div>
-              );
-            })}
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Activity className="h-5 w-5 text-green-400" />
-              Real-time Activity
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-muted-foreground">Projects Created Today</span>
-                <span className="text-2xl font-bold">24</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-muted-foreground">Processing Queue</span>
-                <span className="text-2xl font-bold">{metrics?.processingProjects || 0}</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-muted-foreground">Completed Today</span>
-                <span className="text-2xl font-bold">18</span>
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-muted-foreground">Success Rate</span>
-                <span className="text-2xl font-bold text-green-400">99.2%</span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Status Footer */}
-      <Card>
-        <CardContent className="py-4">
-          <div className="flex items-center justify-between text-sm text-muted-foreground">
+      {/* Global Status */}
+      <Card className="bg-gradient-to-r from-green-500/10 to-blue-500/10 border-green-500/30">
+        <CardContent className="p-6">
+          <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <span>Last updated: {new Date().toLocaleTimeString()}</span>
-              <span>•</span>
-              <span>Version 2.0.0</span>
-              <span>•</span>
-              <span>Enterprise Edition</span>
+              <Award className="h-8 w-8 text-green-400" />
+              <div>
+                <h4 className="text-lg font-semibold text-green-400">Production Environment Active</h4>
+                <p className="text-sm text-gray-300">All professional features enabled • Global deployment ready</p>
+              </div>
             </div>
-            <div className="flex items-center space-x-2">
-              <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-              <span>All systems operational</span>
+            <div className="text-right">
+              <div className="text-2xl font-bold text-green-400">100%</div>
+              <div className="text-xs text-gray-400">System Performance</div>
             </div>
           </div>
         </CardContent>
