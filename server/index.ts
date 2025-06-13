@@ -7,6 +7,7 @@ import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 import helmet from "helmet";
 import cors from "cors";
+import compression from "compression";
 
 // ✅ PRODUCTION READY - ALL FEATURES UNLOCKED
 // 🎬 Video Generation | 🎵 Music Creation | 🎨 Animation Studio
@@ -16,6 +17,18 @@ const app = express();
 
 // Trust proxy configuration for rate limiting
 app.set('trust proxy', 1);
+
+// Enable gzip compression for better network performance
+app.use(compression({
+  level: 6,
+  threshold: 1024,
+  filter: (req, res) => {
+    if (req.headers['x-no-compression']) {
+      return false;
+    }
+    return compression.filter(req, res);
+  }
+}));
 
 // Enhanced security middleware for production
 app.use(helmet({
@@ -103,7 +116,7 @@ app.use((req, res, next) => {
     try {
       const memoryUsage = process.memoryUsage();
       const cpuUsage = process.cpuUsage();
-      
+
       res.status(200).json({ 
         status: "connected",
         server: "online",

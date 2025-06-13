@@ -1,47 +1,55 @@
 [build]
+  command = "npm run build"
+  functions = "netlify/functions"
   publish = "dist"
-  command = "node build-netlify.js"
 
 [build.environment]
-  NODE_VERSION = "20"
-  NPM_VERSION = "10"
   NODE_ENV = "production"
+  NODE_VERSION = "18"
 
-[context.production]
-  environment = { NODE_ENV = "production" }
-
-[context.deploy-preview]
-  environment = { NODE_ENV = "production" }
-
-[context.branch-deploy]
-  environment = { NODE_ENV = "production" }
-
-# Force HTTPS redirect
-[[redirects]]
-  from = "http://ai-media-creator.netlify.app/*"
-  to = "https://ai-media-creator.netlify.app/:splat"
-  status = 301
-  force = true
-
-# API redirects to serverless functions
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/api/:splat"
   status = 200
 
-# SPA fallback
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/api/*"
+  [headers.values]
+    Cache-Control = "no-cache"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+
+[functions]
+  node_bundler = "esbuild"
+  external_node_modules = ["express"]
+
 [dev]
   command = "npm run dev"
   port = 5000
-  publish = "dist"
-  autoLaunch = false
+  targetPort = 5000
+  framework = "#custom"
 
-# Security headers
 [[headers]]
   for = "/*"
   [headers.values]
@@ -53,22 +61,6 @@
     Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
     Content-Security-Policy = "default-src 'self'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-eval' 'unsafe-inline'; img-src 'self' data: https: blob:; connect-src 'self' ws: wss: https:; font-src 'self' https://cdnjs.cloudflare.com; object-src 'none'; media-src 'self' blob: data:; frame-src 'none'; base-uri 'self'; form-action 'self'"
 
-# Cache optimization
-[[headers]]
-  for = "/assets/*"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "/*.js"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "/*.css"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
 [[headers]]
   for = "/*.woff2"
   [headers.values]
@@ -79,14 +71,12 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# API headers
-[[headers]]
-  for = "/api/*"
-  [headers.values]
-    X-Robots-Tag = "noindex"
-    Cache-Control = "no-cache, no-store, must-revalidate"
+[[redirects]]
+  from = "http://ai-media-creator.netlify.app/*"
+  to = "https://ai-media-creator.netlify.app/:splat"
+  status = 301
+  force = true
 
-# Edge functions
 [[edge_functions]]
   function = "security"
   path = "/*"

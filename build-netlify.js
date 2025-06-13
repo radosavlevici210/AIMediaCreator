@@ -1,84 +1,70 @@
-#!/usr/bin/env node
-
-import { build } from 'esbuild';
-import { execSync } from 'child_process';
-import fs from 'fs';
-import path from 'path';
+const { execSync } = require('child_process');
+const fs = require('fs');
+const path = require('path');
 
 console.log('🚀 Building AI Media Creator for Netlify...');
 
-try {
-  // Build the frontend with Vite
-  console.log('📦 Building frontend...');
-  execSync('vite build --config vite.config.netlify.ts', { stdio: 'inherit' });
+// Install dependencies
+console.log('📦 Installing dependencies...');
+execSync('npm ci', { stdio: 'inherit' });
 
-  // Ensure netlify/functions directory exists
-  const functionsDir = 'netlify/functions';
-  if (!fs.existsSync(functionsDir)) {
-    fs.mkdirSync(functionsDir, { recursive: true });
-  }
+// Build the frontend
+console.log('🏗️ Building frontend...');
+execSync('npm run build', { stdio: 'inherit' });
 
-  // Copy _redirects to dist for backup
-  if (fs.existsSync('_redirects')) {
-    fs.copyFileSync('_redirects', 'dist/_redirects');
-  }
-
-  // Build the serverless function
-  console.log('⚡ Building serverless functions...');
-  await build({
-    entryPoints: ['netlify/functions/api.js'],
-    bundle: true,
-    platform: 'node',
-    target: 'node18',
-    format: 'esm',
-    outdir: 'netlify/functions',
-    allowOverwrite: true,
-    external: [
-      '@neondatabase/serverless',
-      'drizzle-orm',
-      'cors',
-      'helmet',
-      'express',
-      'serverless-http'
-    ],
-    define: {
-      'process.env.NODE_ENV': '"production"'
-    },
-    banner: {
-      js: `
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
-      `
-    }
-  }).catch((error) => {
-    console.error('Function build failed:', error);
-    process.exit(1);
-  });
-
-  // Copy necessary assets
-  console.log('📋 Copying assets...');
-  if (fs.existsSync('public')) {
-    execSync('cp -r public/* dist/ 2>/dev/null || true', { stdio: 'inherit' });
-  }
-
-  // Ensure favicon exists
-  if (!fs.existsSync('dist/favicon.ico') && fs.existsSync('public/favicon.svg')) {
-    fs.copyFileSync('public/favicon.svg', 'dist/favicon.ico');
-  }
-
-  // Create robots.txt for SEO
-  const robotsTxt = `User-agent: *
-Allow: /
-Sitemap: https://ai-media-creator.netlify.app/sitemap.xml`;
-  fs.writeFileSync('dist/robots.txt', robotsTxt);
-
-  console.log('✅ Netlify build complete!');
-  console.log('📁 Frontend built to: dist/');
-  console.log('⚡ Functions built to: netlify/functions/');
-  console.log('🔧 Security headers configured');
-  console.log('🌐 HTTPS redirects enabled');
-
-} catch (error) {
-  console.error('Build failed:', error);
-  process.exit(1);
+// Create Netlify functions directory
+const functionsDir = path.join(__dirname, 'netlify', 'functions');
+if (!fs.existsSync(functionsDir)) {
+  fs.mkdirSync(functionsDir, { recursive: true });
 }
+
+// Copy and optimize API function
+const apiFunction = `
+const express = require('express');
+const serverless = require('serverless-http');
+const { registerRoutes } = require('../../dist/routes');
+
+const app = express();
+
+// Enable compression
+const compression = require('compression');
+app.use(compression());
+
+// Security headers
+app.use((req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'DENY');
+  res.setHeader('X-XSS-Protection', '1; mode=block');
+  next();
+});
+
+// CORS
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  if (req.method === 'OPTIONS') {
+    res.sendStatus(200);
+    return;
+  }
+  next();
+});
+
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true }));
+
+// Register API routes
+registerRoutes(app);
+
+// Health check
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+});
+
+module.exports.handler = serverless(app);
+`;
+
+fs.writeFileSync(path.join(functionsDir, 'api.js'), apiFunction);
+
+console.log('✅ Netlify build complete!');
+console.log('🌐 Ready for deployment with optimized performance');
