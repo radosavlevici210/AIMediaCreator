@@ -1,16 +1,35 @@
 [build]
   publish = "dist"
-  command = "npm run build"
+  command = "node build-netlify.js"
 
 [build.environment]
   NODE_VERSION = "20"
   NPM_VERSION = "10"
+  NODE_ENV = "production"
 
+[context.production]
+  environment = { NODE_ENV = "production" }
+
+[context.deploy-preview]
+  environment = { NODE_ENV = "production" }
+
+[context.branch-deploy]
+  environment = { NODE_ENV = "production" }
+
+# Force HTTPS redirect
+[[redirects]]
+  from = "http://ai-media-creator.netlify.app/*"
+  to = "https://ai-media-creator.netlify.app/:splat"
+  status = 301
+  force = true
+
+# API redirects to serverless functions
 [[redirects]]
   from = "/api/*"
-  to = "/.netlify/functions/:splat"
+  to = "/.netlify/functions/api/:splat"
   status = 200
 
+# SPA fallback
 [[redirects]]
   from = "/*"
   to = "/index.html"
@@ -20,7 +39,9 @@
   command = "npm run dev"
   port = 5000
   publish = "dist"
+  autoLaunch = false
 
+# Security headers
 [[headers]]
   for = "/*"
   [headers.values]
@@ -29,7 +50,10 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+    Content-Security-Policy = "default-src 'self'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-eval' 'unsafe-inline'; img-src 'self' data: https: blob:; connect-src 'self' ws: wss: https:; font-src 'self' https://cdnjs.cloudflare.com; object-src 'none'; media-src 'self' blob: data:; frame-src 'none'; base-uri 'self'; form-action 'self'"
 
+# Cache optimization
 [[headers]]
   for = "/assets/*"
   [headers.values]
@@ -44,3 +68,25 @@
   for = "/*.css"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.woff2"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.svg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# API headers
+[[headers]]
+  for = "/api/*"
+  [headers.values]
+    X-Robots-Tag = "noindex"
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+# Edge functions
+[[edge_functions]]
+  function = "security"
+  path = "/*"

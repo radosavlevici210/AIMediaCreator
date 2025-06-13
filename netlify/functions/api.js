@@ -3,6 +3,7 @@ import serverless from 'serverless-http';
 import cors from 'cors';
 import helmet from 'helmet';
 import { registerRoutes } from '../../server/routes.js';
+import { createServer } from 'http';
 
 const app = express();
 
@@ -65,65 +66,70 @@ app.use((req, res, next) => {
   next();
 });
 
+// Create mock server for registerRoutes
+const mockServer = createServer();
+
 // Initialize routes
-(async () => {
-  await registerRoutes(app);
-  
-  // Health check endpoint
-  app.get("/health", (req, res) => {
+registerRoutes(app).then(() => {
+  console.log('Routes registered successfully');
+}).catch((error) => {
+  console.error('Route registration failed:', error);
+});
+
+// Health check endpoint
+app.get("/health", (req, res) => {
+  res.status(200).json({ 
+    status: "healthy", 
+    timestamp: new Date().toISOString(),
+    platform: "netlify",
+    environment: process.env.NODE_ENV || 'production'
+  });
+});
+
+// Router connection check endpoint  
+app.get("/api/router-status", (req, res) => {
+  try {
     res.status(200).json({ 
-      status: "healthy", 
+      status: "connected",
+      server: "online",
+      connected: true,
       timestamp: new Date().toISOString(),
       platform: "netlify",
       environment: process.env.NODE_ENV || 'production'
     });
-  });
-
-  // Router connection check endpoint
-  app.get("/api/router-status", (req, res) => {
-    try {
-      res.status(200).json({ 
-        status: "connected",
-        server: "online",
-        connected: true,
-        timestamp: new Date().toISOString(),
-        platform: "netlify",
-        environment: process.env.NODE_ENV || 'production'
-      });
-    } catch (error) {
-      console.error('Health check error:', error);
-      res.status(500).json({
-        status: "error",
-        connected: false,
-        timestamp: new Date().toISOString(),
-        error: "Health check failed"
-      });
-    }
-  });
-
-  // Enhanced error handling middleware
-  app.use((err, req, res, next) => {
-    const status = err.status || err.statusCode || 500;
-    const message = err.message || "Internal Server Error";
-
-    console.error('Error details:', {
-      status,
-      message,
-      stack: err.stack,
-      url: req.url,
-      method: req.method
+  } catch (error) {
+    console.error('Health check error:', error);
+    res.status(500).json({
+      status: "error",
+      connected: false,
+      timestamp: new Date().toISOString(),
+      error: "Health check failed"
     });
+  }
+});
 
-    res.status(status).json({ 
-      error: message,
-      ...(process.env.NODE_ENV === 'development' && { stack: err.stack })
-    });
+// Enhanced error handling middleware
+app.use((err, req, res, next) => {
+  const status = err.status || err.statusCode || 500;
+  const message = err.message || "Internal Server Error";
+
+  console.error('Error details:', {
+    status,
+    message,
+    stack: err.stack,
+    url: req.url,
+    method: req.method
   });
 
-  // 404 handler for API routes
-  app.use('/api/*', (req, res) => {
-    res.status(404).json({ error: 'API endpoint not found' });
+  res.status(status).json({ 
+    error: message,
+    ...(process.env.NODE_ENV === 'development' && { stack: err.stack })
   });
-})();
+});
+
+// 404 handler for API routes
+app.use('/api/*', (req, res) => {
+  res.status(404).json({ error: 'API endpoint not found' });
+});
 
 export const handler = serverless(app);
