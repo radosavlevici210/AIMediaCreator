@@ -29,27 +29,35 @@ export default function EnhancedStudioHeader() {
   };
 
   return (
-    <header className="nav-modern border-b border-border/50 bg-background/80 backdrop-blur-xl sticky top-0 z-50">
-      <div className="container-padding">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo & Title */}
+    <header className="relative bg-gradient-to-r from-slate-900/95 via-purple-900/95 to-slate-900/95 backdrop-blur-xl border-b border-white/10 shadow-2xl">
+      <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-pink-500/5 to-blue-500/10"></div>
+      <div className="relative container mx-auto px-6 py-4">
+        <div className="flex items-center justify-between">
+          {/* Modern Logo & Branding */}
           <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-gradient-to-br from-primary to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
-                <Sparkles className="w-5 h-5 text-white" />
+            <div className="relative">
+              <div className="w-14 h-14 bg-gradient-to-br from-purple-500 via-pink-500 to-blue-500 rounded-2xl flex items-center justify-center shadow-xl glow-primary animate-float">
+                <Sparkles className="w-7 h-7 text-white" />
               </div>
-              <div>
-                <h1 className="text-xl font-bold text-gradient">Creative Studio</h1>
-                <div className="flex items-center space-x-2">
-                  <Badge className="production-ready text-xs px-2 py-1">
-                    <Rocket className="w-3 h-3 mr-1" />
-                    PRODUCTION
-                  </Badge>
-                  <Badge className="premium-feature text-xs px-2 py-1">
-                    <Crown className="w-3 h-3 mr-1" />
-                    PRO+
-                  </Badge>
-                </div>
+              <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white status-online"></div>
+            </div>
+            <div className="space-y-1">
+              <h1 className="text-2xl font-black bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">
+                Creative Studio
+              </h1>
+              <div className="flex items-center space-x-2">
+                <Badge className="bg-gradient-to-r from-green-500/20 to-emerald-500/20 text-green-300 border-green-500/30 text-xs px-3 py-1">
+                  <Rocket className="w-3 h-3 mr-1" />
+                  PRODUCTION
+                </Badge>
+                <Badge className="bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-purple-300 border-purple-500/30 text-xs px-3 py-1">
+                  <Crown className="w-3 h-3 mr-1" />
+                  PRO+
+                </Badge>
+                <Badge className="bg-gradient-to-r from-blue-500/20 to-cyan-500/20 text-blue-300 border-blue-500/30 text-xs px-3 py-1">
+                  <Zap className="w-3 h-3 mr-1" />
+                  UNLIMITED
+                </Badge>
               </div>
             </div>
           </div>

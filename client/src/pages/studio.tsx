@@ -75,29 +75,70 @@ export default function Studio() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-8">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950/50 to-slate-950 relative overflow-hidden">
+      {/* Animated background effects */}
+      <div className="absolute inset-0 opacity-40">
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-pink-500/5 to-blue-500/5"></div>
+      </div>
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+      
+      <div className="relative z-10">
         <EnhancedStudioHeader />
 
-        <ProductionDashboard />
+        <div className="container mx-auto px-6 py-8 space-y-12">
+          <ProductionDashboard />
 
-        <div className="space-y-8">
-          <ProfessionalDashboard />
+          <div className="space-y-12">
+            <ProfessionalDashboard />
 
-          <AdvancedWorkspace />
+            <AdvancedWorkspace />
 
-          <Tabs defaultValue="video" className="space-y-6">
-            <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2">
-              <TabsTrigger value="video" className="flex items-center justify-center space-x-2 text-xs sm:text-sm">
-                <Play className="h-4 w-4" />
-                <span className="hidden sm:inline">Video Creator</span>
-                <span className="sm:hidden">Video</span>
-              </TabsTrigger>
-              <TabsTrigger value="music" className="flex items-center justify-center space-x-2 text-xs sm:text-sm">
-                <Pause className="h-4 w-4" />
-                <span className="hidden sm:inline">Music Generator</span>
-                <span className="sm:hidden">Music</span>
-              </TabsTrigger>
+            {/* Modern Tab System */}
+            <div className="ultra-modern-card">
+              <Tabs defaultValue="video" className="space-y-8">
+                <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 bg-slate-900/50 p-2 rounded-2xl backdrop-blur-xl border border-white/10">
+                  <TabsTrigger 
+                    value="video" 
+                    className="flex items-center justify-center space-x-2 text-sm bg-transparent hover:bg-white/10 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500 data-[state=active]:text-white rounded-xl py-3 transition-all duration-300"
+                  >
+                    <Play className="h-4 w-4" />
+                    <span className="hidden sm:inline font-medium">Video Creator</span>
+                    <span className="sm:hidden font-medium">Video</span>
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="music" 
+                    className="flex items-center justify-center space-x-2 text-sm bg-transparent hover:bg-white/10 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-cyan-500 data-[state=active]:text-white rounded-xl py-3 transition-all duration-300"
+                  >
+                    <Pause className="h-4 w-4" />
+                    <span className="hidden sm:inline font-medium">Music Generator</span>
+                    <span className="sm:hidden font-medium">Music</span>
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="collaboration" 
+                    className="flex items-center justify-center space-x-2 text-sm bg-transparent hover:bg-white/10 data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-500 data-[state=active]:to-emerald-500 data-[state=active]:text-white rounded-xl py-3 transition-all duration-300"
+                  >
+                    <Users className="h-4 w-4" />
+                    <span className="hidden sm:inline font-medium">Collaboration</span>
+                    <span className="sm:hidden font-medium">Collab</span>
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="analytics" 
+                    className="flex items-center justify-center space-x-2 text-sm bg-transparent hover:bg-white/10 data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-500 data-[state=active]:to-red-500 data-[state=active]:text-white rounded-xl py-3 transition-all duration-300"
+                  >
+                    <BarChart3 className="h-4 w-4" />
+                    <span className="hidden sm:inline font-medium">Analytics</span>
+                    <span className="sm:hidden font-medium">Analytics</span>
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="distribution" 
+                    className="flex items-center justify-center space-x-2 text-sm bg-transparent hover:bg-white/10 data-[state=active]:bg-gradient-to-r data-[state=active]:from-indigo-500 data-[state=active]:to-purple-500 data-[state=active]:text-white rounded-xl py-3 transition-all duration-300"
+                  >
+                    <Share2 className="h-4 w-4" />
+                    <span className="hidden sm:inline font-medium">Distribution</span>
+                    <span className="sm:hidden font-medium">Share</span>
+                  </TabsTrigger>
+                </TabsList>
               <TabsTrigger value="collaboration" className="flex items-center justify-center space-x-2 text-xs sm:text-sm">
                 <Users className="h-4 w-4" />
                 <span className="hidden sm:inline">Collaboration</span>

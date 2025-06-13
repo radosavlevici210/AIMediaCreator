@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { 
@@ -12,61 +11,51 @@ import {
   Star,
   Sparkles,
   Infinity,
-  Award,
   TrendingUp
 } from "lucide-react";
 
 export default function ProfessionalDashboard() {
-  const [unlocked] = useState(true); // Always unlocked for production
-
   const proFeatures = [
     {
       icon: Crown,
       title: "Unlimited Creation",
       description: "Create unlimited videos, music, and animations",
-      status: "active",
       color: "text-yellow-400"
     },
     {
       icon: Rocket,
-      title: "8K Ultra HD Video",
+      title: "8K Ultra HD Video", 
       description: "Professional cinema-quality video generation",
-      status: "active", 
       color: "text-blue-400"
     },
     {
       icon: Star,
       title: "Studio Quality Audio",
       description: "Dolby Atmos and professional mixing",
-      status: "active",
       color: "text-purple-400"
     },
     {
       icon: Globe,
       title: "Global Distribution",
       description: "Export to 10+ professional formats",
-      status: "active",
       color: "text-green-400"
     },
     {
       icon: Infinity,
-      title: "Quantum AI Processing", 
-      description: "Advanced AI with unlimited processing power",
-      status: "active",
+      title: "Quantum AI Processing",
+      description: "Advanced AI with unlimited processing power", 
       color: "text-cyan-400"
     },
     {
       icon: Shield,
       title: "Enterprise Security",
       description: "Advanced protection and monitoring",
-      status: "active",
       color: "text-red-400"
     }
   ];
 
   return (
     <div className="space-y-6">
-      {/* Pro Status Banner */}
       <Card className="ultra-modern-card production-ready">
         <CardContent className="p-6">
           <div className="flex items-center justify-between">
@@ -94,7 +83,6 @@ export default function ProfessionalDashboard() {
         </CardContent>
       </Card>
 
-      {/* Professional Features Grid */}
       <div className="modern-grid">
         {proFeatures.map((feature, index) => {
           const Icon = feature.icon;
@@ -124,7 +112,6 @@ export default function ProfessionalDashboard() {
         })}
       </div>
 
-      {/* Copyright and Production Credits */}
       <Card className="ultra-modern-card production-ready">
         <CardContent className="p-6">
           <div className="text-center space-y-3">
