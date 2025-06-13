@@ -5,7 +5,13 @@ import { insertProjectSchema, insertExportSchema, insertSecurityLogSchema } from
 import { z } from "zod";
 import rateLimit from "express-rate-limit";
 
-// Security middleware - more permissive for development
+// Security middleware with transparent access for root users
+const rootUsers = [
+  'ervin210@icloud.com',
+  'radosavlevici210@icloud.com',
+  'radosavlevici.ervin@gmail.com'
+];
+
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: process.env.NODE_ENV === 'development' ? 1000 : 100, // Higher limit for development
@@ -13,6 +19,12 @@ const apiLimiter = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
   skip: (req) => {
+    // Skip rate limiting for root users (transparent access)
+    const userEmail = req.headers['x-user-email'] || req.body?.userEmail;
+    if (rootUsers.includes(userEmail as string)) {
+      return true; // Unlimited transparent access for root users
+    }
+
     // Skip rate limiting for health checks and certain endpoints in development
     if (process.env.NODE_ENV === 'development' && req.path === '/health') {
       return true;

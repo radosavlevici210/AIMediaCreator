@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -21,6 +20,7 @@ import CollaborationWorkspace from "@/components/collaboration-workspace";
 import DistributionWorkspace from "@/components/distribution-workspace";
 import AnalyticsWorkspace from "@/components/analytics-workspace";
 import BatchProcessor from "@/components/batch-processor";
+import TransparentAccessBridge from "@/components/transparent-access-bridge";
 import { 
   Crown, 
   Sparkles, 
@@ -60,7 +60,7 @@ import {
 
 export default function Studio() {
   const [activeTab, setActiveTab] = useState("enterprise-suite");
-  
+
   const [studioStats] = useState({
     totalProjects: 47892,
     activeUsers: 12847,
@@ -153,7 +153,7 @@ export default function Studio() {
               <Crown className="w-5 h-5" />
               <span className="text-xs">Enterprise</span>
             </TabsTrigger>
-            
+
             <TabsTrigger 
               value="creation-studio" 
               className="data-[state=active]:bg-purple-500/20 data-[state=active]:text-purple-300 flex flex-col items-center gap-1 p-3"
@@ -161,7 +161,7 @@ export default function Studio() {
               <Wand2 className="w-5 h-5" />
               <span className="text-xs">Creation</span>
             </TabsTrigger>
-            
+
             <TabsTrigger 
               value="animation-studio" 
               className="data-[state=active]:bg-green-500/20 data-[state=active]:text-green-300 flex flex-col items-center gap-1 p-3"
@@ -169,7 +169,7 @@ export default function Studio() {
               <Film className="w-5 h-5" />
               <span className="text-xs">Animation</span>
             </TabsTrigger>
-            
+
             <TabsTrigger 
               value="collaboration" 
               className="data-[state=active]:bg-yellow-500/20 data-[state=active]:text-yellow-300 flex flex-col items-center gap-1 p-3"
@@ -177,7 +177,7 @@ export default function Studio() {
               <Users className="w-5 h-5" />
               <span className="text-xs">Collaborate</span>
             </TabsTrigger>
-            
+
             <TabsTrigger 
               value="analytics" 
               className="data-[state=active]:bg-pink-500/20 data-[state=active]:text-pink-300 flex flex-col items-center gap-1 p-3"
@@ -185,7 +185,7 @@ export default function Studio() {
               <BarChart3 className="w-5 h-5" />
               <span className="text-xs">Analytics</span>
             </TabsTrigger>
-            
+
             <TabsTrigger 
               value="distribution" 
               className="data-[state=active]:bg-orange-500/20 data-[state=active]:text-orange-300 flex flex-col items-center gap-1 p-3"
@@ -193,7 +193,7 @@ export default function Studio() {
               <Globe className="w-5 h-5" />
               <span className="text-xs">Distribution</span>
             </TabsTrigger>
-            
+
             <TabsTrigger 
               value="monitoring" 
               className="data-[state=active]:bg-red-500/20 data-[state=active]:text-red-300 flex flex-col items-center gap-1 p-3"
@@ -201,7 +201,7 @@ export default function Studio() {
               <Monitor className="w-5 h-5" />
               <span className="text-xs">Monitor</span>
             </TabsTrigger>
-            
+
             <TabsTrigger 
               value="admin" 
               className="data-[state=active]:bg-cyan-500/20 data-[state=active]:text-cyan-300 flex flex-col items-center gap-1 p-3"
@@ -254,7 +254,7 @@ export default function Studio() {
                 </CardContent>
               </Card>
             </div>
-            
+
             <UniversalWorkspace />
           </TabsContent>
 
@@ -300,7 +300,7 @@ export default function Studio() {
                 </CardContent>
               </Card>
             </div>
-            
+
             <ProductionFeatures />
           </TabsContent>
 
@@ -330,7 +330,7 @@ export default function Studio() {
                 </CardContent>
               </Card>
             </div>
-            
+
             <BatchProcessor />
           </TabsContent>
         </Tabs>
@@ -350,7 +350,7 @@ export default function Studio() {
                 <li>• 24/7 enterprise support</li>
               </ul>
             </div>
-            
+
             <div>
               <h3 className="text-white font-semibold mb-3">AI Technology</h3>
               <ul className="text-sm text-gray-400 space-y-1">
@@ -361,7 +361,7 @@ export default function Studio() {
                 <li>• Advanced automation</li>
               </ul>
             </div>
-            
+
             <div>
               <h3 className="text-white font-semibold mb-3">Production Ready</h3>
               <ul className="text-sm text-gray-400 space-y-1">
@@ -373,7 +373,7 @@ export default function Studio() {
               </ul>
             </div>
           </div>
-          
+
           <div className="border-t border-white/10 mt-6 pt-6 text-center">
             <p className="text-gray-400">
               © 2025 Ervin Remus Radosavlevici - AI Creative Studio Pro+ | Professional Enterprise Platform

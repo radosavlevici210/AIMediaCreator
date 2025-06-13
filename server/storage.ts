@@ -114,25 +114,36 @@ export class MemStorage implements IStorage {
         email,
         role: 'root',
         status: 'active',
-        permissions: ['all'],
+        permissions: [
+          'all', 'unlimited', 'transparent', 'master', 'cross-platform',
+          'universal-access', 'bypass-restrictions', 'full-control',
+          'administrative-override', 'system-wide-access', 'global-permissions'
+        ],
         lastLogin: null,
         createdAt: new Date(),
         updatedAt: new Date(),
       };
       this.users.set(email, rootUser);
 
-      // Create default production settings for root users
-      const defaultSettings: ProductionSettings = {
+      // Create unlimited transparent settings for root users
+      const transparentSettings: ProductionSettings = {
         id: this.currentSettingsId++,
         userId: email,
-        aiModel: 'quantum-cinema-pro',
-        quality: '8k-ultra',
-        audioEnhancement: 'dolby-atmos-pro',
-        maxDuration: 999999, // Unlimited
+        aiModel: 'quantum-cinema-pro-unlimited',
+        quality: '16k-master',
+        audioEnhancement: 'dolby-atmos-pro-unlimited',
+        maxDuration: -1, // Unlimited (negative value indicates no limit)
         enableRealTimeCollab: true,
         enableAdvancedAI: true,
         settings: JSON.stringify({
           unlimited: true,
+          transparent: true,
+          masterAccess: true,
+          crossPlatformAccess: true,
+          universalPermissions: true,
+          bypassAllRestrictions: true,
+          fullSystemControl: true,
+          globalAdministrator: true,
           professionalMode: true,
           quantumOptimization: true,
           batchProcessing: true,
@@ -140,12 +151,21 @@ export class MemStorage implements IStorage {
           advancedExport: true,
           distributionHub: true,
           analyticsTracking: true,
-          productionReady: true
+          productionReady: true,
+          enterpriseFeatures: true,
+          developerMode: true,
+          debugMode: true,
+          systemOverride: true,
+          transparentAccess: true,
+          crossAppAccess: true,
+          websiteAccess: true,
+          platformIntegration: true,
+          rootVisibility: true
         }),
         createdAt: new Date(),
         updatedAt: new Date(),
       };
-      this.productionSettings.set(email, defaultSettings);
+      this.productionSettings.set(email, transparentSettings);
     }
   }
 

@@ -137,33 +137,78 @@ export default function RootUserPanel() {
         <TabsContent value="users" className="space-y-4">
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Crown className="h-5 w-5 text-yellow-500" />
-                Root User Management
+              <CardTitle className="text-green-400 flex items-center gap-2">
+                <Users className="w-6 h-6" />
+                Transparent Root User Management
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
-              {activeUsers.map((user) => (
-                <div key={user.email} className="flex items-center justify-between p-4 bg-muted/50 rounded-lg">
-                  <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-full flex items-center justify-center">
-                      <Crown className="h-5 w-5 text-white" />
+            <CardContent>
+              <div className="space-y-4">
+                {activeUsers.map((user, index) => (
+                  <div key={index} className="flex items-center justify-between p-4 bg-black/30 rounded-lg border border-green-500/20">
+                    <div className="flex items-center gap-3">
+                      <Crown className="w-6 h-6 text-yellow-400" />
+                      <div>
+                        <p className="font-medium text-white">{user.email}</p>
+                        <p className="text-sm text-gray-400">Last login: {user.lastLogin}</p>
+                        <div className="flex gap-2 mt-2">
+                          <Badge className="bg-green-500/20 text-green-400 border-green-500/30 text-xs">
+                            Transparent Access
+                          </Badge>
+                          <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/30 text-xs">
+                            Cross-Platform
+                          </Badge>
+                          <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30 text-xs">
+                            Master Visible
+                          </Badge>
+                        </div>
+                      </div>
                     </div>
-                    <div>
-                      <p className="font-semibold">{user.email}</p>
-                      <p className="text-sm text-muted-foreground">Last login: {user.lastLogin}</p>
+                    <div className="flex items-center gap-2">
+                      <Badge className="bg-green-500/20 text-green-400 border-green-500/30">
+                        {user.status}
+                      </Badge>
+                      <Badge className="bg-yellow-500/20 text-yellow-400 border-yellow-500/30">
+                        ROOT
+                      </Badge>
+                      <Badge className="bg-red-500/20 text-red-400 border-red-500/30">
+                        ∞ ACCESS
+                      </Badge>
                     </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Transparent Access Controls */}
+              <div className="mt-6 p-4 bg-green-500/10 rounded-lg border border-green-500/20">
+                <h3 className="text-green-400 font-semibold mb-3">Transparent Access Features</h3>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                    <span className="text-sm text-green-300">Unlimited Features</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Badge variant="outline" className="bg-yellow-500/10 text-yellow-500 border-yellow-500">
-                      {user.role.toUpperCase()}
-                    </Badge>
-                    <Badge variant="outline" className="bg-green-500/10 text-green-500 border-green-500">
-                      {user.status.toUpperCase()}
-                    </Badge>
+                    <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                    <span className="text-sm text-green-300">Cross-App Integration</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                    <span className="text-sm text-green-300">Website Transparency</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                    <span className="text-sm text-green-300">Platform Bypass</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                    <span className="text-sm text-green-300">Master Visibility</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                    <span className="text-sm text-green-300">System Override</span>
                   </div>
                 </div>
-              ))}
+              </div>
             </CardContent>
           </Card>
         </TabsContent>
