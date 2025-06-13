@@ -12,38 +12,19 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import { 
-  Play, 
-  Pause, 
-  Download, 
-  Upload, 
-  Mic, 
+  Sparkles, 
   Video, 
   Music, 
-  Image,
-  Sparkles, 
+  Image, 
+  Mic, 
+  Camera, 
   Wand2, 
-  Settings, 
-  Clock,
-  Zap,
-  Brain,
-  Palette,
-  Volume2,
-  Film,
-  Camera,
-  Headphones,
-  Layers,
-  RotateCcw,
-  Save,
-  Share2,
-  Eye,
-  Star,
-  Rocket,
+  Play, 
+  Download,
+  Settings,
   Crown,
-  Diamond,
-  Flame,
-  FileText,
-  PenTool,
-  Infinity
+  Zap,
+  FileText
 } from "lucide-react";
 
 interface CreationProject {

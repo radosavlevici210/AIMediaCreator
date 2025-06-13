@@ -16,6 +16,20 @@ export default function RealTimeUpdates() {
   const [connectionStatus, setConnectionStatus] = useState<'connected' | 'disconnected' | 'reconnecting'>('connected');
   const queryClient = useQueryClient();
 
+  // Query for real-time updates
+  const { data: realTimeData } = useQuery({
+    queryKey: ["/api/real-time-updates"],
+    queryFn: async () => {
+      const response = await fetch("/api/real-time-updates");
+      if (!response.ok) {
+        throw new Error("Failed to fetch real-time data");
+      }
+      return response.json();
+    },
+    refetchInterval: 2000,
+    retry: 1
+  }) || {};
+
   useEffect(() => {
     // Simulate real-time updates
     const interval = setInterval(() => {

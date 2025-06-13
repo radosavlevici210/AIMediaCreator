@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
@@ -65,205 +65,89 @@ export default function Studio() {
         </div>
       </div>
 
-      <main className="container mx-auto container-padding section-padding">
+      {/* Main Content */}
+      <div className="container mx-auto px-4 py-8">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
-          <TabsList className="grid w-full grid-cols-6 glass-card h-14 p-1">
-            <TabsTrigger 
-              value="dashboard" 
-              className="flex items-center gap-2 h-12 rounded-lg data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all duration-300"
-            >
+          <TabsList className="grid w-full grid-cols-2 lg:grid-cols-6 gap-2 bg-card/50 backdrop-blur-sm">
+            <TabsTrigger value="dashboard" className="flex items-center gap-2">
               <BarChart3 className="h-4 w-4" />
-              <span className="hidden sm:inline">Dashboard</span>
+              Dashboard
             </TabsTrigger>
-            <TabsTrigger 
-              value="create" 
-              className="flex items-center gap-2 h-12 rounded-lg data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all duration-300 premium-feature"
-            >
+            <TabsTrigger value="create" className="flex items-center gap-2">
               <Sparkles className="h-4 w-4" />
-              <span className="hidden sm:inline">Create</span>
+              Create
             </TabsTrigger>
-            <TabsTrigger 
-              value="lyrics" 
-              className="flex items-center gap-2 h-12 rounded-lg data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all duration-300"
-            >
-              <FileText className="h-4 w-4" />
-              <span className="hidden sm:inline">Lyrics</span>
+            <TabsTrigger value="video" className="flex items-center gap-2">
+              <Video className="h-4 w-4" />
+              Video
             </TabsTrigger>
-            <TabsTrigger 
-              value="legacy" 
-              className="flex items-center gap-2 h-12 rounded-lg data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all duration-300"
-            >
-              <Settings className="h-4 w-4" />
-              <span className="hidden sm:inline">Tools</span>
+            <TabsTrigger value="music" className="flex items-center gap-2">
+              <Music className="h-4 w-4" />
+              Music
             </TabsTrigger>
-            <TabsTrigger 
-              value="security" 
-              className="flex items-center gap-2 h-12 rounded-lg data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all duration-300 production-ready"
-            >
-              <Shield className="h-4 w-4" />
-              <span className="hidden sm:inline">Security</span>
-            </TabsTrigger>
-            <TabsTrigger 
-              value="performance" 
-              className="flex items-center gap-2 h-12 rounded-lg data-[state=active]:bg-primary data-[state=active]:text-primary-foreground transition-all duration-300"
-            >
+            <TabsTrigger value="production" className="flex items-center gap-2">
               <Zap className="h-4 w-4" />
-              <span className="hidden sm:inline">Analytics</span>
+              Production
+            </TabsTrigger>
+            <TabsTrigger value="security" className="flex items-center gap-2">
+              <Shield className="h-4 w-4" />
+              Security
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="dashboard" className="space-y-8 animate-slide-up">
-            <div className="grid gap-6">
-              <div className="text-center space-y-4">
-                <h1 className="text-4xl font-bold text-gradient">Professional AI Studio</h1>
-                <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-                  Create stunning videos, music, and content with enterprise-grade AI technology
-                </p>
+          <TabsContent value="dashboard" className="space-y-6">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <div className="lg:col-span-2 space-y-6">
+                <RealTimeUpdates />
+                <PerformanceMonitor />
+                <ProductionDashboard />
               </div>
-              <ProductionFeatures />
-              <ProductionDashboard />
+              <div className="space-y-6">
+                <SecurityMonitor />
+              </div>
             </div>
           </TabsContent>
 
-          <TabsContent value="create" className="space-y-8 animate-slide-up">
-            <div className="glass-card">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
-                  <Sparkles className="h-6 w-6 text-white" />
-                </div>
-                <div>
-                  <h2 className="text-2xl font-bold">AI Creation Suite</h2>
-                  <p className="text-muted-foreground">Professional-grade content creation tools</p>
-                </div>
-                <Badge className="ml-auto premium-feature bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0">
-                  Premium
-                </Badge>
-              </div>
-              <EnhancedCreationSuite />
-            </div>
+          <TabsContent value="create" className="space-y-6">
+            <EnhancedCreationSuite />
+          </TabsContent>
 
+          <TabsContent value="video" className="space-y-6">
+            <VideoCreator />
+          </TabsContent>
+
+          <TabsContent value="music" className="space-y-6">
+            <MusicGenerator />
+            <LyricsIntegrationSystem />
+          </TabsContent>
+
+          <TabsContent value="production" className="space-y-6">
+            <ProductionFeatures />
             <BatchProcessor />
           </TabsContent>
 
-          <TabsContent value="lyrics" className="space-y-8 animate-slide-up">
-            <div className="glass-card">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center">
-                  <FileText className="h-6 w-6 text-white" />
-                </div>
-                <div>
-                  <h2 className="text-2xl font-bold">Lyrics Integration</h2>
-                  <p className="text-muted-foreground">Advanced lyrical content management</p>
-                </div>
-                <Badge className="ml-auto bg-gradient-to-r from-blue-500 to-cyan-500 text-white border-0">
-                  AI-Powered
-                </Badge>
-              </div>
-              <LyricsIntegrationSystem />
-            </div>
-          </TabsContent>
-
-          <TabsContent value="legacy" className="space-y-8 animate-slide-up">
-            <div className="modern-grid">
-              <Card className="modern-card">
-                <CardHeader className="pb-4">
-                  <CardTitle className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center">
-                      <Video className="h-5 w-5 text-white" />
-                    </div>
-                    <div>
-                      <div className="text-lg">Video Creator</div>
-                      <div className="text-sm text-muted-foreground font-normal">Legacy interface</div>
-                    </div>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <VideoCreator />
-                </CardContent>
-              </Card>
-
-              <Card className="modern-card">
-                <CardHeader className="pb-4">
-                  <CardTitle className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center">
-                      <Music className="h-5 w-5 text-white" />
-                    </div>
-                    <div>
-                      <div className="text-lg">Music Generator</div>
-                      <div className="text-sm text-muted-foreground font-normal">Classic tools</div>
-                    </div>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <MusicGenerator />
-                </CardContent>
-              </Card>
-
-              <Card className="modern-card">
-                <CardHeader className="pb-4">
-                  <CardTitle className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-purple-500 to-violet-500 flex items-center justify-center">
-                      <Mic className="h-5 w-5 text-white" />
-                    </div>
-                    <div>
-                      <div className="text-lg">Voice Synthesis</div>
-                      <div className="text-sm text-muted-foreground font-normal">Coming soon</div>
-                    </div>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-center py-12 space-y-4">
-                    <div className="h-16 w-16 mx-auto rounded-full bg-muted flex items-center justify-center animate-float">
-                      <Mic className="h-8 w-8 text-muted-foreground" />
-                    </div>
-                    <p className="text-muted-foreground">Advanced voice synthesis features in development</p>
-                    <Badge variant="outline">Next Update</Badge>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-          </TabsContent>
-
-          <TabsContent value="security" className="space-y-8 animate-slide-up">
-            <div className="glass-card">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-red-500 to-rose-500 flex items-center justify-center animate-glow">
-                  <Shield className="h-6 w-6 text-white" />
-                </div>
-                <div>
-                  <h2 className="text-2xl font-bold">Security Monitor</h2>
-                  <p className="text-muted-foreground">Enterprise security & protection</p>
-                </div>
-                <Badge className="ml-auto production-ready bg-gradient-to-r from-red-500 to-rose-500 text-white border-0">
-                  Active Protection
-                </Badge>
-              </div>
-              <SecurityMonitor />
-            </div>
-          </TabsContent>
-
-          <TabsContent value="performance" className="space-y-8 animate-slide-up">
-            <div className="glass-card">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="h-12 w-12 rounded-xl bg-gradient-to-br from-yellow-500 to-orange-500 flex items-center justify-center">
-                  <Zap className="h-6 w-6 text-white" />
-                </div>
-                <div>
-                  <h2 className="text-2xl font-bold">Performance Analytics</h2>
-                  <p className="text-muted-foreground">Real-time system monitoring</p>
-                </div>
-                <div className="ml-auto flex items-center gap-2">
-                  <div className="h-2 w-2 rounded-full status-online"></div>
-                  <span className="text-sm text-green-500 font-medium">Online</span>
-                </div>
-              </div>
-              <PerformanceMonitor />
-            </div>
+          <TabsContent value="security" className="space-y-6">
+            <SecurityMonitor />
           </TabsContent>
         </Tabs>
-      </main>
+      </div>
 
-      <RealTimeUpdates />
+      {/* Footer */}
+      <footer className="border-t border-border/50 bg-card/30 backdrop-blur-sm mt-16">
+        <div className="container mx-auto px-4 py-6">
+          <div className="flex items-center justify-between text-sm text-muted-foreground">
+            <div>
+              © 2025 Ervin Remus Radosavlevici - AI Creative Studio Pro+
+            </div>
+            <div className="flex items-center gap-4">
+              <Badge variant="outline" className="production-ready">
+                Production Ready
+              </Badge>
+              <span>All Rights Reserved</span>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

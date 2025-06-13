@@ -7,8 +7,24 @@ interface ProductionDashboardProps {
   };
 }
 
+import { useQuery } from "@tanstack/react-query";
+
 // © 2025 Ervin Radosavlevici - Professional Production Dashboard
 export default function ProductionDashboard({ stats }: ProductionDashboardProps) {
+  // Query for production stats
+  const { data: queryStats } = useQuery({
+    queryKey: ["/api/stats"],
+    queryFn: async () => {
+      const response = await fetch("/api/stats");
+      if (!response.ok) {
+        throw new Error("Failed to fetch stats");
+      }
+      return response.json();
+    },
+    refetchInterval: 5000,
+    retry: 1
+  }) || {};
+
   const defaultStats = {
     totalProjects: 0,
     completedProjects: 0,
@@ -16,7 +32,7 @@ export default function ProductionDashboard({ stats }: ProductionDashboardProps)
     avgProcessingTime: 0,
   };
 
-  const displayStats = stats || defaultStats;
+  const displayStats = stats || queryStats || defaultStats;
 
   return (
     <div className="mt-12">

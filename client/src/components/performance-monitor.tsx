@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
@@ -18,6 +19,20 @@ export default function PerformanceMonitor() {
     network: 0,
     latency: 0
   });
+
+  // Query for performance data
+  const { data: performanceData } = useQuery({
+    queryKey: ["/api/performance"],
+    queryFn: async () => {
+      const response = await fetch("/api/performance");
+      if (!response.ok) {
+        throw new Error("Failed to fetch performance data");
+      }
+      return response.json();
+    },
+    refetchInterval: 3000,
+    retry: 1
+  }) || {};
 
   useEffect(() => {
     const updateMetrics = () => {
