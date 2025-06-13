@@ -75,14 +75,7 @@ export default function Studio() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-purple-950/50 to-slate-950 relative overflow-hidden">
-      {/* Animated background effects */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-pink-500/5 to-blue-500/5"></div>
-      </div>
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-      
+    <div className="min-h-screen ultra-modern-bg">
       <div className="relative z-10">
         <EnhancedStudioHeader />
 
@@ -94,29 +87,29 @@ export default function Studio() {
 
             <AdvancedWorkspace />
 
-            {/* Modern Tab System */}
-            <div className="ultra-modern-card">
+            {/* Ultra-Modern Tab System */}
+            <div className="ultra-modern-card p-2">
               <Tabs defaultValue="video" className="space-y-8">
-                <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 bg-slate-900/50 p-2 rounded-2xl backdrop-blur-xl border border-white/10">
+                <TabsList className="grid w-full grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 bg-transparent p-0 h-auto">
                   <TabsTrigger 
                     value="video" 
-                    className="flex items-center justify-center space-x-2 text-sm bg-transparent hover:bg-white/10 data-[state=active]:bg-gradient-to-r data-[state=active]:from-purple-500 data-[state=active]:to-pink-500 data-[state=active]:text-white rounded-xl py-3 transition-all duration-300"
+                    className="glass-morphism flex items-center justify-center space-x-2 text-sm hover:bg-purple-500/20 data-[state=active]:bg-purple-500/30 data-[state=active]:text-white data-[state=active]:shadow-lg rounded-xl py-4 transition-all duration-300"
                   >
                     <Play className="h-4 w-4" />
-                    <span className="hidden sm:inline font-medium">Video Creator</span>
-                    <span className="sm:hidden font-medium">Video</span>
+                    <span className="hidden sm:inline font-semibold">Video Creator</span>
+                    <span className="sm:hidden font-semibold">Video</span>
                   </TabsTrigger>
                   <TabsTrigger 
                     value="music" 
-                    className="flex items-center justify-center space-x-2 text-sm bg-transparent hover:bg-white/10 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-cyan-500 data-[state=active]:text-white rounded-xl py-3 transition-all duration-300"
+                    className="glass-morphism flex items-center justify-center space-x-2 text-sm hover:bg-blue-500/20 data-[state=active]:bg-blue-500/30 data-[state=active]:text-white data-[state=active]:shadow-lg rounded-xl py-4 transition-all duration-300"
                   >
                     <Pause className="h-4 w-4" />
-                    <span className="hidden sm:inline font-medium">Music Generator</span>
-                    <span className="sm:hidden font-medium">Music</span>
+                    <span className="hidden sm:inline font-semibold">Music Generator</span>
+                    <span className="sm:hidden font-semibold">Music</span>
                   </TabsTrigger>
                   <TabsTrigger 
                     value="collaboration" 
-                    className="flex items-center justify-center space-x-2 text-sm bg-transparent hover:bg-white/10 data-[state=active]:bg-gradient-to-r data-[state=active]:from-green-500 data-[state=active]:to-emerald-500 data-[state=active]:text-white rounded-xl py-3 transition-all duration-300"
+                    className="glass-morphism flex items-center justify-center space-x-2 text-sm hover:bg-green-500/20 data-[state=active]:bg-green-500/30 data-[state=active]:text-white data-[state=active]:shadow-lg rounded-xl py-4 transition-all duration-300"
                   >
                     <Users className="h-4 w-4" />
                     <span className="hidden sm:inline font-medium">Collaboration</span>
@@ -124,19 +117,19 @@ export default function Studio() {
                   </TabsTrigger>
                   <TabsTrigger 
                     value="analytics" 
-                    className="flex items-center justify-center space-x-2 text-sm bg-transparent hover:bg-white/10 data-[state=active]:bg-gradient-to-r data-[state=active]:from-orange-500 data-[state=active]:to-red-500 data-[state=active]:text-white rounded-xl py-3 transition-all duration-300"
+                    className="glass-morphism flex items-center justify-center space-x-2 text-sm hover:bg-orange-500/20 data-[state=active]:bg-orange-500/30 data-[state=active]:text-white data-[state=active]:shadow-lg rounded-xl py-4 transition-all duration-300"
                   >
                     <BarChart3 className="h-4 w-4" />
-                    <span className="hidden sm:inline font-medium">Analytics</span>
-                    <span className="sm:hidden font-medium">Analytics</span>
+                    <span className="hidden sm:inline font-semibold">Analytics</span>
+                    <span className="sm:hidden font-semibold">Analytics</span>
                   </TabsTrigger>
                   <TabsTrigger 
                     value="distribution" 
-                    className="flex items-center justify-center space-x-2 text-sm bg-transparent hover:bg-white/10 data-[state=active]:bg-gradient-to-r data-[state=active]:from-indigo-500 data-[state=active]:to-purple-500 data-[state=active]:text-white rounded-xl py-3 transition-all duration-300"
+                    className="glass-morphism flex items-center justify-center space-x-2 text-sm hover:bg-indigo-500/20 data-[state=active]:bg-indigo-500/30 data-[state=active]:text-white data-[state=active]:shadow-lg rounded-xl py-4 transition-all duration-300"
                   >
                     <Share2 className="h-4 w-4" />
-                    <span className="hidden sm:inline font-medium">Distribution</span>
-                    <span className="sm:hidden font-medium">Share</span>
+                    <span className="hidden sm:inline font-semibold">Distribution</span>
+                    <span className="sm:hidden font-semibold">Share</span>
                   </TabsTrigger>
                 </TabsList>
 

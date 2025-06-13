@@ -149,41 +149,48 @@ export default function EnhancedStudioHeader() {
           </div>
         </div>
 
-        {/* Feature Bar */}
-        <div className="hidden lg:flex items-center justify-between py-2 border-t border-border/20">
-          <div className="flex items-center space-x-6 text-xs">
+        {/* Professional Feature Bar */}
+        <div className="flex items-center justify-between py-4 px-6 border-t border-white/10">
+          <div className="flex items-center space-x-8">
             <div className="flex items-center space-x-2 text-green-400">
-              <Shield className="w-3 h-3" />
-              <span>Enterprise Security</span>
+              <Shield className="w-4 h-4" />
+              <span className="font-medium">Enterprise Security</span>
             </div>
             <div className="flex items-center space-x-2 text-blue-400">
-              <Globe className="w-3 h-3" />
-              <span>Global CDN</span>
+              <Globe className="w-4 h-4" />
+              <span className="font-medium">Global CDN</span>
             </div>
             <div className="flex items-center space-x-2 text-purple-400">
-              <Zap className="w-3 h-3" />
-              <span>AI-Powered</span>
+              <Zap className="w-4 h-4" />
+              <span className="font-medium">AI-Powered</span>
             </div>
             <div className="flex items-center space-x-2 text-pink-400">
-              <Rocket className="w-3 h-3" />
-              <span>Production Ready</span>
+              <Rocket className="w-4 h-4" />
+              <span className="font-medium">Production Ready</span>
             </div>
           </div>
 
-          <div className="flex items-center space-x-2 text-xs text-muted-foreground">
-            <span>v2.0.0</span>
-            <span>•</span>
-            <span>Last updated: {new Date().toLocaleDateString()}</span>
+          <div className="glass-morphism px-4 py-2 rounded-full">
+            <div className="flex items-center space-x-3 text-sm">
+              <span className="text-white font-bold">v2.0.0</span>
+              <div className="w-px h-4 bg-white/20"></div>
+              <span className="text-gray-300">Last updated: {new Date().toLocaleDateString()}</span>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Processing Overlay */}
       {isProcessing && (
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-purple-500 to-pink-500 animate-pulse">
-          <div className="h-full bg-gradient-to-r from-primary to-purple-600 animate-glow"></div>
+        <div className="absolute top-0 left-0 right-0 h-1 rounded-t-2xl overflow-hidden">
+          <div className="h-full bg-gradient-to-r from-purple-500 via-pink-500 to-blue-500 animate-pulse"></div>
         </div>
       )}
+
+      {/* Copyright Attribution */}
+      <div className="text-center py-2 text-xs text-gray-400">
+        © 2025 Ervin Remus Radosavlevici (ervin210@icloud.com) - All Rights Reserved
+      </div>
     </header>
   );
 }

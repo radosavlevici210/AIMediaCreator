@@ -38,7 +38,7 @@ waitForPort = 5000
 
 [[workflows.workflow]]
 name = "Production Ready"
-author = 43788695
+author = "agent"
 mode = "sequential"
 
 [[workflows.workflow.tasks]]

@@ -342,6 +342,56 @@
     border-color: rgba(139, 92, 246, 0.4);
   }
 
+  /* Ultra-modern animated background */
+  .ultra-modern-bg {
+    background: 
+      radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(168, 85, 247, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 40% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+      linear-gradient(135deg, hsl(220, 20%, 5%) 0%, hsl(220, 25%, 8%) 100%);
+    background-size: 100% 100%, 100% 100%, 100% 100%, 100% 100%;
+    animation: backgroundFloat 20s ease-in-out infinite;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ultra-modern-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 100px,
+        rgba(139, 92, 246, 0.03) 102px,
+        rgba(139, 92, 246, 0.03) 104px
+      ),
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 100px,
+        rgba(139, 92, 246, 0.03) 102px,
+        rgba(139, 92, 246, 0.03) 104px
+      );
+    pointer-events: none;
+  }
+
+  @keyframes backgroundFloat {
+    0%, 100% { 
+      background-position: 0% 0%, 100% 100%, 50% 50%, 0% 0%;
+    }
+    33% { 
+      background-position: 30% 20%, 70% 80%, 80% 30%, 0% 0%;
+    }
+    66% { 
+      background-position: 80% 60%, 20% 40%, 20% 70%, 0% 0%;
+    }
+  }
+
   /* Modern gradient buttons */
   .btn-gradient-primary {
     background: var(--gradient-primary);
