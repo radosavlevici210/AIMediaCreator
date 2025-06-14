@@ -47,8 +47,8 @@ const features: FeatureCard[] = [
   },
   {
     icon: <Brain className="w-8 h-8" />,
-    title: "Quantum AI Optimization",
-    description: "Next-generation AI models with quantum-level optimization for unprecedented creative possibilities.",
+    title: "AI-Powered Optimization",
+    description: "Next-generation AI models with GPT-4o and DALL-E 3 for unprecedented creative possibilities.",
     gradient: "from-green-500 to-emerald-500",
     delay: 0.2
   },
@@ -167,8 +167,8 @@ export default function ModernLanding() {
           </div>
 
           <h1 className="text-6xl md:text-8xl lg:text-9xl font-black mb-12 leading-none tracking-wider transform hover:scale-105 transition-transform duration-500">
-            <span className="holographic block">QUANTUM AI</span>
-            <span className="holographic block mt-4">NEURAL STUDIO</span>
+            <span className="holographic block">AI STUDIO</span>
+            <span className="holographic block mt-4">PRO+</span>
           </h1>
 
           <p className="text-xl md:text-2xl text-cyan-300 mb-16 max-w-4xl mx-auto leading-relaxed font-medium neon-glow px-8 py-4">
