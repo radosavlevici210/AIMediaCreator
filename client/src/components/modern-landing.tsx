@@ -96,7 +96,7 @@ export default function ModernLanding() {
   }, []);
 
   return (
-    <div className="min-h-screen relative overflow-hidden matrix-bg">
+    <div className="min-h-screen relative overflow-hidden ultra-modern-container cyber-grid">
       {/* Cyberpunk animated background */}
       <div className="absolute inset-0 overflow-hidden">
         <div 
@@ -158,8 +158,8 @@ export default function ModernLanding() {
           </div>
 
           <h1 className="text-6xl md:text-8xl lg:text-9xl font-black mb-12 leading-none tracking-wider transform hover:scale-105 transition-transform duration-500">
-            <span className="header-gradient block">NEURAL AI</span>
-            <span className="text-gradient block mt-4">CREATIVE FUSION</span>
+            <span className="holographic block">QUANTUM AI</span>
+            <span className="holographic block mt-4">NEURAL STUDIO</span>
           </h1>
 
           <p className="text-xl md:text-2xl text-cyan-300 mb-16 max-w-4xl mx-auto leading-relaxed font-medium neon-glow px-8 py-4">
@@ -170,15 +170,15 @@ export default function ModernLanding() {
 
           <div className="flex flex-col lg:flex-row gap-8 justify-center items-center mb-24">
             <Link href="/studio">
-              <Button size="lg" className="btn-neon text-xl px-16 py-8 font-black min-w-[280px] tracking-widest">
-                <Rocket className="w-6 h-6 mr-3" />
-                INITIATE CREATION
-              </Button>
+              <button className="quantum-button text-xl px-16 py-8 min-w-[280px] tracking-widest neon-border">
+                <Rocket className="w-6 h-6 mr-3 inline" />
+                INITIATE QUANTUM
+              </button>
             </Link>
-            <Button size="lg" className="btn-gradient-secondary text-xl px-16 py-8 font-black min-w-[250px] tracking-widest">
-              <Play className="w-6 h-6 mr-3" />
+            <button className="quantum-button text-xl px-16 py-8 min-w-[250px] tracking-widest neon-border">
+              <Play className="w-6 h-6 mr-3 inline" />
               NEURAL DEMO
-            </Button>
+            </button>
           </div>
 
           {/* Stats */}
@@ -214,12 +214,12 @@ export default function ModernLanding() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
           {features.map((feature, index) => (
-            <Card 
+            <div 
               key={index}
-              className={`card-modern group cursor-pointer border-0 bg-transparent transform transition-all duration-700 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+              className={`ultra-modern-card group cursor-pointer transform transition-all duration-700 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
               style={{ transitionDelay: `${feature.delay + 1}s` }}
             >
-              <CardContent className="p-8">
+              <div className="p-8">
                 <div className={`w-20 h-20 rounded-2xl bg-gradient-to-r ${feature.gradient} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
                   <div className="text-white">
                     {feature.icon}
@@ -227,15 +227,15 @@ export default function ModernLanding() {
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-gradient transition-colors duration-300">{feature.title}</h3>
                 <p className="text-slate-400 leading-relaxed text-base">{feature.description}</p>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           ))}
         </div>
       </section>
 
       {/* CTA Section */}
       <section className="relative z-10 container mx-auto px-6 py-24">
-        <div className="card-modern text-center p-16 neon-glow max-w-4xl mx-auto">
+        <div className="ultra-modern-card text-center p-16 neon-border max-w-4xl mx-auto neural-grid">
           <div className="mb-8">
             <div className="w-24 h-24 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full mx-auto mb-6 flex items-center justify-center">
               <Sparkles className="w-12 h-12 text-white" />
@@ -250,15 +250,15 @@ export default function ModernLanding() {
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <Link href="/studio">
-              <Button size="lg" className="btn-gradient-primary text-xl px-12 py-6 pulse-glow font-semibold min-w-[220px]">
-                <Palette className="w-6 h-6 mr-2" />
-                Launch Studio Now
-              </Button>
+              <button className="quantum-button text-xl px-12 py-6 min-w-[220px] neon-border">
+                <Palette className="w-6 h-6 mr-2 inline" />
+                Launch Quantum Studio
+              </button>
             </Link>
-            <Button size="lg" variant="outline" className="glass-morphism text-xl px-12 py-6 font-semibold min-w-[200px] hover:bg-white/10">
-              <Shield className="w-6 h-6 mr-2" />
-              View Security
-            </Button>
+            <button className="quantum-button text-xl px-12 py-6 min-w-[200px] neon-border">
+              <Shield className="w-6 h-6 mr-2 inline" />
+              Neural Security
+            </button>
           </div>
         </div>
       </section>
