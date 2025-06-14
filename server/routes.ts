@@ -1147,5 +1147,14 @@ app.post("/api/environments/:id/stop", async (req, res) => {
   // Add AI routes
   app.use('/api/ai', aiRoutes);
 
+  // Enhanced AI Routes
+  app.post("/api/ai/enhanced-music", enhancedMusicGeneration);
+  app.post("/api/ai/enhanced-video", enhancedVideoGeneration);
+  app.post("/api/ai/batch-process", batchProcessing);
+  app.post("/api/ai/real-time-analysis", realTimeAnalysis);
+  app.post("/api/ai/switch-model", switchAIModel);
+  app.post("/api/ai/enhanced-export", enhancedExport);
+  app.get("/api/system/metrics", getSystemMetrics);
+
   return httpServer;
 }
