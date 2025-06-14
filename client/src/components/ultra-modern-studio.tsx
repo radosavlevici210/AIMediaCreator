@@ -256,18 +256,42 @@ export default function UltraModernStudio() {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer className="ultra-modern-card p-6 mt-8 neon-border">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <Sparkles className="w-6 h-6 text-purple-400" />
-            <span className="holographic font-bold">AI Quantum Studio Pro+</span>
+      {/* Copyright Protection Footer */}
+      <footer className="ultra-modern-card p-8 mt-8 neon-border">
+        <div className="text-center mb-6">
+          <div className="flex items-center justify-center space-x-3 mb-4">
+            <Crown className="w-8 h-8 text-yellow-400" />
+            <span className="holographic font-bold text-2xl">AI QUANTUM STUDIO PRO+</span>
+            <Crown className="w-8 h-8 text-yellow-400" />
           </div>
-          <div className="flex items-center space-x-6 text-sm text-purple-300">
-            <span>© 2025 Ervin Radosavlevici</span>
-            <span>Enterprise Ready</span>
-            <span>Unlimited Access</span>
+          <p className="text-xl font-bold text-yellow-400 mb-2">
+            © 2025 Ervin Remus Radosavlevici - All Rights Reserved
+          </p>
+          <p className="text-sm text-gray-400 mb-4">
+            Private & Proprietary Software • Enterprise Grade • Professional AI Content Creation
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="p-3 bg-green-500/20 rounded-xl">
+              <Lock className="w-5 h-5 text-green-400 mx-auto mb-2" />
+              <p className="text-green-400 font-bold text-sm">Copyright Protected</p>
+            </div>
+            <div className="p-3 bg-purple-500/20 rounded-xl">
+              <Shield className="w-5 h-5 text-purple-400 mx-auto mb-2" />
+              <p className="text-purple-400 font-bold text-sm">Root Access: ervin210@icloud.com</p>
+            </div>
+            <div className="p-3 bg-blue-500/20 rounded-xl">
+              <Award className="w-5 h-5 text-blue-400 mx-auto mb-2" />
+              <p className="text-blue-400 font-bold text-sm">Master License</p>
+            </div>
           </div>
+        </div>
+        <div className="border-t border-white/10 pt-4 text-center">
+          <p className="text-xs text-gray-500">
+            Root Users: ervin210@icloud.com • radosavlevici.ervin@gmail.com • radosavlevici210@icloud.com
+          </p>
+          <p className="text-xs text-gray-500 mt-2">
+            Unauthorized use, copying, or distribution is strictly prohibited and subject to legal action
+          </p>
         </div>
       </footer>
     </div>

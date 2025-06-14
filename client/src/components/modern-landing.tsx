@@ -304,13 +304,49 @@ export default function ModernLanding() {
           </div>
 
           <div className="border-t border-slate-800/50 pt-8 text-center">
-            <p className="text-slate-500 mb-4">
-              &copy; 2025 AI Creative Studio Pro+. Professional AI-powered content creation platform.
-            </p>
-            <div className="flex justify-center space-x-8 text-sm text-slate-400">
+            <div className="mb-6">
+              <div className="flex items-center justify-center space-x-3 mb-4">
+                <Crown className="w-8 h-8 text-yellow-400" />
+                <h3 className="text-2xl font-bold header-gradient">COPYRIGHT PROTECTED</h3>
+                <Crown className="w-8 h-8 text-yellow-400" />
+              </div>
+              <p className="text-xl font-bold text-yellow-400 mb-2">
+                © 2025 Ervin Remus Radosavlevici - All Rights Reserved
+              </p>
+              <p className="text-slate-400 mb-4">
+                Private & Proprietary Software • Professional AI-powered content creation platform
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+              <div className="p-4 bg-green-500/20 rounded-xl border border-green-500/30">
+                <Shield className="w-6 h-6 text-green-400 mx-auto mb-2" />
+                <p className="text-green-400 font-bold text-sm">Copyright Protected</p>
+              </div>
+              <div className="p-4 bg-purple-500/20 rounded-xl border border-purple-500/30">
+                <Users className="w-6 h-6 text-purple-400 mx-auto mb-2" />
+                <p className="text-purple-400 font-bold text-sm">Root Access Control</p>
+              </div>
+              <div className="p-4 bg-blue-500/20 rounded-xl border border-blue-500/30">
+                <Lock className="w-6 h-6 text-blue-400 mx-auto mb-2" />
+                <p className="text-blue-400 font-bold text-sm">Private License</p>
+              </div>
+              <div className="p-4 bg-yellow-500/20 rounded-xl border border-yellow-500/30">
+                <Award className="w-6 h-6 text-yellow-400 mx-auto mb-2" />
+                <p className="text-yellow-400 font-bold text-sm">Master Ownership</p>
+              </div>
+            </div>
+
+            <div className="flex justify-center space-x-8 text-sm text-slate-400 mb-4">
               <span className="flex items-center"><Shield className="w-4 h-4 mr-1" /> Enterprise-grade Security</span>
               <span className="flex items-center"><Sparkles className="w-4 h-4 mr-1" /> Unlimited Creation</span>
               <span className="flex items-center"><Zap className="w-4 h-4 mr-1" /> Quantum AI Optimization</span>
+            </div>
+
+            <div className="text-xs text-slate-500 space-y-1">
+              <p>Root Users: ervin210@icloud.com • radosavlevici.ervin@gmail.com • radosavlevici210@icloud.com</p>
+              <p>Unauthorized use, copying, or distribution is strictly prohibited</p>
+              <p>Contact: radosavlevici210@icloud.com for licensing inquiries</p>
             </div>
           </div>
         </div>

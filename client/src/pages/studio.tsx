@@ -69,6 +69,29 @@ import {
   Share2
 } from "lucide-react";
 
+import UltraModernStudio from '@/components/ultra-modern-studio';
+import EnhancedCopyrightSystem from '@/components/enhanced-copyright-system';
+
 export default function Studio() {
-  return <UltraModernStudio />;
+  return (
+    <div className="min-h-screen bg-slate-950">
+      <div className="p-4">
+        <div className="mb-6 text-center">
+          <h1 className="text-3xl font-bold holographic mb-2">AI QUANTUM STUDIO PRO+ ENTERPRISE</h1>
+          <p className="text-yellow-400 font-bold">© 2025 Ervin Remus Radosavlevici • Root Access: ervin210@icloud.com</p>
+        </div>
+
+        <div className="tabs-container">
+          <div className="tab-buttons flex space-x-4 mb-6">
+            <button className="quantum-button">Studio</button>
+            <button className="quantum-button">Copyright System</button>
+          </div>
+
+          <div className="tab-content">
+            <UltraModernStudio />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
