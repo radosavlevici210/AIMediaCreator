@@ -51,7 +51,7 @@ AI Creative Studio Pro+ is a state-of-the-art, enterprise-grade multimedia creat
 - **TypeScript** for full-stack type safety
 - **Drizzle ORM** with PostgreSQL support
 - **Express Sessions** with configurable storage
-- **Comprehensive Security** - Helmet, CORS, rate limiting
+- **Comprehensive Security** - Helmet, rate limiting
 
 ### Production Features
 - **Autoscaling** - Replit deployment optimization
@@ -83,7 +83,7 @@ The application runs on port 5000 with automatic port mapping for external acces
 - **Comprehensive Audit Logging** - Security event tracking
 - **Rate Limiting** - API protection
 - **Session Management** - Secure user sessions
-- **CORS Protection** - Cross-origin security
+- **Security Headers** - Enhanced protection
 
 ### Data Protection
 - **Encrypted Communications** - All data in transit
@@ -120,7 +120,7 @@ The application runs on port 5000 with automatic port mapping for external acces
 NODE_ENV=production
 DATABASE_URL=postgresql://...
 SESSION_SECRET=your-secret-key
-CORS_ORIGIN=https://your-domain.com
+SESSION_SECRET=your-secure-secret
 ```
 
 ## 📚 API Documentation

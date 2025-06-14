@@ -11,7 +11,7 @@
 This application implements multiple layers of security:
 
 ### Network Security
-- CORS protection with configurable origins
+- Security headers with enhanced protection
 - Rate limiting (100 requests per 15 minutes for API)
 - Helmet security headers
 - CSP (Content Security Policy) headers

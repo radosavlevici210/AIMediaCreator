@@ -20,7 +20,7 @@ AI Creative Studio Pro+ is a professional AI-powered media generation platform t
 - **Runtime**: Node.js with Express.js framework
 - **Language**: TypeScript for full-stack type safety
 - **Database**: Drizzle ORM with PostgreSQL support (configurable via DATABASE_URL)
-- **Security**: Helmet for security headers, CORS protection, rate limiting
+- **Security**: Helmet for security headers, rate limiting
 - **Session Management**: Express sessions with configurable storage
 
 ### Database Schema
@@ -83,7 +83,7 @@ The application uses Drizzle ORM with the following main entities:
 
 ### Environment Configuration
 - **NODE_ENV**: Production/development mode switching
-- **Security**: Configurable CORS origins, rate limiting, and session secrets
+- **Security**: Rate limiting, security headers, and session secrets
 - **API Keys**: Optional external service integration
 - **Database**: Flexible database connection via DATABASE_URL
 
