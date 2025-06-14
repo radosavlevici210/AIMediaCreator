@@ -16,7 +16,9 @@ import {
   Brain,
   Palette,
   Globe,
-  Award
+  Award,
+  Crown,
+  Lock
 } from 'lucide-react';
 import { Link } from 'wouter';
 
