@@ -1,0 +1,5 @@
+language = "html"
+run = "preview"
+[web_server]
+  enable = true
+  workflow  ="html"

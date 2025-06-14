@@ -15,6 +15,15 @@ import {
   enhancedExport, 
   getSystemMetrics 
 } from "./ai-enhanced-routes";
+import {
+  advancedMusicGeneration,
+  advancedVideoGeneration,
+  getSmartRecommendations,
+  planAdvancedProject,
+  enhanceUserPrompt,
+  advancedBatchProcessing,
+  compareAIModels
+} from "./advanced-ai-routes";
 
 // Security middleware with transparent access for root users
 const rootUsers = [
