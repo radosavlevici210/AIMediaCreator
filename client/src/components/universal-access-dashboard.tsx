@@ -22,7 +22,7 @@ import {
   Eye,
   Edit,
   Play,
-  Stop,
+  Square,
   Rocket,
   Terminal,
   Crown,
@@ -483,7 +483,7 @@ export default function UniversalAccessDashboard() {
                       onClick={() => stopApplication(app.id)}
                       className="glass-morphism"
                     >
-                      <Stop className="w-4 h-4 mr-1" />
+                      <Square className="w-4 h-4 mr-1" />
                       Stop
                     </Button>
                   )}
@@ -605,7 +605,7 @@ export default function UniversalAccessDashboard() {
               <span>Start All</span>
             </Button>
             <Button className="flex flex-col items-center p-6 h-auto space-y-2 glass-morphism">
-              <Stop className="w-6 h-6" />
+              <Square className="w-6 h-6" />
               <span>Stop All</span>
             </Button>
             <Button className="flex flex-col items-center p-6 h-auto space-y-2 glass-morphism">
