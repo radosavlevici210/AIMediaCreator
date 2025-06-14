@@ -1,6 +1,7 @@
 const serverless = require('serverless-http');
 const express = require('express');
-// CORS completely removed
+const helmet = require('helmet');
+const compression = require('compression');
 
 const app = express();
 
@@ -18,13 +19,6 @@ app.use(helmet({
       workerSrc: ["'self'", "blob:"]
     }
   }
-}));
-
-app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? ['https://ai-enterprise-studio.netlify.app', 'https://ai-studio-pro.netlify.app']
-    : ['http://localhost:3000', 'http://localhost:5000', 'http://localhost:5173'],
-  credentials: true
 }));
 
 app.use(compression());
