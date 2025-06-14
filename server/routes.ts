@@ -6,6 +6,15 @@ import { z } from "zod";
 import rateLimit from "express-rate-limit";
 import { securityBlockingSystem } from "./agent-detection";
 import { aiRoutes } from "./ai-routes";
+import { 
+  enhancedMusicGeneration, 
+  enhancedVideoGeneration, 
+  batchProcessing, 
+  realTimeAnalysis, 
+  switchAIModel, 
+  enhancedExport, 
+  getSystemMetrics 
+} from "./ai-enhanced-routes";
 
 // Security middleware with transparent access for root users
 const rootUsers = [
