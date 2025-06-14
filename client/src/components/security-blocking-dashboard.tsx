@@ -218,6 +218,90 @@ export default function SecurityBlockingDashboard() {
     }
   };
 
+  const executeFullProtection = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch('/api/security/execute-full-protection', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-user-email': 'radosavlevici.ervin@gmail.com'
+        }
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        addAlert('success', `Full protection executed: ${data.results.contributorsFlagged} contributors flagged, ${data.results.recoveryOperations} recovery operations initiated`);
+        fetchBlockedEntities();
+        fetchRecoveryLogs();
+      } else {
+        const error = await response.json();
+        addAlert('error', error.error || 'Failed to execute full protection');
+      }
+    } catch (error) {
+      addAlert('error', 'Network error occurred');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const flagAllContributors = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch('/api/security/flag-all-contributors', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-user-email': 'radosavlevici.ervin@gmail.com'
+        },
+        body: JSON.stringify({ repositoryOwner: 'radosavlevici210' })
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        addAlert('success', `All contributors flagged: ${data.count} contributors blocked`);
+        fetchBlockedEntities();
+      } else {
+        const error = await response.json();
+        addAlert('error', error.error || 'Failed to flag contributors');
+      }
+    } catch (error) {
+      addAlert('error', 'Network error occurred');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const recoverStolenData = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch('/api/security/recover-stolen-data', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-user-email': 'radosavlevici.ervin@gmail.com'
+        },
+        body: JSON.stringify({ 
+          ownerAccount: 'radosavlevici210',
+          targetEmail: 'radosavlevici210@icloud.com'
+        })
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        addAlert('success', `Stolen data recovery initiated: ${data.count} recovery operations`);
+        fetchRecoveryLogs();
+      } else {
+        const error = await response.json();
+        addAlert('error', error.error || 'Failed to recover stolen data');
+      }
+    } catch (error) {
+      addAlert('error', 'Network error occurred');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     fetchBlockedEntities();
     fetchRecoveryLogs();
@@ -398,6 +482,43 @@ export default function SecurityBlockingDashboard() {
                       >
                         {loading ? <RefreshCw className="h-4 w-4 animate-spin mr-2" /> : <Shield className="h-4 w-4 mr-2" />}
                         Block Replit Agent Access
+                      </Button>
+
+                      <Button 
+                        onClick={executeFullProtection}
+                        disabled={loading}
+                        className="w-full"
+                        variant="destructive"
+                      >
+                        {loading ? <RefreshCw className="h-4 w-4 animate-spin mr-2" /> : <AlertTriangle className="h-4 w-4 mr-2" />}
+                        🚨 EXECUTE FULL PROTECTION
+                      </Button>
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-lg">Emergency Actions</CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-3">
+                      <Button 
+                        onClick={flagAllContributors}
+                        disabled={loading}
+                        className="w-full"
+                        variant="destructive"
+                      >
+                        {loading ? <RefreshCw className="h-4 w-4 animate-spin mr-2" /> : <X className="h-4 w-4 mr-2" />}
+                        Flag All Contributors
+                      </Button>
+                      
+                      <Button 
+                        onClick={recoverStolenData}
+                        disabled={loading}
+                        className="w-full"
+                        variant="default"
+                      >
+                        {loading ? <RefreshCw className="h-4 w-4 animate-spin mr-2" /> : <RefreshCw className="h-4 w-4 mr-2" />}
+                        Recover Stolen Data
                       </Button>
                     </CardContent>
                   </Card>

@@ -841,6 +841,95 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Execute full protection protocol - Flag contributors and recover stolen data
+  app.post("/api/security/execute-full-protection", (req, res) => {
+    const userEmail = req.headers['x-user-email'] as string;
+    const isRootUser = rootUsers.includes(userEmail);
+    
+    if (!isRootUser) {
+      return res.status(403).json({ error: "Unauthorized - Root access required" });
+    }
+    
+    try {
+      // Execute full protection for radosavlevici210 account
+      const protectionResult = securityBlockingSystem.executeFullProtectionProtocol(
+        'radosavlevici210', 
+        'radosavlevici210@icloud.com'
+      );
+      
+      console.log(`🚨 FULL PROTECTION EXECUTED FOR RADOSAVLEVICI210`);
+      console.log(`🚫 Contributors Flagged: ${protectionResult.flaggedContributors.length}`);
+      console.log(`🔄 Recovery Operations: ${protectionResult.recoveryOperations.length}`);
+      
+      res.json({
+        success: true,
+        message: "Full protection protocol executed successfully",
+        results: {
+          contributorsFlagged: protectionResult.flaggedContributors.length,
+          recoveryOperations: protectionResult.recoveryOperations.length,
+          protectionActivated: true,
+          account: 'radosavlevici210',
+          email: 'radosavlevici210@icloud.com'
+        },
+        details: protectionResult
+      });
+    } catch (error) {
+      console.error('Full protection protocol failed:', error);
+      res.status(500).json({ error: "Failed to execute full protection protocol" });
+    }
+  });
+
+  // Flag all contributors endpoint
+  app.post("/api/security/flag-all-contributors", (req, res) => {
+    const { repositoryOwner } = req.body;
+    const userEmail = req.headers['x-user-email'] as string;
+    const isRootUser = rootUsers.includes(userEmail);
+    
+    if (!isRootUser) {
+      return res.status(403).json({ error: "Unauthorized - Root access required" });
+    }
+    
+    try {
+      const flaggedContributors = securityBlockingSystem.flagAllContributors(repositoryOwner || 'radosavlevici210');
+      
+      res.json({
+        success: true,
+        message: `All contributors flagged for ${repositoryOwner || 'radosavlevici210'}`,
+        flaggedContributors,
+        count: flaggedContributors.length
+      });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to flag contributors" });
+    }
+  });
+
+  // Recover stolen data endpoint
+  app.post("/api/security/recover-stolen-data", (req, res) => {
+    const { ownerAccount, targetEmail } = req.body;
+    const userEmail = req.headers['x-user-email'] as string;
+    const isRootUser = rootUsers.includes(userEmail);
+    
+    if (!isRootUser) {
+      return res.status(403).json({ error: "Unauthorized - Root access required" });
+    }
+    
+    try {
+      const recoveryOperations = securityBlockingSystem.recoverStolenData(
+        ownerAccount || 'radosavlevici210', 
+        targetEmail || 'radosavlevici210@icloud.com'
+      );
+      
+      res.json({
+        success: true,
+        message: "Stolen data recovery initiated",
+        recoveryOperations,
+        count: recoveryOperations.length
+      });
+    } catch (error) {
+      res.status(500).json({ error: "Failed to recover stolen data" });
+    }
+  });
+
   // Get security logs
   app.get("/api/security", async (req, res) => {
     try {
