@@ -1,5 +1,12 @@
 language = "html"
 run = "preview"
+modules = ["clojure-1.12", "clojure-1.11"]
 [web_server]
   enable = true
   workflow  ="html"
+
+[deployment]
+run = ["sh", "-c", "preview"]
+
+[nix]
+channel = "stable-24_05"
