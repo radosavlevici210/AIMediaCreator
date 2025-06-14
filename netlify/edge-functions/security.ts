@@ -11,20 +11,7 @@ export default async (request: Request, context: any) => {
   headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
   headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains; preload');
 
-  // Content Security Policy for AI Enterprise Studio
-  const csp = [
-    "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
-    "style-src 'self' 'unsafe-inline'",
-    "img-src 'self' data: https: blob:",
-    "font-src 'self' data:",
-    "connect-src 'self' wss: https:",
-    "media-src 'self' blob:",
-    "worker-src 'self' blob:",
-    "frame-ancestors 'none'"
-  ].join('; ');
-
-  headers.set('Content-Security-Policy', csp);
+  // CORS and CSP restrictions removed for full access
 
   // AI Studio specific headers
   headers.set('X-AI-Studio-Version', '1.0.0');

@@ -41,18 +41,7 @@ const projectLimiter = rateLimit({
 });
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // Universal CORS middleware - no restrictions
-  app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS, PATCH');
-    res.header('Access-Control-Allow-Headers', '*');
-    res.header('Access-Control-Allow-Credentials', 'true');
-    if (req.method === 'OPTIONS') {
-      res.sendStatus(200);
-    } else {
-      next();
-    }
-  });
+  // CORS completely removed - no middleware restrictions
   // Security headers for API routes
   app.use("/api", (req, res, next) => {
     res.setHeader('X-Content-Type-Options', 'nosniff');
