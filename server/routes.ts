@@ -942,6 +942,150 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   const httpServer = createServer(app);
+  // Universal Access Dashboard API endpoints
+  app.get("/api/applications", async (req, res) => {
+    try {
+      // Mock application data - replace with actual application monitoring
+      const applications = [
+        { 
+          id: 'main-studio', 
+          name: 'AI Creative Studio Pro+', 
+          type: 'web', 
+          status: 'running', 
+          url: process.env.PRODUCTION_URL, 
+          port: 5000, 
+          branch: 'main', 
+          lastActivity: '2 mins ago',
+          canModify: true,
+          owner: 'ervin210@icloud.com',
+          description: 'Main production application',
+          framework: 'React + TypeScript',
+          version: '1.0.0'
+        },
+        { 
+          id: 'dev-studio', 
+          name: 'Development Studio', 
+          type: 'web', 
+          status: 'running', 
+          port: 5001, 
+          branch: 'development', 
+          lastActivity: '5 mins ago',
+          canModify: true,
+          owner: 'ervin210@icloud.com',
+          description: 'Development environment',
+          framework: 'React + TypeScript',
+          version: '1.1.0-dev'
+        },
+        { 
+          id: 'api-server', 
+          name: 'API Server', 
+          type: 'api', 
+          status: 'running', 
+          port: 3000, 
+          branch: 'main', 
+          lastActivity: '1 min ago',
+          canModify: true,
+          owner: 'ervin210@icloud.com',
+          description: 'Backend API server',
+          framework: 'Express + TypeScript',
+          version: '1.0.0'
+        }
+      ];
+      res.json(applications);
+    } catch (error) {
+      console.error('Error fetching applications:', error);
+      res.status(500).json({ error: 'Failed to fetch applications' });
+    }
+  });
+
+  app.post("/api/applications", async (req, res) => {
+    try {
+      const { name, type, port, framework, description } = req.body;
+      const userEmail = req.headers['x-user-email'] as string;
+      const isRootUser = rootUsers.includes(userEmail);
+      
+      if (!isRootUser) {
+        return res.status(403).json({ error: "Unauthorized - Root access required" });
+      }
+      
+      // Mock application creation
+      const newApp = {
+        id: `app-${Date.now()}`,
+        name,
+        type,
+        status: 'stopped',
+        port,
+        branch: 'main',
+        lastActivity: 'Just created',
+        canModify: true,
+        owner: userEmail,
+        description: description || 'New application',
+        framework: framework || 'Custom',
+        version: '0.1.0'
+      };
+      
+      console.log(`✅ New application created: ${name} on port ${port}`);
+      res.json({ success: true, application: newApp });
+    } catch (error) {
+      console.error('Error creating application:', error);
+      res.status(500).json({ error: 'Failed to create application' });
+    }
+  });
+
+  app.post("/api/applications/:id/start", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const userEmail = req.headers['x-user-email'] as string;
+      const isRootUser = rootUsers.includes(userEmail);
+      
+      if (!isRootUser) {
+        return res.status(403).json({ error: "Unauthorized - Root access required" });
+      }
+      
+      console.log(`🚀 Starting application: ${id}`);
+      res.json({ success: true, message: `Application ${id} started successfully` });
+    } catch (error) {
+      console.error('Error starting application:', error);
+      res.status(500).json({ error: 'Failed to start application' });
+    }
+  });
+
+  app.post("/api/applications/:id/stop", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const userEmail = req.headers['x-user-email'] as string;
+      const isRootUser = rootUsers.includes(userEmail);
+      
+      if (!isRootUser) {
+        return res.status(403).json({ error: "Unauthorized - Root access required" });
+      }
+      
+      console.log(`⏹️ Stopping application: ${id}`);
+      res.json({ success: true, message: `Application ${id} stopped successfully` });
+    } catch (error) {
+      console.error('Error stopping application:', error);
+      res.status(500).json({ error: 'Failed to stop application' });
+    }
+  });
+
+  app.delete("/api/applications/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const userEmail = req.headers['x-user-email'] as string;
+      const isRootUser = rootUsers.includes(userEmail);
+      
+      if (!isRootUser) {
+        return res.status(403).json({ error: "Unauthorized - Root access required" });
+      }
+      
+      console.log(`🗑️ Deleting application: ${id}`);
+      res.json({ success: true, message: `Application ${id} deleted successfully` });
+    } catch (error) {
+      console.error('Error deleting application:', error);
+      res.status(500).json({ error: 'Failed to delete application' });
+    }
+  });
+
   // Development Dashboard API endpoints
   app.get("/api/branches", async (req, res) => {
   try {

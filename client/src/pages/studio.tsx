@@ -28,6 +28,7 @@ import EnterpriseMasterControl from "@/components/enterprise-master-control";
 import SystemVerification from "@/components/system-verification";
 import DevelopmentDashboard from "@/components/development-dashboard";
 import SecurityBlockingDashboard from "@/components/security-blocking-dashboard";
+import UniversalAccessDashboard from "@/components/universal-access-dashboard";
 import { 
   Crown, 
   Sparkles, 
@@ -154,7 +155,7 @@ export default function Studio() {
       <div className="container mx-auto p-6">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           {/* Enhanced Tab Navigation */}
-          <TabsList className="grid w-full grid-cols-4 lg:grid-cols-8 bg-black/20 backdrop-blur-sm h-auto p-2 gap-1">
+          <TabsList className="grid w-full grid-cols-4 lg:grid-cols-9 bg-black/20 backdrop-blur-sm h-auto p-2 gap-1">
             <TabsTrigger 
               value="enterprise-suite" 
               className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-300 flex flex-col items-center gap-1 p-3"
@@ -185,6 +186,13 @@ export default function Studio() {
             >
               <Zap className="w-5 h-5" />
               <span className="text-xs">Development</span>
+            </TabsTrigger>
+            <TabsTrigger 
+              value="universal-access" 
+              className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-300 flex flex-col items-center gap-1 p-3"
+            >
+              <Crown className="w-5 h-5" />
+              <span className="text-xs">All Access</span>
             </TabsTrigger>
             <TabsTrigger 
               value="security" 
@@ -288,6 +296,10 @@ export default function Studio() {
 
            <TabsContent value="development" className="mt-6">
             <DevelopmentDashboard />
+          </TabsContent>
+
+          <TabsContent value="universal-access" className="mt-6">
+            <UniversalAccessDashboard />
           </TabsContent>
 
           <TabsContent value="security" className="mt-6">
