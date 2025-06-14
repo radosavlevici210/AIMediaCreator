@@ -63,7 +63,8 @@ import {
   Edit3,
   Download,
   Upload,
-  Share2
+  Share2,
+  Square
 } from "lucide-react";
 
 export default function Studio() {
