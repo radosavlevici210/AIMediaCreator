@@ -53,7 +53,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     // Agent detection and blocking
     const userAgent = req.get('User-Agent') || '';
     const userEmail = req.headers['x-user-email'] as string;
-    const suspicious = securityBlockingSystem.detectSuspiciousActivity(userAgent, req.ip, userEmail);
+    const suspicious = securityBlockingSystem.detectSuspiciousActivity(userAgent, req.ip || 'unknown', userEmail || '');
     
     if (suspicious) {
       return res.status(403).json({ 

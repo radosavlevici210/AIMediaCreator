@@ -8,6 +8,7 @@ import AdminPanel from "@/components/admin-panel";
 import RootUserPanel from "@/components/root-user-panel";
 import ProtectionSystem from "@/components/protection-system";
 import ModernLanding from "@/components/modern-landing";
+import AIStudio from "@/components/ai-studio";
 import NotFound from "@/pages/not-found";
 import { Suspense } from "react";
 
@@ -40,6 +41,7 @@ function App() {
               <Switch>
                 <Route path="/" component={ModernLanding} />
                 <Route path="/studio" component={Studio} />
+                <Route path="/ai-studio" component={AIStudio} />
                 <Route path="/admin" component={AdminPanel} />
                 <Route path="/root" component={RootUserPanel} />
                 <Route path="/protection" component={ProtectionSystem} />
