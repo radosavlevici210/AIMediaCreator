@@ -1,7 +1,7 @@
 import OpenAI from "openai";
 
 // the newest OpenAI model is "gpt-4o" which was released May 13, 2024. do not change this unless explicitly requested by the user
-const openai = process.env.OPENAI_API_KEY ? new OpenAI({ apiKey: process.env.OPENAI_API_KEY }) : null;
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 // Music generation with AI
 export async function generateMusicConcept(prompt: string): Promise<{
@@ -11,10 +11,6 @@ export async function generateMusicConcept(prompt: string): Promise<{
   lyrics: string;
   structure: string;
 }> {
-  if (!openai) {
-    throw new Error("OpenAI API key not configured. Please provide OPENAI_API_KEY to use AI features.");
-  }
-  
   try {
     const response = await openai.chat.completions.create({
       model: "gpt-4o",
@@ -52,10 +48,6 @@ export async function generateVideoConcept(prompt: string): Promise<{
   style: string;
   duration: string;
 }> {
-  if (!openai) {
-    throw new Error("OpenAI API key not configured. Please provide OPENAI_API_KEY to use AI features.");
-  }
-  
   try {
     const response = await openai.chat.completions.create({
       model: "gpt-4o",
@@ -87,10 +79,6 @@ export async function generateVideoConcept(prompt: string): Promise<{
 
 // Image generation for video thumbnails/covers
 export async function generateCoverArt(description: string): Promise<{ url: string }> {
-  if (!openai) {
-    throw new Error("OpenAI API key not configured. Please provide OPENAI_API_KEY to use AI features.");
-  }
-  
   try {
     const response = await openai.images.generate({
       model: "dall-e-3",
@@ -115,10 +103,6 @@ export async function analyzeMusicInput(input: string): Promise<{
   improvements: string[];
   genre_recommendations: string[];
 }> {
-  if (!openai) {
-    throw new Error("OpenAI API key not configured. Please provide OPENAI_API_KEY to use AI features.");
-  }
-  
   try {
     const response = await openai.chat.completions.create({
       model: "gpt-4o",

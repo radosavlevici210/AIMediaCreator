@@ -6,54 +6,6 @@ import { z } from "zod";
 import rateLimit from "express-rate-limit";
 import { securityBlockingSystem } from "./agent-detection";
 import { aiRoutes } from "./ai-routes";
-import { 
-  enhancedMusicGeneration, 
-  enhancedVideoGeneration, 
-  batchProcessing, 
-  realTimeAnalysis, 
-  switchAIModel, 
-  enhancedExport, 
-  getSystemMetrics 
-} from "./ai-enhanced-routes";
-import {
-  advancedMusicGeneration,
-  advancedVideoGeneration,
-  getSmartRecommendations,
-  planAdvancedProject,
-  enhanceUserPrompt,
-  advancedBatchProcessing,
-  compareAIModels
-} from "./advanced-ai-routes";
-import {
-  executeDifyWorkflow,
-  executePrefectFlow,
-  chatWithDifyApp,
-  executeDifyAgent,
-  listWorkflowsAndFlows,
-  getWorkflowStatus,
-  cancelWorkflow,
-  createPrefectDeployment,
-  getDeploymentStatus,
-  listDeployments,
-  getOrchestrationMetrics
-} from "./workflow-orchestration-routes";
-import {
-  createMediaProject,
-  importMediaAsset,
-  addTimelineLayer,
-  applyEffect,
-  startRender,
-  getRenderStatus,
-  listEffects,
-  listTemplates,
-  getMediaProject,
-  listMediaProjects,
-  exportProjectData,
-  importProjectData,
-  registerContentCopyright,
-  scanForInfringement,
-  getSurveillanceAlerts
-} from "./media-studio-routes";
 
 // Security middleware with transparent access for root users
 const rootUsers = [
@@ -343,35 +295,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // Restore endpoint
   app.post("/api/restore", (req, res) => {
-    const { checkpoint_id, hours_back } = req.body;
-    const userEmail = req.headers['x-user-email'] as string;
-    const isRootUser = rootUsers.includes(userEmail);
-    
-    if (!isRootUser) {
-      return res.status(403).json({ error: "Unauthorized - Root access required for system restore" });
-    }
-    
-    // Calculate restore point
-    const restoreTime = new Date();
-    if (hours_back) {
-      restoreTime.setHours(restoreTime.getHours() - parseInt(hours_back));
-    }
-    
-    console.log(`🔄 SYSTEM RESTORE INITIATED`);
-    console.log(`📧 Authorized by: ${userEmail}`);
-    console.log(`⏰ Restore Point: ${hours_back ? `${hours_back} hours back` : 'Latest checkpoint'}`);
-    console.log(`🕐 Target Time: ${restoreTime.toISOString()}`);
-    
     res.json({
       status: "restored",
-      checkpoint_id: checkpoint_id || `restore-${hours_back}h-${Date.now()}`,
-      restore_point: restoreTime.toISOString(),
-      hours_back: hours_back || 0,
+      checkpoint_id: req.body.checkpoint_id || "latest",
       timestamp: new Date().toISOString(),
-      features_restored: "all",
-      system_status: "operational",
-      authorized_by: userEmail,
-      restore_type: hours_back ? "time-based" : "checkpoint-based"
+      features_restored: "all"
     });
   });
 
@@ -393,45 +321,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
       notifications: [],
       connection: "stable",
       timestamp: new Date().toISOString()
-    });
-  });
-
-  // Time-based system restore endpoint
-  app.post("/api/system/restore-time", (req, res) => {
-    const { hours } = req.body;
-    const userEmail = req.headers['x-user-email'] as string;
-    const isRootUser = rootUsers.includes(userEmail);
-    
-    if (!isRootUser) {
-      return res.status(403).json({ error: "Unauthorized - Root access required" });
-    }
-    
-    const hoursBack = parseInt(hours) || 3;
-    const restorePoint = new Date();
-    restorePoint.setHours(restorePoint.getHours() - hoursBack);
-    
-    console.log(`🔄 TIME-BASED SYSTEM RESTORE`);
-    console.log(`⏰ Restoring to: ${hoursBack} hours back`);
-    console.log(`🕐 Target time: ${restorePoint.toISOString()}`);
-    console.log(`👤 Authorized by: ${userEmail}`);
-    
-    res.json({
-      success: true,
-      restore_completed: true,
-      restore_point: restorePoint.toISOString(),
-      hours_restored: hoursBack,
-      system_status: "restored_and_operational",
-      features_restored: {
-        database: "restored",
-        user_settings: "restored",
-        production_settings: "restored",
-        security_logs: "restored",
-        projects: "restored",
-        ai_models: "restored",
-        enterprise_features: "restored"
-      },
-      timestamp: new Date().toISOString(),
-      authorized_by: userEmail
     });
   });
 
@@ -1248,56 +1137,6 @@ app.post("/api/environments/:id/stop", async (req, res) => {
 
   // Add AI routes
   app.use('/api/ai', aiRoutes);
-
-  // Enhanced AI Routes
-  app.post("/api/ai/enhanced-music", enhancedMusicGeneration);
-  app.post("/api/ai/enhanced-video", enhancedVideoGeneration);
-  app.post("/api/ai/batch-process", batchProcessing);
-  app.post("/api/ai/real-time-analysis", realTimeAnalysis);
-  app.post("/api/ai/switch-model", switchAIModel);
-  app.post("/api/ai/enhanced-export", enhancedExport);
-  app.get("/api/system/metrics", getSystemMetrics);
-
-  // OpenAI Cookbook Advanced Routes
-  app.post("/api/ai/advanced-music", advancedMusicGeneration);
-  app.post("/api/ai/advanced-video", advancedVideoGeneration);
-  app.post("/api/ai/smart-recommendations", getSmartRecommendations);
-  app.post("/api/ai/plan-project", planAdvancedProject);
-  app.post("/api/ai/enhance-prompt", enhanceUserPrompt);
-  app.post("/api/ai/advanced-batch", advancedBatchProcessing);
-  app.post("/api/ai/compare-models", compareAIModels);
-
-  // Workflow Orchestration Routes (Dify + Prefect)
-  app.post("/api/workflows/dify/execute", executeDifyWorkflow);
-  app.post("/api/workflows/prefect/execute", executePrefectFlow);
-  app.post("/api/workflows/dify/chat", chatWithDifyApp);
-  app.post("/api/workflows/dify/agent", executeDifyAgent);
-  app.get("/api/workflows/list", listWorkflowsAndFlows);
-  app.get("/api/workflows/:type/:id/status", getWorkflowStatus);
-  app.post("/api/workflows/:type/:id/cancel", cancelWorkflow);
-  app.post("/api/workflows/prefect/deploy", createPrefectDeployment);
-  app.get("/api/workflows/deployments/:deployment_id", getDeploymentStatus);
-  app.get("/api/workflows/deployments", listDeployments);
-  app.get("/api/workflows/metrics", getOrchestrationMetrics);
-
-  // Media Studio Routes (AIMediaStudio Integration)
-  app.post("/api/media/projects", createMediaProject);
-  app.post("/api/media/projects/:project_id/assets", importMediaAsset);
-  app.post("/api/media/projects/:project_id/timeline", addTimelineLayer);
-  app.post("/api/media/projects/:project_id/layers/:layer_id/effects", applyEffect);
-  app.post("/api/media/projects/:project_id/render", startRender);
-  app.get("/api/media/renders/:job_id/status", getRenderStatus);
-  app.get("/api/media/effects", listEffects);
-  app.get("/api/media/templates", listTemplates);
-  app.get("/api/media/projects/:project_id", getMediaProject);
-  app.get("/api/media/projects", listMediaProjects);
-  app.get("/api/media/projects/:project_id/export", exportProjectData);
-  app.post("/api/media/projects/import", importProjectData);
-
-  // Copyright Protection Routes
-  app.post("/api/copyright/register", registerContentCopyright);
-  app.post("/api/copyright/scan", scanForInfringement);
-  app.get("/api/copyright/alerts", getSurveillanceAlerts);
 
   return httpServer;
 }
