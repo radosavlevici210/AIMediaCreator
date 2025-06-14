@@ -42,12 +42,10 @@ app.use(helmet({
 }));
 
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' ? 
-    ['https://replit.app', 'https://*.replit.app', 'https://*.replit.dev'] : 
-    ['http://localhost:5173', 'http://127.0.0.1:5173', 'http://0.0.0.0:5173', true],
+  origin: true,
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'X-Router-Connection']
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'X-Router-Connection', 'X-User-Email']
 }));
 
 app.use(express.json({ limit: '10mb' }));
