@@ -920,13 +920,55 @@
   .enterprise-only,
   .restricted-access,
   .beta-feature,
-  .limited-access {
+  .limited-access,
+  .hidden,
+  .invisible,
+  .access-denied,
+  .permission-required,
+  .auth-required,
+  .subscription-required,
+  .tier-locked,
+  .feature-locked,
+  .demo-only,
+  .preview-only {
     opacity: 1 !important;
     pointer-events: auto !important;
     filter: none !important;
     cursor: auto !important;
     background: none !important;
     border: none !important;
+    display: block !important;
+    visibility: visible !important;
+    position: static !important;
+    z-index: auto !important;
+    height: auto !important;
+    width: auto !important;
+    max-height: none !important;
+    max-width: none !important;
+    overflow: visible !important;
+    clip: auto !important;
+    clip-path: none !important;
+    mask: none !important;
+    transform: none !important;
+  }
+
+  /* Force visibility on all elements */
+  * {
+    visibility: visible !important;
+  }
+
+  /* Ensure all interactive elements are accessible */
+  button,
+  input,
+  select,
+  textarea,
+  a,
+  [role="button"],
+  [tabindex] {
+    pointer-events: auto !important;
+    opacity: 1 !important;
+    display: block !important;
+    visibility: visible !important;
   }
 
   /* Ultra-modern design system */

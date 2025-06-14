@@ -152,7 +152,7 @@ export default function ModernLanding() {
           <div className="card-neon inline-block mb-12 px-8 py-4">
             <div className="flex items-center justify-center">
               <Star className="w-6 h-6 mr-3 text-yellow-400 pulse-glow" />
-              <span className="text-gradient text-lg font-black tracking-widest">ENTERPRISE QUANTUM READY</span>
+              <span className="text-gradient text-lg font-black tracking-widest">ALL FEATURES UNLOCKED • NO RESTRICTIONS</span>
               <Star className="w-6 h-6 ml-3 text-yellow-400 pulse-glow" />
             </div>
           </div>
@@ -165,7 +165,9 @@ export default function ModernLanding() {
           <p className="text-xl md:text-2xl text-cyan-300 mb-16 max-w-4xl mx-auto leading-relaxed font-medium neon-glow px-8 py-4">
             QUANTUM-POWERED CONTENT CREATION • NEURAL MUSIC SYNTHESIS • HOLOGRAPHIC VIDEO RENDERING
             <br />
-            <span className="text-pink-400 font-bold">UNLIMITED CREATIVE MATRIX • ENTERPRISE GRADE SECURITY</span>
+            <span className="text-pink-400 font-bold">UNLIMITED ACCESS • ALL FEATURES VISIBLE • NO RESTRICTIONS</span>
+            <br />
+            <span className="text-green-400 font-bold">FULL VISIBILITY MODE • ENTERPRISE GRADE • PRODUCTION READY</span>
           </p>
 
           <div className="flex flex-col lg:flex-row gap-8 justify-center items-center mb-24">
