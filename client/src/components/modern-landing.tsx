@@ -83,14 +83,14 @@ const stats = [
 export default function ModernLanding() {
   const [isVisible, setIsVisible] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  
+
   useEffect(() => {
     setIsVisible(true);
-    
+
     const handleMouseMove = (e: MouseEvent) => {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
-    
+
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
@@ -111,7 +111,7 @@ export default function ModernLanding() {
         <div className="absolute top-1/3 right-1/3 w-80 h-80 bg-gradient-to-r from-yellow-400/20 to-orange-500/20 rounded-none blur-2xl floating-animation cyber-border" />
         <div className="absolute bottom-1/3 left-1/3 w-72 h-72 bg-gradient-to-r from-green-400/25 to-blue-500/25 blur-3xl floating-animation" style={{ animationDelay: '1s' }} />
         <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-to-r from-purple-500/20 to-red-500/20 rounded-full blur-2xl" style={{ animation: 'rotate3d 10s linear infinite' }} />
-        
+
         {/* Digital rain effect */}
         <div className="absolute inset-0 opacity-10">
           {[...Array(20)].map((_, i) => (
@@ -156,18 +156,18 @@ export default function ModernLanding() {
               <Star className="w-6 h-6 ml-3 text-yellow-400 pulse-glow" />
             </div>
           </div>
-          
+
           <h1 className="text-6xl md:text-8xl lg:text-9xl font-black mb-12 leading-none tracking-wider transform hover:scale-105 transition-transform duration-500">
             <span className="header-gradient block">NEURAL AI</span>
             <span className="text-gradient block mt-4">CREATIVE FUSION</span>
           </h1>
-          
+
           <p className="text-xl md:text-2xl text-cyan-300 mb-16 max-w-4xl mx-auto leading-relaxed font-medium neon-glow px-8 py-4">
             QUANTUM-POWERED CONTENT CREATION • NEURAL MUSIC SYNTHESIS • HOLOGRAPHIC VIDEO RENDERING
             <br />
             <span className="text-pink-400 font-bold">UNLIMITED CREATIVE MATRIX • ENTERPRISE GRADE SECURITY</span>
           </p>
-          
+
           <div className="flex flex-col lg:flex-row gap-8 justify-center items-center mb-24">
             <Link href="/studio">
               <Button size="lg" className="btn-neon text-xl px-16 py-8 font-black min-w-[280px] tracking-widest">
@@ -279,7 +279,7 @@ export default function ModernLanding() {
                 and unlimited creative possibilities.
               </p>
             </div>
-            
+
             <div>
               <h4 className="text-lg font-semibold text-white mb-4">Features</h4>
               <ul className="space-y-3 text-slate-400">
@@ -289,7 +289,7 @@ export default function ModernLanding() {
                 <li className="flex items-center"><Shield className="w-4 h-4 mr-2 text-red-400" /> Enterprise Security</li>
               </ul>
             </div>
-            
+
             <div>
               <h4 className="text-lg font-semibold text-white mb-4">Quality</h4>
               <ul className="space-y-3 text-slate-400">
@@ -300,7 +300,7 @@ export default function ModernLanding() {
               </ul>
             </div>
           </div>
-          
+
           <div className="border-t border-slate-800/50 pt-8 text-center">
             <p className="text-slate-500 mb-4">
               &copy; 2025 AI Creative Studio Pro+. Professional AI-powered content creation platform.
@@ -316,3 +316,4 @@ export default function ModernLanding() {
     </div>
   );
 }
+```
