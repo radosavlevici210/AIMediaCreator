@@ -1165,5 +1165,14 @@ app.post("/api/environments/:id/stop", async (req, res) => {
   app.post("/api/ai/enhanced-export", enhancedExport);
   app.get("/api/system/metrics", getSystemMetrics);
 
+  // OpenAI Cookbook Advanced Routes
+  app.post("/api/ai/advanced-music", advancedMusicGeneration);
+  app.post("/api/ai/advanced-video", advancedVideoGeneration);
+  app.post("/api/ai/smart-recommendations", getSmartRecommendations);
+  app.post("/api/ai/plan-project", planAdvancedProject);
+  app.post("/api/ai/enhance-prompt", enhanceUserPrompt);
+  app.post("/api/ai/advanced-batch", advancedBatchProcessing);
+  app.post("/api/ai/compare-models", compareAIModels);
+
   return httpServer;
 }

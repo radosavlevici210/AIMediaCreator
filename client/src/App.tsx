@@ -13,6 +13,7 @@ import EnhancedAIStudio from "@/components/enhanced-ai-studio";
 import RealTimeDashboard from "@/components/real-time-dashboard";
 import EnhancedNavigation from "@/components/enhanced-navigation";
 import FeatureShowcase from "@/components/feature-showcase";
+import OpenAICookbookStudio from "@/components/openai-cookbook-studio";
 import NotFound from "@/pages/not-found";
 import { Suspense } from "react";
 import CopyrightProtection from "@/components/copyright-protection";
@@ -53,6 +54,7 @@ function App() {
                 <Route path="/enhanced-studio" component={EnhancedAIStudio} />
                 <Route path="/dashboard" component={RealTimeDashboard} />
                 <Route path="/features" component={FeatureShowcase} />
+                <Route path="/cookbook" component={OpenAICookbookStudio} />
                 <Route path="/admin" component={AdminPanel} />
                 <Route path="/root" component={RootUserPanel} />
                 <Route path="/protection" component={ProtectionSystem} />
