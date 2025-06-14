@@ -32,7 +32,10 @@ import UniversalAccessDashboard from "@/components/universal-access-dashboard";
 import { 
   Crown, 
   Sparkles, 
-  Play, 
+  Play,
+  Pause,
+  Square,
+  SkipForward,
   Music, 
   Video, 
   Wand2, 
@@ -63,8 +66,7 @@ import {
   Edit3,
   Download,
   Upload,
-  Share2,
-  Square
+  Share2
 } from "lucide-react";
 
 export default function Studio() {
