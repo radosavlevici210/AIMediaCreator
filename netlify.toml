@@ -1,11 +1,13 @@
-[build]
-  base = "."
-  publish = "dist"
-  command = "node build-netlify.js"
+# COPYRIGHT © ERVIN REMUS RADOSAVLEVICI - ALL RIGHTS RESERVED
+# PRIVATE PROPERTY - UNAUTHORIZED MODIFICATION PROHIBITED
 
+[build]
+  publish = "dist"
+  command = "npm run build:netlify"
+  
 [build.environment]
   NODE_VERSION = "20"
-  NPM_VERSION = "10"
+  NPM_VERSION = "latest"
 
 [[redirects]]
   from = "/api/*"
@@ -17,44 +19,33 @@
   to = "/index.html"
   status = 200
 
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Frame-Options = "DENY"
-    X-Content-Type-Options = "nosniff"
-    X-XSS-Protection = "1; mode=block"
-    Referrer-Policy = "strict-origin-when-cross-origin"
-    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' wss: https:; media-src 'self' blob:; worker-src 'self' blob:;"
-    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=()"
-
-[[headers]]
-  for = "/*.js"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "/*.css"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "/*.woff2"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "/api/*"
-  [headers.values]
-    Access-Control-Allow-Origin = "*"
-    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
-    Access-Control-Allow-Headers = "Content-Type, Authorization"
-
 [functions]
   directory = "netlify/functions"
   node_bundler = "esbuild"
 
-[dev]
-  command = "npm run dev"
-  port = 3000
-  targetPort = 5000
-  autoLaunch = false
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Copyright = "ERVIN REMUS RADOSAVLEVICI - ALL RIGHTS RESERVED"
+    X-Owner = "Ervin Remus Radosavlevici"
+    X-Creator = "Ervin Remus Radosavlevici"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

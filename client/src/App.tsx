@@ -11,10 +11,13 @@ import ModernLanding from "@/components/modern-landing";
 import AIStudio from "@/components/ai-studio";
 import NotFound from "@/pages/not-found";
 import { Suspense } from "react";
+import CopyrightProtection from "@/components/copyright-protection";
 
-// 🚀 Creative Studio - Production Ready Application
+// 🚀 AI STUDIO PRO+ - PRODUCTION READY APPLICATION
+// COPYRIGHT © ERVIN REMUS RADOSAVLEVICI - ALL RIGHTS RESERVED
 // Enterprise-grade AI-powered media generation platform
 // All features unlocked - Ready for global deployment
+// PRIVATE PROPERTY - UNAUTHORIZED USE STRICTLY PROHIBITED
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -50,6 +53,7 @@ function App() {
             </Suspense>
           </Router>
           <Toaster />
+          <CopyrightProtection />
         </QueryClientProvider>
       </ThemeProvider>
     </ErrorBoundary>

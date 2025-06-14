@@ -1135,5 +1135,8 @@ app.post("/api/environments/:id/stop", async (req, res) => {
   }
 });
 
+  // Add AI routes
+  app.use('/api/ai', aiRoutes);
+
   return httpServer;
 }

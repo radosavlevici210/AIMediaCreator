@@ -140,11 +140,18 @@ export default function ModernLanding() {
             </div>
             <h1 className="text-3xl font-black header-gradient tracking-wider">AI STUDIO PRO+</h1>
           </div>
-          <Link href="/studio">
-            <Button className="btn-neon text-lg px-8 py-3">
-              LAUNCH STUDIO <ChevronRight className="w-5 h-5 ml-2" />
-            </Button>
-          </Link>
+          <div className="flex gap-4">
+            <Link href="/ai-studio">
+              <Button className="btn-neon text-lg px-8 py-3">
+                AI STUDIO <Brain className="w-5 h-5 ml-2" />
+              </Button>
+            </Link>
+            <Link href="/studio">
+              <Button variant="outline" className="border-cyan-500/50 text-cyan-300 hover:bg-cyan-500/10 text-lg px-8 py-3">
+                CLASSIC <ChevronRight className="w-5 h-5 ml-2" />
+              </Button>
+            </Link>
+          </div>
         </nav>
       </header>
 
