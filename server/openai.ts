@@ -88,7 +88,10 @@ export async function generateCoverArt(description: string): Promise<{ url: stri
       quality: "standard"
     });
 
-    return { url: response.data[0]?.url || "" };
+    if (!response.data || response.data.length === 0) {
+      throw new Error("No image data received from OpenAI");
+    }
+    return { url: response.data[0].url || "" };
   } catch (error) {
     throw new Error("Failed to generate cover art: " + (error as Error).message);
   }
