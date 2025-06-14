@@ -129,50 +129,49 @@ export default function ModernLanding() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative z-10 container mx-auto px-6 py-20 text-center">
+      <section className="relative z-10 container mx-auto px-6 py-24 text-center">
         <div className={`transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-          <Badge variant="secondary" className="mb-6 glass-morphism px-4 py-2">
-            <Star className="w-4 h-4 mr-2" />
+          <Badge variant="secondary" className="mb-8 glass-morphism px-6 py-3 text-sm font-medium">
+            <Star className="w-4 h-4 mr-2 text-yellow-400" />
             Enterprise Production Ready
           </Badge>
           
-          <h1 className="text-6xl md:text-8xl font-bold mb-8 leading-tight">
-            <span className="header-gradient">Professional AI</span>
-            <br />
-            <span className="text-white">Creative Studio</span>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-tight tracking-tight">
+            <span className="header-gradient block">Professional AI</span>
+            <span className="text-white block mt-2">Creative Studio</span>
           </h1>
           
-          <p className="text-xl md:text-2xl text-slate-300 mb-12 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl text-slate-300 mb-12 max-w-3xl mx-auto leading-relaxed font-light">
             Create stunning music, videos, and multimedia content with quantum-level AI optimization. 
-            Professional-grade tools for unlimited creative possibilities.
+            Professional-grade tools for unlimited creative possibilities with enterprise security.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-20">
             <Link href="/studio">
-              <Button size="lg" className="btn-gradient-primary text-lg px-8 py-4 neon-glow">
+              <Button size="lg" className="btn-gradient-primary text-lg px-10 py-5 neon-glow font-semibold min-w-[200px]">
                 <Rocket className="w-5 h-5 mr-2" />
                 Start Creating Now
               </Button>
             </Link>
-            <Button size="lg" variant="outline" className="glass-morphism text-lg px-8 py-4">
+            <Button size="lg" variant="outline" className="glass-morphism text-lg px-10 py-5 font-semibold min-w-[180px] hover:bg-white/10">
               <Play className="w-5 h-5 mr-2" />
               Watch Demo
             </Button>
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
             {stats.map((stat, index) => (
               <div 
                 key={index}
-                className={`card-modern text-center transform transition-all duration-700 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+                className={`card-modern text-center transform transition-all duration-700 hover:scale-105 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
                 style={{ transitionDelay: `${index * 0.1 + 0.5}s` }}
               >
-                <div className="flex items-center justify-center mb-2 text-purple-400">
+                <div className="flex items-center justify-center mb-3 text-purple-400">
                   {stat.icon}
                 </div>
-                <div className="text-3xl font-bold text-white mb-1">{stat.number}</div>
-                <div className="text-sm text-slate-400">{stat.label}</div>
+                <div className="text-4xl font-bold text-white mb-2">{stat.number}</div>
+                <div className="text-sm text-slate-400 font-medium">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -180,31 +179,32 @@ export default function ModernLanding() {
       </section>
 
       {/* Features Section */}
-      <section className="relative z-10 container mx-auto px-6 py-20">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold header-gradient mb-6">
+      <section className="relative z-10 container mx-auto px-6 py-24">
+        <div className="text-center mb-20">
+          <h2 className="text-4xl md:text-6xl font-bold header-gradient mb-8">
             Unlimited Creative Power
           </h2>
-          <p className="text-xl text-slate-300 max-w-3xl mx-auto">
+          <p className="text-xl text-slate-300 max-w-4xl mx-auto leading-relaxed font-light">
             Professional-grade AI tools designed for creators, studios, and enterprises who demand excellence.
+            Experience the future of content creation with quantum-level optimization.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
           {features.map((feature, index) => (
             <Card 
               key={index}
-              className={`card-modern group cursor-pointer transform transition-all duration-700 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+              className={`card-modern group cursor-pointer border-0 bg-transparent transform transition-all duration-700 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
               style={{ transitionDelay: `${feature.delay + 1}s` }}
             >
-              <CardContent className="p-6">
-                <div className={`w-16 h-16 rounded-xl bg-gradient-to-r ${feature.gradient} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
+              <CardContent className="p-8">
+                <div className={`w-20 h-20 rounded-2xl bg-gradient-to-r ${feature.gradient} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
                   <div className="text-white">
                     {feature.icon}
                   </div>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
-                <p className="text-slate-400 leading-relaxed">{feature.description}</p>
+                <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-gradient transition-colors duration-300">{feature.title}</h3>
+                <p className="text-slate-400 leading-relaxed text-base">{feature.description}</p>
               </CardContent>
             </Card>
           ))}
@@ -212,28 +212,83 @@ export default function ModernLanding() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative z-10 container mx-auto px-6 py-20">
-        <div className="card-modern text-center p-12 neon-glow">
-          <h2 className="text-4xl font-bold header-gradient mb-6">
+      <section className="relative z-10 container mx-auto px-6 py-24">
+        <div className="card-modern text-center p-16 neon-glow max-w-4xl mx-auto">
+          <div className="mb-8">
+            <div className="w-24 h-24 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full mx-auto mb-6 flex items-center justify-center">
+              <Sparkles className="w-12 h-12 text-white" />
+            </div>
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold header-gradient mb-8">
             Ready to Create the Future?
           </h2>
-          <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-slate-300 mb-12 max-w-3xl mx-auto leading-relaxed font-light">
             Join thousands of creators using AI Studio Pro+ to push the boundaries of digital content creation.
+            Experience unlimited possibilities with enterprise-grade security and quantum AI optimization.
           </p>
-          <Link href="/studio">
-            <Button size="lg" className="btn-gradient-primary text-xl px-12 py-6 pulse-glow">
-              <Palette className="w-6 h-6 mr-2" />
-              Launch Studio Now
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <Link href="/studio">
+              <Button size="lg" className="btn-gradient-primary text-xl px-12 py-6 pulse-glow font-semibold min-w-[220px]">
+                <Palette className="w-6 h-6 mr-2" />
+                Launch Studio Now
+              </Button>
+            </Link>
+            <Button size="lg" variant="outline" className="glass-morphism text-xl px-12 py-6 font-semibold min-w-[200px] hover:bg-white/10">
+              <Shield className="w-6 h-6 mr-2" />
+              View Security
             </Button>
-          </Link>
+          </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="relative z-10 container mx-auto px-6 py-12 border-t border-slate-800">
-        <div className="text-center text-slate-400">
-          <p>&copy; 2025 AI Creative Studio Pro+. Professional AI-powered content creation.</p>
-          <p className="mt-2">Enterprise-grade • Unlimited Creation • Quantum AI Optimization</p>
+      <footer className="relative z-10 border-t border-slate-800/50">
+        <div className="container mx-auto px-6 py-16">
+          <div className="grid md:grid-cols-3 gap-12 mb-12">
+            <div>
+              <div className="flex items-center space-x-2 mb-6">
+                <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+                  <Sparkles className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold header-gradient">AI Studio Pro+</h3>
+              </div>
+              <p className="text-slate-400 leading-relaxed">
+                Professional AI-powered content creation platform with enterprise-grade security 
+                and unlimited creative possibilities.
+              </p>
+            </div>
+            
+            <div>
+              <h4 className="text-lg font-semibold text-white mb-4">Features</h4>
+              <ul className="space-y-3 text-slate-400">
+                <li className="flex items-center"><Music className="w-4 h-4 mr-2 text-purple-400" /> AI Music Generation</li>
+                <li className="flex items-center"><Video className="w-4 h-4 mr-2 text-blue-400" /> 8K Video Creation</li>
+                <li className="flex items-center"><Users className="w-4 h-4 mr-2 text-green-400" /> Real-time Collaboration</li>
+                <li className="flex items-center"><Shield className="w-4 h-4 mr-2 text-red-400" /> Enterprise Security</li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="text-lg font-semibold text-white mb-4">Quality</h4>
+              <ul className="space-y-3 text-slate-400">
+                <li className="flex items-center"><Award className="w-4 h-4 mr-2 text-yellow-400" /> IMAX Quality</li>
+                <li className="flex items-center"><Globe className="w-4 h-4 mr-2 text-cyan-400" /> Global Distribution</li>
+                <li className="flex items-center"><Zap className="w-4 h-4 mr-2 text-orange-400" /> Quantum AI</li>
+                <li className="flex items-center"><Brain className="w-4 h-4 mr-2 text-indigo-400" /> Neural Processing</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="border-t border-slate-800/50 pt-8 text-center">
+            <p className="text-slate-500 mb-4">
+              &copy; 2025 AI Creative Studio Pro+. Professional AI-powered content creation platform.
+            </p>
+            <div className="flex justify-center space-x-8 text-sm text-slate-400">
+              <span className="flex items-center"><Shield className="w-4 h-4 mr-1" /> Enterprise-grade Security</span>
+              <span className="flex items-center"><Sparkles className="w-4 h-4 mr-1" /> Unlimited Creation</span>
+              <span className="flex items-center"><Zap className="w-4 h-4 mr-1" /> Quantum AI Optimization</span>
+            </div>
+          </div>
         </div>
       </footer>
     </div>
