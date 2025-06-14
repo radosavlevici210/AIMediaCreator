@@ -24,6 +24,36 @@ import {
   advancedBatchProcessing,
   compareAIModels
 } from "./advanced-ai-routes";
+import {
+  executeDifyWorkflow,
+  executePrefectFlow,
+  chatWithDifyApp,
+  executeDifyAgent,
+  listWorkflowsAndFlows,
+  getWorkflowStatus,
+  cancelWorkflow,
+  createPrefectDeployment,
+  getDeploymentStatus,
+  listDeployments,
+  getOrchestrationMetrics
+} from "./workflow-orchestration-routes";
+import {
+  createMediaProject,
+  importMediaAsset,
+  addTimelineLayer,
+  applyEffect,
+  startRender,
+  getRenderStatus,
+  listEffects,
+  listTemplates,
+  getMediaProject,
+  listMediaProjects,
+  exportProjectData,
+  importProjectData,
+  registerContentCopyright,
+  scanForInfringement,
+  getSurveillanceAlerts
+} from "./media-studio-routes";
 
 // Security middleware with transparent access for root users
 const rootUsers = [
@@ -1173,6 +1203,38 @@ app.post("/api/environments/:id/stop", async (req, res) => {
   app.post("/api/ai/enhance-prompt", enhanceUserPrompt);
   app.post("/api/ai/advanced-batch", advancedBatchProcessing);
   app.post("/api/ai/compare-models", compareAIModels);
+
+  // Workflow Orchestration Routes (Dify + Prefect)
+  app.post("/api/workflows/dify/execute", executeDifyWorkflow);
+  app.post("/api/workflows/prefect/execute", executePrefectFlow);
+  app.post("/api/workflows/dify/chat", chatWithDifyApp);
+  app.post("/api/workflows/dify/agent", executeDifyAgent);
+  app.get("/api/workflows/list", listWorkflowsAndFlows);
+  app.get("/api/workflows/:type/:id/status", getWorkflowStatus);
+  app.post("/api/workflows/:type/:id/cancel", cancelWorkflow);
+  app.post("/api/workflows/prefect/deploy", createPrefectDeployment);
+  app.get("/api/workflows/deployments/:deployment_id", getDeploymentStatus);
+  app.get("/api/workflows/deployments", listDeployments);
+  app.get("/api/workflows/metrics", getOrchestrationMetrics);
+
+  // Media Studio Routes (AIMediaStudio Integration)
+  app.post("/api/media/projects", createMediaProject);
+  app.post("/api/media/projects/:project_id/assets", importMediaAsset);
+  app.post("/api/media/projects/:project_id/timeline", addTimelineLayer);
+  app.post("/api/media/projects/:project_id/layers/:layer_id/effects", applyEffect);
+  app.post("/api/media/projects/:project_id/render", startRender);
+  app.get("/api/media/renders/:job_id/status", getRenderStatus);
+  app.get("/api/media/effects", listEffects);
+  app.get("/api/media/templates", listTemplates);
+  app.get("/api/media/projects/:project_id", getMediaProject);
+  app.get("/api/media/projects", listMediaProjects);
+  app.get("/api/media/projects/:project_id/export", exportProjectData);
+  app.post("/api/media/projects/import", importProjectData);
+
+  // Copyright Protection Routes
+  app.post("/api/copyright/register", registerContentCopyright);
+  app.post("/api/copyright/scan", scanForInfringement);
+  app.get("/api/copyright/alerts", getSurveillanceAlerts);
 
   return httpServer;
 }
