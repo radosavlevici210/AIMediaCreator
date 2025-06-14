@@ -42,13 +42,17 @@ const projectLimiter = rateLimit({
 });
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // CORS completely removed - no middleware restrictions
-  // Security headers for API routes
+  // Security headers with copyright protection for API routes
   app.use("/api", (req, res, next) => {
     res.setHeader('X-Content-Type-Options', 'nosniff');
     res.setHeader('X-Frame-Options', 'DENY');
     res.setHeader('X-XSS-Protection', '1; mode=block');
     res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+    res.setHeader('X-Copyright', 'ERVIN REMUS RADOSAVLEVICI - ALL RIGHTS RESERVED');
+    res.setHeader('X-Owner', 'Ervin Remus Radosavlevici');
+    res.setHeader('X-Creator', 'Ervin Remus Radosavlevici');
+    res.setHeader('X-Private-Property', 'ERVIN REMUS RADOSAVLEVICI');
+    res.setHeader('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
     
     // Agent detection and blocking
     const userAgent = req.get('User-Agent') || '';
