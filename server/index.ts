@@ -30,23 +30,9 @@ app.use(compression({
   }
 }));
 
-// Enhanced security middleware for production
+// No restrictions - Full access mode
 app.use(helmet({
-  contentSecurityPolicy: {
-    directives: {
-      defaultSrc: ["'self'"],
-      styleSrc: ["'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com"],
-      scriptSrc: ["'self'", "'unsafe-eval'", "'unsafe-inline'"],
-      imgSrc: ["'self'", "data:", "https:", "blob:"],
-      connectSrc: ["'self'", "ws:", "wss:", "https:"],
-      fontSrc: ["'self'", "https://cdnjs.cloudflare.com"],
-      objectSrc: ["'none'"],
-      mediaSrc: ["'self'", "blob:", "data:"],
-      frameSrc: ["'none'"],
-      baseUri: ["'self'"],
-      formAction: ["'self'"],
-    },
-  },
+  contentSecurityPolicy: false,
   crossOriginEmbedderPolicy: false,
   hsts: {
     maxAge: 31536000,

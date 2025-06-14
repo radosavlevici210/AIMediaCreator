@@ -96,66 +96,88 @@ export default function ModernLanding() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
-      {/* Animated background elements */}
+    <div className="min-h-screen relative overflow-hidden matrix-bg">
+      {/* Cyberpunk animated background */}
       <div className="absolute inset-0 overflow-hidden">
         <div 
-          className="absolute w-96 h-96 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full blur-3xl"
+          className="absolute w-96 h-96 bg-gradient-to-r from-pink-500/30 to-cyan-400/30 rounded-full blur-3xl"
           style={{
-            left: mousePosition.x / 10,
-            top: mousePosition.y / 10,
-            transition: 'all 0.3s ease-out'
+            left: mousePosition.x / 8,
+            top: mousePosition.y / 8,
+            transition: 'all 0.2s ease-out',
+            animation: 'neonPulse 3s infinite'
           }}
         />
-        <div className="absolute top-1/4 right-1/4 w-64 h-64 bg-gradient-to-r from-blue-400/20 to-cyan-400/20 rounded-full blur-3xl floating-animation" />
-        <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-gradient-to-r from-green-400/20 to-emerald-400/20 rounded-full blur-3xl floating-animation" style={{ animationDelay: '2s' }} />
+        <div className="absolute top-1/3 right-1/3 w-80 h-80 bg-gradient-to-r from-yellow-400/20 to-orange-500/20 rounded-none blur-2xl floating-animation cyber-border" />
+        <div className="absolute bottom-1/3 left-1/3 w-72 h-72 bg-gradient-to-r from-green-400/25 to-blue-500/25 blur-3xl floating-animation" style={{ animationDelay: '1s' }} />
+        <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-to-r from-purple-500/20 to-red-500/20 rounded-full blur-2xl" style={{ animation: 'rotate3d 10s linear infinite' }} />
+        
+        {/* Digital rain effect */}
+        <div className="absolute inset-0 opacity-10">
+          {[...Array(20)].map((_, i) => (
+            <div 
+              key={i}
+              className="absolute w-1 bg-gradient-to-b from-green-400 to-transparent"
+              style={{
+                left: `${i * 5}%`,
+                height: '100%',
+                animation: `shimmer ${2 + Math.random() * 3}s infinite`,
+                animationDelay: `${Math.random() * 2}s`
+              }}
+            />
+          ))}
+        </div>
       </div>
 
-      {/* Header */}
+      {/* Cyberpunk Header */}
       <header className="relative z-10 container mx-auto px-6 py-8">
         <nav className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
-              <Sparkles className="w-6 h-6 text-white" />
+          <div className="flex items-center space-x-3">
+            <div className="w-12 h-12 bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-400 rounded-none cyber-border flex items-center justify-center">
+              <Sparkles className="w-7 h-7 text-white" />
             </div>
-            <h1 className="text-2xl font-bold header-gradient">AI Studio Pro+</h1>
+            <h1 className="text-3xl font-black header-gradient tracking-wider">AI STUDIO PRO+</h1>
           </div>
           <Link href="/studio">
-            <Button className="btn-gradient-primary">
-              Launch Studio <ChevronRight className="w-4 h-4 ml-1" />
+            <Button className="btn-neon text-lg px-8 py-3">
+              LAUNCH STUDIO <ChevronRight className="w-5 h-5 ml-2" />
             </Button>
           </Link>
         </nav>
       </header>
 
-      {/* Hero Section */}
-      <section className="relative z-10 container mx-auto px-6 py-24 text-center">
+      {/* Cyberpunk Hero Section */}
+      <section className="relative z-10 container mx-auto px-6 py-32 text-center">
         <div className={`transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-          <Badge variant="secondary" className="mb-8 glass-morphism px-6 py-3 text-sm font-medium">
-            <Star className="w-4 h-4 mr-2 text-yellow-400" />
-            Enterprise Production Ready
-          </Badge>
+          <div className="card-neon inline-block mb-12 px-8 py-4">
+            <div className="flex items-center justify-center">
+              <Star className="w-6 h-6 mr-3 text-yellow-400 pulse-glow" />
+              <span className="text-gradient text-lg font-black tracking-widest">ENTERPRISE QUANTUM READY</span>
+              <Star className="w-6 h-6 ml-3 text-yellow-400 pulse-glow" />
+            </div>
+          </div>
           
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 leading-tight tracking-tight">
-            <span className="header-gradient block">Professional AI</span>
-            <span className="text-white block mt-2">Creative Studio</span>
+          <h1 className="text-6xl md:text-8xl lg:text-9xl font-black mb-12 leading-none tracking-wider transform hover:scale-105 transition-transform duration-500">
+            <span className="header-gradient block">NEURAL AI</span>
+            <span className="text-gradient block mt-4">CREATIVE FUSION</span>
           </h1>
           
-          <p className="text-lg md:text-xl text-slate-300 mb-12 max-w-3xl mx-auto leading-relaxed font-light">
-            Create stunning music, videos, and multimedia content with quantum-level AI optimization. 
-            Professional-grade tools for unlimited creative possibilities with enterprise security.
+          <p className="text-xl md:text-2xl text-cyan-300 mb-16 max-w-4xl mx-auto leading-relaxed font-medium neon-glow px-8 py-4">
+            QUANTUM-POWERED CONTENT CREATION • NEURAL MUSIC SYNTHESIS • HOLOGRAPHIC VIDEO RENDERING
+            <br />
+            <span className="text-pink-400 font-bold">UNLIMITED CREATIVE MATRIX • ENTERPRISE GRADE SECURITY</span>
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-20">
+          <div className="flex flex-col lg:flex-row gap-8 justify-center items-center mb-24">
             <Link href="/studio">
-              <Button size="lg" className="btn-gradient-primary text-lg px-10 py-5 neon-glow font-semibold min-w-[200px]">
-                <Rocket className="w-5 h-5 mr-2" />
-                Start Creating Now
+              <Button size="lg" className="btn-neon text-xl px-16 py-8 font-black min-w-[280px] tracking-widest">
+                <Rocket className="w-6 h-6 mr-3" />
+                INITIATE CREATION
               </Button>
             </Link>
-            <Button size="lg" variant="outline" className="glass-morphism text-lg px-10 py-5 font-semibold min-w-[180px] hover:bg-white/10">
-              <Play className="w-5 h-5 mr-2" />
-              Watch Demo
+            <Button size="lg" className="btn-gradient-secondary text-xl px-16 py-8 font-black min-w-[250px] tracking-widest">
+              <Play className="w-6 h-6 mr-3" />
+              NEURAL DEMO
             </Button>
           </div>
 
